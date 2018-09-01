@@ -1,4 +1,4 @@
-# jooger.me-admin
+# vue-admin
 
 ## Project setup
 ```

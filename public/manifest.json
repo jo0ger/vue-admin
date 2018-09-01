@@ -1,6 +1,6 @@
 {
-  "name": "jooger.me-admin",
-  "short_name": "jooger.me-admin",
+  "name": "vue-admin",
+  "short_name": "vue-admin",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",
