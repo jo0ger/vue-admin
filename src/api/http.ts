@@ -6,7 +6,7 @@ import { IS_PROD, WHITE_API_LIST, AXIOS_DEFAULT_CONFIG } from '@/config'
 
 export default class Http {
     public static client: AxiosInstance
-    public static apiHost: string = IS_PROD ? 'https://api.jooger.me' : 'http://127.0.0.1:3002'
+    public static apiHost: string = IS_PROD ? 'https://api.jooger.me/v2/backend' : 'http://127.0.0.1:3002/v2/backend'
 
     constructor () {
         this.createAxios()

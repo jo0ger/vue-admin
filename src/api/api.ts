@@ -12,20 +12,36 @@ export default class Api extends Http {
         return this.processPromise<Res>(Http.client.request(Object.assign({}, config)))
     }
 
-    public originGet<Req, Res> (url: string, params?: Req) {
+    public originGet<Req, Res> (url: string = '', params?: Req) {
         return this.processPromise<Res>(Http.client.get(url, { params }))
     }
 
-    public originPost<Req, Res> (url: string, data?: Req) {
+    public originPost<Req, Res> (url: string = '', data?: Req) {
         return this.processPromise<Res>(Http.client.post(url, data))
     }
 
-    public get<Req, Res> (url: string, params?: Req) {
+    public originPatch<Req, Res> (url: string = '', data?: Req) {
+        return this.processPromise<Res>(Http.client.patch(url, data))
+    }
+
+    public originDelete<Res> (url: string = '') {
+        return this.processPromise<Res>(Http.client.delete(url))
+    }
+
+    public get<Req, Res> (url: string = '', params?: Req) {
         return this.originGet<Req, Res>(this.processUrl(url), params)
     }
 
-    public post<Req, Res> (url: string, data?: Req) {
+    public post<Req, Res> (url: string = '', data?: Req) {
         return this.originPost<Req, Res>(this.processUrl(url), data)
+    }
+
+    public patch<Req, Res> (url: string = '', data?: Req) {
+        return this.originPatch<Req, Res>(this.processUrl(url), data)
+    }
+
+    public delete<Res> (url: string = '') {
+        return this.originDelete<Res>(this.processUrl(url))
     }
 
     private processUrl (url: string) {
