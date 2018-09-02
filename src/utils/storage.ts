@@ -2,17 +2,18 @@
  * storage
  */
 
-const storage = window.sessionStorage || window.localStorage
+const storage = window.localStorage
 const error = (e: Error | string) => {
     console.error(e)
 }
 
 export default {
-    get (key: string): object | undefined {
+    get (key: string): object | null {
         try {
             return JSON.parse(storage.getItem(key) as string)
         } catch (e) {
             error(e)
+            return null
         }
     },
     set (key: string, val: any) {

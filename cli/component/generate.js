@@ -23,7 +23,7 @@ const create = async () => {
             name: 'componentPath',
             message: '请输入组件路径（基于src目录）:',
             type: 'input',
-            default: 'components/common'
+            default: 'components'
         },
         {
             name: 'yes',

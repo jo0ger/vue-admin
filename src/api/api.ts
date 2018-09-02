@@ -54,6 +54,6 @@ export default class Api extends Http {
     }
 
     private processPromise<Res> (ps: Promise<any>): Promise<Res> {
-        return ps.then(res => res.data)
+        return ps.then(res => res && res.data || {})
     }
 }

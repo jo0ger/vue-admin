@@ -1,6 +1,6 @@
 import api from '@/api'
 import { DEFAULT_PAGE_LAYOUT } from '@/config'
-import { StateTree, Getters, RootState, Mutations, Actions, ActionCtx } from '../interface'
+import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'
 
 interface State extends StateTree {
     layout: string

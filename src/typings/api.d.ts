@@ -42,17 +42,17 @@ declare namespace WebApi {
      */
     export interface IPageableResponse<T = {}> extends IResponse<{
         list: T[],
-        pageInfo: PageInfo
+        pageInfo: PageInfo,
     }> {}
 
     export interface ModuleShare {
-        id: string
+        _id: string
         createdAt: string
         updatedAt: string
-        extends: {
+        extends: Array<{
             key: string
-            value: string
-        }[]
+            value: string,
+        }>
     }
 
     /**
@@ -83,9 +83,9 @@ declare namespace WebApi {
                 startDate?: Date
                 endDate?: Date
                 orderBy?: -1 | 1
-                sortBy?: string
+                sortBy?: string,
             }
-    
+
             export type res = IPageableResponse<Article[]>
         }
 
@@ -98,14 +98,14 @@ declare namespace WebApi {
             export type req = {}
             export type res = IResponse<{
                 count: number
-                list: {
+                list: Array<{
                     year: number
-                    months: {
+                    months: Array<{
                         month: number
                         monthStr: string
-                        articles: Article[]
-                    }[]
-                }[]
+                        articles: Article[],
+                    }>,
+                }>,
             }>
         }
 
@@ -123,7 +123,7 @@ declare namespace WebApi {
             export type req = {}
             export type res = IResponse<boolean>
         }
-    
+
         namespace unlike {
             export type req = {}
             export type res = IResponse<boolean>
@@ -148,22 +148,22 @@ declare namespace WebApi {
             meta: {
                 pvs: number
                 ups: number
-                comments: number
-            }
+                comments: number,
+            },
         }
     }
 
     namespace CategoryModule {
         type Category = ModuleShare & {
             name: string
-            description: string
+            description: string,
         }
 
         namespace list {
             export type req =  IPageableRequest & {
-                keyword?: string
+                keyword?: string,
             }
-    
+
             export type res = IPageableResponse<Category[]>
         }
 
@@ -191,14 +191,14 @@ declare namespace WebApi {
     namespace TagModule {
         type Tag = ModuleShare & {
             name: string
-            description: string
+            description: string,
         }
 
         namespace list {
             export type req =  IPageableRequest & {
-                keyword?: string
+                keyword?: string,
             }
-    
+
             export type res = IPageableResponse<Tag[]>
         }
 
@@ -236,12 +236,12 @@ declare namespace WebApi {
             location: string
             github: {
                 id: string
-                login: string
-            }
+                login: string,
+            },
         }
 
         namespace list {
-            export type req =  {}
+            export type req = {}
             export type res = IPageableResponse<User[]>
         }
 
@@ -251,7 +251,7 @@ declare namespace WebApi {
         }
 
         namespace update {
-            export type req = {
+            export interface req {
                 mute?: boolean
             }
             export type res = IResponse<User>
@@ -267,19 +267,19 @@ declare namespace WebApi {
             target: {
                 article?: ArticleModule.Article
                 user?: UserModule.User
-                comment?: CommentModule.Comment
+                comment?: CommentModule.Comment,
             }
             actors: {
                 from?: UserModule.User
-                to?: UserModule.User
-            }
+                to?: UserModule.User,
+            },
         }
 
         namespace list {
             export type req = IPageableRequest & {
                 type?: number
                 classify?: number
-                viewed?: boolean
+                viewed?: boolean,
             }
             export type res = IPageableResponse<Notification[]>
         }
@@ -319,10 +319,10 @@ declare namespace WebApi {
                 ip: string
                 location: object
                 ua: string
-                referer: string
+                referer: string,
             }
             parent: Comment
-            forward: Comment
+            forward: Comment,
         }
 
         namespace list {
@@ -336,9 +336,9 @@ declare namespace WebApi {
                 startDate?: Date
                 endDate?: Date
                 orderBy?: -1 | 1
-                sortBy?: string
+                sortBy?: string,
             }
-    
+
             export type res = IPageableResponse<Comment[]>
         }
 
@@ -361,7 +361,7 @@ declare namespace WebApi {
             export type req = {}
             export type res = IResponse<boolean>
         }
-    
+
         namespace unlike {
             export type req = {}
             export type res = IResponse<boolean>
@@ -383,52 +383,52 @@ declare namespace WebApi {
                 music: string
                 location: string
                 company: string
-                links: {
+                links: Array<{
                     name: string
                     github: string
                     avatar: string
                     slogan: string
-                    site: string
-                }[]
-                musicId: string
+                    site: string,
+                }>
+                musicId: string,
             }
             keys: {
                 aliyun: {
                     accessKeyId: string
                     accessKeySecret: string
                     bucket: string
-                    region: string
+                    region: string,
                 },
                 alinode: {
                     appid: string
-                    secret: string
+                    secret: string,
                 },
                 mail: {
                     user: string
-                    pass: string
+                    pass: string,
                 },
                 github: {
                     clientID: string
-                    clientSecret: string
-                }
+                    clientSecret: string,
+                },
             }
             limit: {
                 articleCount: number
                 commentCount: number
                 relatedArticleCount: number
                 hotArticleCount: number
-                commentSpamMaxCount: number
-            }
+                commentSpamMaxCount: number,
+            },
         }
 
         namespace getData {
-            export type req =  {}
-    
+            export type req = {}
+
             export type res = IResponse<Setting>
         }
 
         namespace update {
-            export type req = {
+            export interface req {
                 site: object
                 keys: object
                 limit: object
@@ -439,13 +439,13 @@ declare namespace WebApi {
 
     namespace AuthModule {
         namespace login {
-            export type req = {
+            export interface req {
                 username: string
                 password: string
             }
             export type res = IResponse<{
                 id: string
-                token: string
+                token: string,
             }>
         }
 
@@ -465,7 +465,7 @@ declare namespace WebApi {
         }
 
         namespace password {
-            export type req = {
+            export interface req {
                 oldPassword: string
                 password: string
             }

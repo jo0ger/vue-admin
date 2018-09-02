@@ -14,7 +14,9 @@
   "dependencies": {
     "@types/lodash": "^4.14.116",
     "axios": "^0.18.0",
+    "iview": "^3.0.1",
     "normalize.css": "^8.0.0",
+    "particles.js": "^2.0.0",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",

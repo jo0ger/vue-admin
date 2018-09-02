@@ -1,0 +1,44 @@
+/**
+ * @desc Container
+ * @author Jooger <iamjooger@gmail.com>
+ * @date 2018-09-02 01:14:02
+ */
+
+@import '~@/assets/style/init'
+
+.container {
+    margin (0 - $padding-lg) (0 - $padding-lg) 0
+
+    .header {
+        display flex
+        justify-content space-between
+        padding $padding-md 2 * $padding-md 0
+        background-color $white-color
+        border-bottom 1px solid $divider-color
+
+        .logo {
+            margin-right $padding-md
+        }
+
+        .detail {
+            width 100%
+            .row {
+                display flex
+                justify-content: space-between
+                margin-bottom $padding-md
+            }
+
+            .title {
+                font-size 20px
+            }
+
+            .action {
+                margin-left $padding-md * 3
+            }
+        }
+    }
+
+    .content {
+        margin $padding-lg
+    }
+}

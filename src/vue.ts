@@ -1,3 +1,5 @@
+/// <reference path="./typings/api.d.ts" />
+
 /**
  * 所有组件的基类
  */
@@ -9,7 +11,7 @@ import { cloneDeep, merge, processModel, constant, constantFilter } from '@/util
 import * as config from '@/config'
 import { namespace } from 'vuex-class'
 
-const AppMod = namespace('app')
+const { Getter } = namespace('auth')
 
 @Component({
     filters: {
@@ -17,15 +19,17 @@ const AppMod = namespace('app')
     },
 })
 export default class Base extends Vue {
-    public static compile = Vue.compile
+    @Getter('info') protected admin!: WebApi.UserModule.User
 
-    public config = config
-    public api = api
-    public constant = constant
+    protected static compile = Vue.compile
 
-    public merge = merge
-    public cloneDeep = cloneDeep
-    public processModel = processModel
+    protected config = config
+    protected api = api
+    protected constant = constant
+
+    protected merge = merge
+    protected cloneDeep = cloneDeep
+    protected processModel = processModel
 
     constructor () {
         super()

@@ -9,6 +9,6 @@
     </div>
 </template>
 
-<style lang="stylus" scoped>
-@import './index'
-</style>
+<script lang="ts" src="./index.ts"></script>
+
+<style lang="stylus" scoped src="./index.styl"></style>

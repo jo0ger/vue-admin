@@ -22,6 +22,8 @@
         "no-reference": false,
         "no-console": false,
         "no-empty-interface": false,
-        "no-namespace": false
+        "no-namespace": false,
+        "curly": [true, "ignore-same-line"],
+        "no-shadowed-variable": false
     }
 }

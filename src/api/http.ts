@@ -1,8 +1,11 @@
 ///<reference path="../typings/api.d.ts"/>
 
 import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios'
-import { merge } from '@/utils'
 import { IS_PROD, WHITE_API_LIST, AXIOS_DEFAULT_CONFIG } from '@/config'
+import { merge } from '@/utils'
+import { Message } from 'iview'
+
+let unAuthMessageVisible = false
 
 export default class Http {
     public static client: AxiosInstance
@@ -47,11 +50,11 @@ export default class Http {
     private processResponse (response: AxiosResponse<WebApi.IResponse>) {
         let errMsg = '接口错误，请稍后重试'
         if (!response || !response.data) { throw new Error(errMsg) }
-        if (response.data.code) {
+        if (response.data.code !== 200) {
             // 如果在白名单内，就不全局处理了
             if (response.request.url && !WHITE_API_LIST.some(item => response.request.url.includes(item))) {
                 errMsg = response.data.message || errMsg
-                // TODO: message tip error
+                Message.error(errMsg)
                 throw new Error(errMsg)
             }
         }
@@ -60,14 +63,22 @@ export default class Http {
 
     private processError (err: AxiosError) {
         if (err.response && err.response.status === 401) {
-            // TODO: 401 to login page
+            if (!unAuthMessageVisible) {
+                unAuthMessageVisible = true
+                Message.error({
+                    content: err.response.data.message,
+                    onClose: () => {
+                        unAuthMessageVisible = false
+                    }
+                })
+            }
             return
         }
         // 如果是手动取消的请求，不显示错误信息
         if (axios.isCancel(err)) {
-            console.log(err)
+            console.error(err)
         } else {
-            // TODO: message tip network error
+            Message.error('网络错误')
         }
         throw err
     }

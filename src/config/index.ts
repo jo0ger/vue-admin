@@ -3,7 +3,7 @@
  */
 
 // 生产环境
-export const IS_PROD = process.env.BUILD_ENV !== 'production'
+export const IS_PROD = process.env.BUILD_ENV === 'production'
 
 // 表格默认size
 export const DEFAULT_PAGE_SIZE = 10
@@ -18,6 +18,7 @@ export const WHITE_API_LIST = []
 export const AXIOS_DEFAULT_CONFIG = {
     headers: {
         'x-requested-with': 'XMLHttpRequest',
+        'Accept': 'application/json',
     },
     timeout: 100000,
     responseType: 'json',
@@ -36,3 +37,7 @@ export const ROUTER_DEFAULT_CONFIG = {
     linkActiveClass: 'active',
     linkExactActiveClass: 'exact-active',
 }
+
+export const AUTH_TOKEN_KEY = 'node-server_token'
+
+export const AUTH_CACHE_KEY = 'jooger.me.info'
