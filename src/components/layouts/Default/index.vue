@@ -45,7 +45,7 @@
                 </template>
             </Menu>
         </Sider>
-        <Layout>
+        <Layout style="overflow-y: auto; height: 100vh;">
             <Content class="app-content">
                 <router-view></router-view>
             </Content>

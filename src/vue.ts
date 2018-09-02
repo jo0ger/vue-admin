@@ -7,7 +7,7 @@
 import Vue from 'vue'
 import api from '@/api'
 import { Component } from '@/utils/decorators'
-import { cloneDeep, merge, processModel, constant, constantFilter } from '@/utils'
+import { cloneDeep, merge, processModel, findExtendsItem, constant, filters } from '@/utils'
 import * as config from '@/config'
 import { namespace } from 'vuex-class'
 
@@ -15,13 +15,11 @@ const { Getter } = namespace('auth')
 
 @Component({
     filters: {
-        constantFilter,
+        ...filters,
     },
 })
 export default class Base extends Vue {
     @Getter('info') protected admin!: WebApi.UserModule.User
-
-    protected static compile = Vue.compile
 
     protected config = config
     protected api = api
@@ -30,6 +28,7 @@ export default class Base extends Vue {
     protected merge = merge
     protected cloneDeep = cloneDeep
     protected processModel = processModel
+    protected findExtendsItem = findExtendsItem
 
     constructor () {
         super()

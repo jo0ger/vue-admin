@@ -5,52 +5,47 @@ import { Controller } from '@/utils/decorators'
 
 @Controller('/articles')
 export class ArticleApi extends Api {
-    public list (params: WebApi.ArticleModule.list.req) {
-        type req = WebApi.ArticleModule.list.req
-        type res = WebApi.ArticleModule.list.res
-        return this.get<req, res>('', params)
+    public list (params: WebApi.ArticleModule.list.Req) {
+        type Req = WebApi.ArticleModule.list.Req
+        type Res = WebApi.ArticleModule.list.Res
+        return this.get<Req, Res>('', params)
     }
 
     public item (id: string) {
-        type req = WebApi.ArticleModule.item.req
-        type res = WebApi.ArticleModule.item.res
-        return this.get<req, res>(`/${id}`)
+        type Res = WebApi.ArticleModule.item.Res
+        return this.get<null, Res>(`/${id}`)
     }
 
     public archives () {
-        type req = WebApi.ArticleModule.archives.req
-        type res = WebApi.ArticleModule.archives.res
-        return this.get<req, res>('/archives')
+        type Res = WebApi.ArticleModule.archives.Res
+        return this.get<null, Res>('/archives')
     }
 
-    public create (data: WebApi.ArticleModule.create.req) {
-        type req = WebApi.ArticleModule.create.req
-        type res = WebApi.ArticleModule.create.res
-        return this.post<req, res>('', data)
+    public create (data: WebApi.ArticleModule.create.Req) {
+        type Req = WebApi.ArticleModule.create.Req
+        type Res = WebApi.ArticleModule.create.Res
+        return this.post<Req, Res>('', data)
     }
 
-    public update (id: string, data: WebApi.ArticleModule.update.req) {
-        type req = WebApi.ArticleModule.update.req
-        type res = WebApi.ArticleModule.update.res
-        return this.patch<req, res>(`/${id}`, data)
+    public update (id: string, data: WebApi.ArticleModule.update.Req) {
+        type Req = WebApi.ArticleModule.update.Req
+        type Res = WebApi.ArticleModule.update.Res
+        return this.patch<Req, Res>(`/${id}`, data)
     }
 
     public like (id: string) {
-        type req = WebApi.ArticleModule.like.req
-        type res = WebApi.ArticleModule.like.res
-        return this.patch<req, res>(`/${id}/like`)
+        type Res = WebApi.ArticleModule.like.Res
+        return this.patch<null, Res>(`/${id}/like`)
     }
 
     public unlike (id: string) {
-        type req = WebApi.ArticleModule.unlike.req
-        type res = WebApi.ArticleModule.unlike.res
-        return this.patch<req, res>(`/${id}/unlike`)
+        type Res = WebApi.ArticleModule.unlike.Res
+        return this.patch<null, Res>(`/${id}/unlike`)
     }
 
     public deleteItem (id: string) {
-        type req = WebApi.ArticleModule.deleteItem.req
-        type res = WebApi.ArticleModule.deleteItem.res
-        return this.delete<res>(`/${id}`)
+        type Res = WebApi.ArticleModule.deleteItem.Res
+        return this.delete<Res>(`/${id}`)
     }
 }
 

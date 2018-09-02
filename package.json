@@ -8,12 +8,13 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint --fix",
+    "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
     "@types/lodash": "^4.14.116",
     "axios": "^0.18.0",
+    "dayjs": "^1.7.5",
     "iview": "^3.0.1",
     "normalize.css": "^8.0.0",
     "particles.js": "^2.0.0",

@@ -17,6 +17,15 @@ export const state = (): State => ({
 export const getters: Getters<State, RootState> = {
     loading: s => s.loading,
     list: s => s.list,
+    listWidthAll: s => {
+        return [
+            {
+                _id: '',
+                name: '全部',
+            },
+            ...s.list,
+        ]
+    },
 }
 
 export const mutations: Mutations<State> = {
@@ -39,5 +48,5 @@ export const actions: Actions<State, RootState> = {
             commit(FETCH_LIST_FAILURE)
         }
         return success
-    }
+    },
 }

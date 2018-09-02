@@ -6,4 +6,107 @@
 
 @import '~@/assets/style/init'
 
-.article {}
+.article-list-page {
+    .loadmore {
+        text-align center
+    }
+
+    .article-list {
+
+    }
+
+    .article-item {
+        margin-bottom $padding-lg
+        overflow hidden
+
+        .source {
+            position absolute
+            top -8px
+            right -30px
+            width 96px
+            height 48px
+            line-height 36px
+            padding $padding-sm $padding-md
+            transform rotateZ(45deg)
+            text-align center
+            color $white-color
+            font-weight bold
+
+            &.original {
+                background-color $info-color
+            }
+        
+            &.reprint {
+                background-color $warning-color
+            }
+        }
+
+        .wrap {
+            display flex
+        }
+
+        .main {
+            flex 1 1 auto
+            display flex
+            flex-direction column
+        }
+
+        .extra {
+            margin 0 128px 0 64px
+
+            .thumb {
+                img {
+                    max-height 150px
+                    border-radius 8px
+                    box-shadow 1px 10px 10px rgba($black-color, 0.1)
+                }
+            }
+        }
+
+        .content {
+            flex 1 1
+            margin-bottom $padding-md
+
+            .title {
+                margin-bottom $padding-sm
+                font-size $font-size-lg
+                line-height 24px
+
+                a {
+                    color $content-color
+                }
+            }
+
+            .category {
+                margin-right $padding-sm
+            }
+
+            .tag-list {
+                margin-bottom $padding-sm
+            }
+
+            .description {
+                margin-right 128px
+                line-height 22px
+                text-align justify                  
+                lineLimit(3)
+            }
+        }
+
+        .action {
+            .meta-item {
+                display inline-block
+                padding 0 $padding-xs
+                color $sub-color
+
+                .icon {
+                    margin-right $padding-xs
+                }
+
+                &:first-child {
+                    padding-left 0
+                }
+            }
+        }
+    }
+}

@@ -36,6 +36,10 @@ export default class Container extends Vue {
         return this.getNamedSlotsExist('desc')
     }
 
+    get hasFilterSlots () {
+        return this.getNamedSlotsExist('filter')
+    }
+
     private getNamedSlotsExist (name) {
         const slots = this.$slots[name]
         return Boolean(slots && slots.length)

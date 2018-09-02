@@ -5,34 +5,30 @@ import { Controller } from '@/utils/decorators'
 
 @Controller('/notifications')
 export class NotificationApi extends Api {
-    public list (params: WebApi.NotificationModule.list.req) {
-        type req = WebApi.NotificationModule.list.req
-        type res = WebApi.NotificationModule.list.res
-        return this.get<req, res>('', params)
+    public list (params: WebApi.NotificationModule.list.Req) {
+        type Req = WebApi.NotificationModule.list.Req
+        type Res = WebApi.NotificationModule.list.Res
+        return this.get<Req, Res>('', params)
     }
 
     public item (id: string) {
-        type req = WebApi.NotificationModule.item.req
-        type res = WebApi.NotificationModule.item.res
-        return this.get<req, res>(`/${id}`)
+        type Res = WebApi.NotificationModule.item.Res
+        return this.get<null, Res>(`/${id}`)
     }
 
     public view (id: string) {
-        type req = WebApi.NotificationModule.view.req
-        type res = WebApi.NotificationModule.view.res
-        return this.patch<req, res>(`/${id}/view`)
+        type Res = WebApi.NotificationModule.view.Res
+        return this.patch<null, Res>(`/${id}/view`)
     }
 
     public viewAll () {
-        type req = WebApi.NotificationModule.viewAll.req
-        type res = WebApi.NotificationModule.viewAll.res
-        return this.patch<req, res>('/view')
+        type Res = WebApi.NotificationModule.viewAll.Res
+        return this.patch<null, Res>('/view')
     }
 
     public deleteItem (id: string) {
-        type req = WebApi.NotificationModule.deleteItem.req
-        type res = WebApi.NotificationModule.deleteItem.res
-        return this.delete<res>(`/${id}`)
+        type Res = WebApi.NotificationModule.deleteItem.Res
+        return this.delete<Res>(`/${id}`)
     }
 }
 

@@ -19,10 +19,10 @@ const { Getter, Action } = namespace('auth')
     },
 })
 export default class Login extends Vue {
-    @Getter loading!: boolean
-    @Action login!: Function
+    @Getter public loading
+    @Action public login
 
-    ruleValidate = {
+    public ruleValidate = {
         username: [
             { required: true, message: '请填写登录名' },
         ],
@@ -31,12 +31,12 @@ export default class Login extends Vue {
         ],
     }
 
-    model = {
+    public model = {
         username: '',
         password: '',
     }
 
-    submit () {
+    public submit () {
         (this.$refs.form as any).validate(async valid => {
             if (valid) {
                 const success = await this.login(this.model)
@@ -45,7 +45,7 @@ export default class Login extends Vue {
                     this.$router.push({
                         name: query.redirect_uri_name || 'Dashboard',
                         params: JSON.parse(query.redirect_params || '{}'),
-                        query: JSON.parse(query.redirect_query || '{}')
+                        query: JSON.parse(query.redirect_query || '{}'),
                     })
                 }
             }

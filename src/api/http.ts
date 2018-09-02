@@ -69,7 +69,7 @@ export default class Http {
                     content: err.response.data.message,
                     onClose: () => {
                         unAuthMessageVisible = false
-                    }
+                    },
                 })
             }
             return
@@ -78,7 +78,7 @@ export default class Http {
         if (axios.isCancel(err)) {
             console.error(err)
         } else {
-            Message.error('网络错误')
+            Message.error(err.response && err.response.data.message || '网络错误')
         }
         throw err
     }

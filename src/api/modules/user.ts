@@ -5,22 +5,20 @@ import { Controller } from '@/utils/decorators'
 
 @Controller('/users')
 export class UserApi extends Api {
-    public list (params: WebApi.UserModule.list.req) {
-        type req = WebApi.UserModule.list.req
-        type res = WebApi.UserModule.list.res
-        return this.get<req, res>('', params)
+    public list () {
+        type Res = WebApi.UserModule.list.Res
+        return this.get<null, Res>('')
     }
 
     public item (id: string) {
-        type req = WebApi.UserModule.item.req
-        type res = WebApi.UserModule.item.res
-        return this.get<req, res>(`/${id}`)
+        type Res = WebApi.UserModule.item.Res
+        return this.get<null, Res>(`/${id}`)
     }
 
-    public update (id: string, data: WebApi.UserModule.update.req) {
-        type req = WebApi.UserModule.update.req
-        type res = WebApi.UserModule.update.res
-        return this.patch<req, res>(`/${id}`, data)
+    public update (id: string, data: WebApi.UserModule.update.Req) {
+        type Req = WebApi.UserModule.update.Req
+        type Res = WebApi.UserModule.update.Res
+        return this.patch<Req, Res>(`/${id}`, data)
     }
 }
 

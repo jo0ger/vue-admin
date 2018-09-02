@@ -117,9 +117,9 @@ export const actions: Actions<State, RootState> = {
         return success
     },
     async update ({ commit, state }, payload) {
-        if (state.loading || !state.info.id) return
+        if (state.loading || !state.info._id) return
         commit(EDIT_INFO_REQUEST)
-        const { success, data } = await api.user.update(state.info.id, payload)
+        const { success, data } = await api.user.update(state.info._id, payload)
         if (success) {
             commit(EDIT_INFO_SUCCESS, data)
         } else {

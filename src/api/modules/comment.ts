@@ -5,46 +5,42 @@ import { Controller } from '@/utils/decorators'
 
 @Controller('/comments')
 export class CommentApi extends Api {
-    public list (params: WebApi.CommentModule.list.req) {
-        type req = WebApi.CommentModule.list.req
-        type res = WebApi.CommentModule.list.res
-        return this.get<req, res>('', params)
+    public list (params: WebApi.CommentModule.list.Req) {
+        type Req = WebApi.CommentModule.list.Req
+        type Res = WebApi.CommentModule.list.Res
+        return this.get<Req, Res>('', params)
     }
 
     public item (id: string) {
-        type req = WebApi.CommentModule.item.req
-        type res = WebApi.CommentModule.item.res
-        return this.get<req, res>(`/${id}`)
+        type Res = WebApi.CommentModule.item.Res
+        return this.get<null, Res>(`/${id}`)
     }
 
-    public create (data: WebApi.CommentModule.create.req) {
-        type req = WebApi.CommentModule.create.req
-        type res = WebApi.CommentModule.create.res
-        return this.post<req, res>('', data)
+    public create (data: WebApi.CommentModule.create.Req) {
+        type Req = WebApi.CommentModule.create.Req
+        type Res = WebApi.CommentModule.create.Res
+        return this.post<Req, Res>('', data)
     }
 
-    public update (id: string, data: WebApi.CommentModule.update.req) {
-        type req = WebApi.CommentModule.update.req
-        type res = WebApi.CommentModule.update.res
-        return this.patch<req, res>(`/${id}`, data)
+    public update (id: string, data: WebApi.CommentModule.update.Req) {
+        type Req = WebApi.CommentModule.update.Req
+        type Res = WebApi.CommentModule.update.Res
+        return this.patch<Req, Res>(`/${id}`, data)
     }
 
     public deleteItem (id: string) {
-        type req = WebApi.CommentModule.deleteItem.req
-        type res = WebApi.CommentModule.deleteItem.res
-        return this.delete<res>(`/${id}`)
+        type Res = WebApi.CommentModule.deleteItem.Res
+        return this.delete<Res>(`/${id}`)
     }
 
     public like (id: string) {
-        type req = WebApi.CommentModule.like.req
-        type res = WebApi.CommentModule.like.res
-        return this.patch<req, res>(`/${id}/like`)
+        type Res = WebApi.CommentModule.like.Res
+        return this.patch<null, Res>(`/${id}/like`)
     }
 
     public unlike (id: string) {
-        type req = WebApi.CommentModule.unlike.req
-        type res = WebApi.CommentModule.unlike.res
-        return this.patch<req, res>(`/${id}/unlike`)
+        type Res = WebApi.CommentModule.unlike.Res
+        return this.patch<null, Res>(`/${id}/unlike`)
     }
 }
 

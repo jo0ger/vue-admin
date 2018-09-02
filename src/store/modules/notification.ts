@@ -48,5 +48,5 @@ export const actions: Actions<State, RootState> = {
             commit(FETCH_LIST_FAILURE)
         }
         return success
-    }
+    },
 }

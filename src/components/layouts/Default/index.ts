@@ -15,11 +15,18 @@ const nMod = namespace('notification')
 
 @Component({
     name: 'Default',
+    head () {
+        const head: any = {}
+        if (this.$route.meta.title) {
+            head.title = this.$route.meta.title
+        }
+        return head
+    },
 })
 export default class Default extends Vue {
     @authMod.Action
     private logout
-    
+
     @nMod.Getter('list')
     private nList
 
@@ -33,10 +40,10 @@ export default class Default extends Vue {
         return this.genMenu(routes)
     }
 
-    created () {
+    public created () {
         this.getNList({
             page: 1,
-            viewed: false
+            viewed: false,
         })
     }
 
@@ -65,7 +72,7 @@ export default class Default extends Vue {
                 if (success) {
                     this.$router.push({ name: 'Login' })
                 }
-            }
+            },
         })
     }
 }

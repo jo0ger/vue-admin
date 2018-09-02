@@ -6,15 +6,14 @@ import { Controller } from '@/utils/decorators'
 @Controller('/setting')
 export class SettingApi extends Api {
     public getData () {
-        type req = WebApi.SettingModule.getData.req
-        type res = WebApi.SettingModule.getData.res
-        return this.get<req, res>('')
+        type Res = WebApi.SettingModule.getData.Res
+        return this.get<null, Res>('')
     }
 
-    public update (id: string, data: WebApi.SettingModule.update.req) {
-        type req = WebApi.SettingModule.update.req
-        type res = WebApi.SettingModule.update.res
-        return this.patch<req, res>(`/${id}`, data)
+    public update (id: string, data: WebApi.SettingModule.update.Req) {
+        type Req = WebApi.SettingModule.update.Req
+        type Res = WebApi.SettingModule.update.Res
+        return this.patch<Req, Res>(`/${id}`, data)
     }
 }
 

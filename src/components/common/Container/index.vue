@@ -25,6 +25,9 @@
             </div>
         </div>
         <div class="content">
+            <Card v-if="hasFilterSlots" class="filter">
+                <slot name="filter"></slot>
+            </Card>
             <slot></slot>
         </div>
     </div>

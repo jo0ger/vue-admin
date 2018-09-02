@@ -19,26 +19,80 @@ const tMod = namespace('tag')
     },
 })
 export default class Article extends Vue {
-    @cMod.Getter('list') private cList
+    @cMod.Getter('listWidthAll') private cList
     @cMod.Action('getList') private getCList
-    @tMod.Getter('list') private tList
+    @tMod.Getter('listWidthAll') private tList
     @tMod.Action('getList') private getTList
 
-    query = {
-        keyword: ''
+    private cLoading: boolean = false
+
+    private aList: WebApi.ArticleModule.Article[] = []
+
+    private pageInfo: WebApi.PageInfo = {
+        total: 0,
+        current: 1,
+        pages: 0,
+        limit: 10,
     }
 
-    filter = {
+    private query = {
+        keyword: '',
+    }
+
+    private filter = {
         category: '',
         tag: '',
         state: '',
         source: '',
         startDate: '',
-        endDate: ''
+        endDate: '',
     }
 
-    created () {
+    private pageReq: WebApi.IPageableRequest = {
+        page: 1,
+    }
+
+    private created () {
         this.getCList()
         this.getTList()
+        this.search()
+    }
+
+    private async search (payload: any = {}) {
+        if (this.cLoading) return
+        payload = Object.assign({}, payload, this.pageReq)
+        this.cLoading = true
+        const res = await this.api.article.list(
+            this.processModel(payload),
+        )
+        this.cLoading = false
+        if (payload.page > this.pageInfo.current) {
+            // loadmore
+            this.aList.push(...res.data.list)
+        } else {
+            this.aList = res.data.list
+        }
+        this.pageInfo = res.data.pageInfo
+    }
+
+    private keywordSearch () {
+        this.pageReq.page = 1
+        this.search(this.query)
+    }
+
+    private filterSearch () {
+        this.pageReq.page = 1
+        this.search({
+            ...this.query,
+            ...this.filter,
+        })
+    }
+
+    private loadmore () {
+        this.pageReq.page++
+        this.search({
+            ...this.query,
+            ...this.filter,
+        })
     }
 }

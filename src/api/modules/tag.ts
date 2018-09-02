@@ -5,34 +5,32 @@ import { Controller } from '@/utils/decorators'
 
 @Controller('/tags')
 export class TagApi extends Api {
-    public list (params: WebApi.TagModule.list.req) {
-        type req = WebApi.TagModule.list.req
-        type res = WebApi.TagModule.list.res
-        return this.get<req, res>('', params)
+    public list (params: WebApi.TagModule.list.Req) {
+        type Req = WebApi.TagModule.list.Req
+        type Res = WebApi.TagModule.list.Res
+        return this.get<Req, Res>('', params)
     }
 
     public item (id: string) {
-        type req = WebApi.TagModule.item.req
-        type res = WebApi.TagModule.item.res
-        return this.get<req, res>(`/${id}`)
+        type Res = WebApi.TagModule.item.Res
+        return this.get<null, Res>(`/${id}`)
     }
 
-    public create (data: WebApi.TagModule.create.req) {
-        type req = WebApi.TagModule.create.req
-        type res = WebApi.TagModule.create.res
-        return this.post<req, res>('', data)
+    public create (data: WebApi.TagModule.create.Req) {
+        type Req = WebApi.TagModule.create.Req
+        type Res = WebApi.TagModule.create.Res
+        return this.post<Req, Res>('', data)
     }
 
-    public update (id: string, data: WebApi.TagModule.update.req) {
-        type req = WebApi.TagModule.update.req
-        type res = WebApi.TagModule.update.res
-        return this.patch<req, res>(`/${id}`, data)
+    public update (id: string, data: WebApi.TagModule.update.Req) {
+        type Req = WebApi.TagModule.update.Req
+        type Res = WebApi.TagModule.update.Res
+        return this.patch<Req, Res>(`/${id}`, data)
     }
 
     public deleteItem (id: string) {
-        type req = WebApi.TagModule.deleteItem.req
-        type res = WebApi.TagModule.deleteItem.res
-        return this.delete<res>(`/${id}`)
+        type Res = WebApi.TagModule.deleteItem.Res
+        return this.delete<Res>(`/${id}`)
     }
 }
 

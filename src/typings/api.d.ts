@@ -63,9 +63,9 @@ declare namespace WebApi {
      * @example
      *  namespace TestModule {
      *      ## 请求参数类型
-     *      export type req = {}
+     *      export type Req = {}
      *      ## 返回数据类型
-     *      export type res = IReponse<T>
+     *      export type Res = IReponse<T>
      *  }
      */
 
@@ -74,7 +74,7 @@ declare namespace WebApi {
      */
     namespace ArticleModule {
         namespace list {
-            export type req =  IPageableRequest & {
+            export type Req =  IPageableRequest & {
                 state?: number
                 source?: number
                 category?: string
@@ -86,17 +86,15 @@ declare namespace WebApi {
                 sortBy?: string,
             }
 
-            export type res = IPageableResponse<Article[]>
+            export type Res = IPageableResponse<Article>
         }
 
         namespace item {
-            export type req = {}
-            export type res = IResponse<Article>
+            export type Res = IResponse<Article>
         }
 
         namespace archives {
-            export type req = {}
-            export type res = IResponse<{
+            export type Res = IResponse<{
                 count: number
                 list: Array<{
                     year: number
@@ -110,28 +108,25 @@ declare namespace WebApi {
         }
 
         namespace create {
-            export type req = Article
-            export type res = IResponse<Article>
+            export type Req = Article
+            export type Res = IResponse<Article>
         }
 
         namespace update {
-            export type req = Article
-            export type res = IResponse<Article>
+            export type Req = Article
+            export type Res = IResponse<Article>
         }
 
         namespace like {
-            export type req = {}
-            export type res = IResponse<boolean>
+            export type Res = IResponse<boolean>
         }
 
         namespace unlike {
-            export type req = {}
-            export type res = IResponse<boolean>
+            export type Res = IResponse<boolean>
         }
 
         namespace deleteItem {
-            export type req = {}
-            export type res = IResponse<boolean>
+            export type Res = IResponse<boolean>
         }
 
         type Article = ModuleShare & {
@@ -160,31 +155,29 @@ declare namespace WebApi {
         }
 
         namespace list {
-            export type req =  IPageableRequest & {
+            export type Req =  IPageableRequest & {
                 keyword?: string,
             }
 
-            export type res = IPageableResponse<Category[]>
+            export type Res = IResponse<Category[]>
         }
 
         namespace item {
-            export type req = {}
-            export type res = IResponse<Category>
+            export type Res = IResponse<Category>
         }
 
         namespace create {
-            export type req = Category
-            export type res = IResponse<Category>
+            export type Req = Category
+            export type Res = IResponse<Category>
         }
 
         namespace update {
-            export type req = Category
-            export type res = IResponse<Category>
+            export type Req = Category
+            export type Res = IResponse<Category>
         }
 
         namespace deleteItem {
-            export type req = {}
-            export type res = IResponse<boolean>
+            export type Res = IResponse<boolean>
         }
     }
 
@@ -195,31 +188,29 @@ declare namespace WebApi {
         }
 
         namespace list {
-            export type req =  IPageableRequest & {
+            export type Req =  IPageableRequest & {
                 keyword?: string,
             }
 
-            export type res = IPageableResponse<Tag[]>
+            export type Res = IResponse<Tag[]>
         }
 
         namespace item {
-            export type req = {}
-            export type res = IResponse<Tag>
+            export type Res = IResponse<Tag>
         }
 
         namespace create {
-            export type req = Tag
-            export type res = IResponse<Tag>
+            export type Req = Tag
+            export type Res = IResponse<Tag>
         }
 
         namespace update {
-            export type req = Tag
-            export type res = IResponse<Tag>
+            export type Req = Tag
+            export type Res = IResponse<Tag>
         }
 
         namespace deleteItem {
-            export type req = {}
-            export type res = IResponse<boolean>
+            export type Res = IResponse<boolean>
         }
     }
 
@@ -241,20 +232,18 @@ declare namespace WebApi {
         }
 
         namespace list {
-            export type req = {}
-            export type res = IPageableResponse<User[]>
+            export type Res = IResponse<User[]>
         }
 
         namespace item {
-            export type req = {}
-            export type res = IResponse<User>
+            export type Res = IResponse<User>
         }
 
         namespace update {
-            export interface req {
+            export interface Req {
                 mute?: boolean
             }
-            export type res = IResponse<User>
+            export type Res = IResponse<User>
         }
     }
 
@@ -276,32 +265,28 @@ declare namespace WebApi {
         }
 
         namespace list {
-            export type req = IPageableRequest & {
+            export type Req = IPageableRequest & {
                 type?: number
                 classify?: number
                 viewed?: boolean,
             }
-            export type res = IPageableResponse<Notification[]>
+            export type Res = IPageableResponse<Notification>
         }
 
         namespace item {
-            export type req = {}
-            export type res = IResponse<Notification>
+            export type Res = IResponse<Notification>
         }
 
         namespace view {
-            export type req = {}
-            export type res = IResponse<boolean>
+            export type Res = IResponse<boolean>
         }
 
         namespace viewAll {
-            export type req = {}
-            export type res = IResponse<boolean>
+            export type Res = IResponse<boolean>
         }
 
         namespace deleteItem {
-            export type req = {}
-            export type res = IResponse<boolean>
+            export type Res = IResponse<boolean>
         }
     }
 
@@ -326,7 +311,7 @@ declare namespace WebApi {
         }
 
         namespace list {
-            export type req =  IPageableRequest & {
+            export type Req =  IPageableRequest & {
                 state?: number
                 type?: number
                 author?: string
@@ -339,37 +324,33 @@ declare namespace WebApi {
                 sortBy?: string,
             }
 
-            export type res = IPageableResponse<Comment[]>
+            export type Res = IPageableResponse<Comment>
         }
 
         namespace item {
-            export type req = {}
-            export type res = IResponse<Comment>
+            export type Res = IResponse<Comment>
         }
 
         namespace create {
-            export type req = Comment
-            export type res = IResponse<Comment>
+            export type Req = Comment
+            export type Res = IResponse<Comment>
         }
 
         namespace update {
-            export type req = Comment
-            export type res = IResponse<Comment>
+            export type Req = Comment
+            export type Res = IResponse<Comment>
         }
 
         namespace like {
-            export type req = {}
-            export type res = IResponse<boolean>
+            export type Res = IResponse<boolean>
         }
 
         namespace unlike {
-            export type req = {}
-            export type res = IResponse<boolean>
+            export type Res = IResponse<boolean>
         }
 
         namespace deleteItem {
-            export type req = {}
-            export type res = IResponse<boolean>
+            export type Res = IResponse<boolean>
         }
     }
 
@@ -422,54 +403,51 @@ declare namespace WebApi {
         }
 
         namespace getData {
-            export type req = {}
 
-            export type res = IResponse<Setting>
+            export type Res = IResponse<Setting>
         }
 
         namespace update {
-            export interface req {
+            export interface Req {
                 site: object
                 keys: object
                 limit: object
             }
-            export type res = IResponse<Setting>
+            export type Res = IResponse<Setting>
         }
     }
 
     namespace AuthModule {
         namespace login {
-            export interface req {
+            export interface Req {
                 username: string
                 password: string
             }
-            export type res = IResponse<{
+            export type Res = IResponse<{
                 id: string
                 token: string,
             }>
         }
 
         namespace logout {
-            export type req = {}
-            export type res = IResponse<{}>
+            export type Res = IResponse<{}>
         }
 
         namespace info {
-            export type req = {}
-            export type res = IResponse<UserModule.User>
+            export type Res = IResponse<UserModule.User>
         }
 
         namespace update {
-            export type req = UserModule.User
-            export type res = IResponse<UserModule.User>
+            export type Req = UserModule.User
+            export type Res = IResponse<UserModule.User>
         }
 
         namespace password {
-            export interface req {
+            export interface Req {
                 oldPassword: string
                 password: string
             }
-            export type res = IResponse<{}>
+            export type Res = IResponse<{}>
         }
     }
 }
