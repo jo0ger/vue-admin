@@ -1,12 +1,25 @@
 /// <reference path="../../typings/api.d.ts" />
 
 import api from '@/api'
-import { FETCH_LIST_REQUEST, FETCH_LIST_SUCCESS, FETCH_LIST_FAILURE} from '../mutation-types'
+import {
+    FETCH_LIST_REQUEST,
+    FETCH_LIST_SUCCESS,
+    FETCH_LIST_FAILURE,
+    CREATE_ITEM_REQUEST,
+    CREATE_ITEM_SUCCESS,
+    CREATE_ITEM_FAILURE,
+    UPDATE_ITEM_REQUEST,
+    UPDATE_ITEM_SUCCESS,
+    UPDATE_ITEM_FAILURE,
+    DELETE_ITEM_REQUEST,
+    DELETE_ITEM_SUCCESS,
+    DELETE_ITEM_FAILURE,
+} from '../mutation-types'
 import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'
 
 interface State extends StateTree {
     loading: boolean
-    list: WebApi.NotificationModule.Notification[]
+    list: WebApi.CategoryModule.Category[]
 }
 
 export const state = (): State => ({
@@ -35,6 +48,21 @@ export const mutations: Mutations<State> = {
         s.loading = false
         s.list = list
     },
+    [CREATE_ITEM_REQUEST]: s => (s.loading = true),
+    [CREATE_ITEM_FAILURE]: s => (s.loading = false),
+    [CREATE_ITEM_SUCCESS]: s => (s.loading = false),
+    [UPDATE_ITEM_REQUEST]: s => (s.loading = true),
+    [UPDATE_ITEM_FAILURE]: s => (s.loading = false),
+    [UPDATE_ITEM_SUCCESS]: (s, data) => {
+        s.loading = false
+        const index = s.list.findIndex(item => item._id === data._id)
+        if (index > -1) {
+            s.list.splice(index, 1, data)
+        }
+    },
+    [DELETE_ITEM_REQUEST]: s => (s.loading = true),
+    [DELETE_ITEM_FAILURE]: s => (s.loading = false),
+    [DELETE_ITEM_SUCCESS]: s => (s.loading = false),
 }
 
 export const actions: Actions<State, RootState> = {
@@ -46,6 +74,39 @@ export const actions: Actions<State, RootState> = {
             commit(FETCH_LIST_SUCCESS, data)
         } else {
             commit(FETCH_LIST_FAILURE)
+        }
+        return success
+    },
+    async create ({ commit, dispatch, state }, payload) {
+        if (state.loading) return
+        commit(CREATE_ITEM_REQUEST)
+        const { success } = await api.category.create(payload)
+        if (success) {
+            commit(CREATE_ITEM_SUCCESS)
+        } else {
+            commit(CREATE_ITEM_FAILURE)
+        }
+        return success
+    },
+    async update ({ commit, state }, { id, payload }) {
+        if (state.loading) return
+        commit(UPDATE_ITEM_REQUEST)
+        const { success, data } = await api.category.update(id, payload)
+        if (success) {
+            commit(UPDATE_ITEM_SUCCESS, data)
+        } else {
+            commit(UPDATE_ITEM_FAILURE)
+        }
+        return success
+    },
+    async deleteItem ({ commit, state }, id) {
+        if (state.loading) return
+        commit(DELETE_ITEM_REQUEST)
+        const { success } = await api.category.deleteItem(id)
+        if (success) {
+            commit(DELETE_ITEM_SUCCESS)
+        } else {
+            commit(DELETE_ITEM_FAILURE)
         }
         return success
     },

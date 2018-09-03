@@ -68,9 +68,7 @@ export const processModel = (query: any = {}) => {
             } else if (Array.isArray(val) || isObject(val)) {
                 val = processModel(val)
             }
-            if (val) {
-                m[key] = val
-            }
+            m[key] = val
         }
         return m
     }, Object.create(Array.isArray(query) ? [] : {}))

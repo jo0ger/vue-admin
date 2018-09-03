@@ -4,9 +4,9 @@
  * @date 2018-09-02 13:51:43
  -->
 <template>
-    <Container class="article-list-page" title="文章列表">
-        <Avatar slot="logo" :icon="$route.meta.icon" style="color: #f56a00;background-color: #fde3cf">U</Avatar>
-        <Input slot="action" search enter-button="搜索" placeholder="搜索文章" style="width: 300px" @on-search="keywordSearch" @on-enter="keywordSearch" />
+    <Container class="article-list-page" :title="$route.meta.title">
+        <Avatar slot="logo" :icon="$route.meta.icon" style="color: #2d8cf0;background-color: #e6f7ff"></Avatar>
+        <Input slot="action" search enter-button="搜索" placeholder="搜索文章" style="width: 300px" v-model.trim="query.keyword" @on-search="keywordSearch" @on-enter="keywordSearch" />
         <Form :label-width="60" slot="filter">
             <FormItem label="分类项">
                 <Form :label-width="80" inline>
@@ -54,7 +54,7 @@
                 共找到 <b style="color: #FF8D13">{{ pageInfo.total }}</b> 篇文章，
                 共 <b style="color: #FF8D13">{{ pageInfo.pages }}</b> 页
             </Alert>
-            <Card class="article-item" v-for="article in aList" :key="article._id">
+            <Card class="article-item" v-for="(article, index) in aList" :key="article._id">
                 <div class="source" :class="[article.source ? 'reprint' : 'original']" v-if="article.source !== undefined">
                     {{ article.source | constantFilter('ARTICLE_SOURCE') }}
                 </div>
@@ -81,8 +81,13 @@
                                 </Tooltip>
                             </div>
                             <div class="description">{{ article.description }}</div>
+                            <div class="time">
+                                <span>创建于 {{ article.createdAt | dateFormat }}</span>
+                                <span>发布在 <a :href="article.permallink">{{ article.title }}</a></span>
+                            </div>
                         </div>
                         <div class="action">
+                            <Tag type="border" size="small" :color="article.state ? 'success' : 'warning'">{{ ['未发布', '已发布'][article.state] }}</Tag>
                             <ul class="meta-list">
                                 <li class="meta-item">
                                     <Icon class="icon" type="ios-eye-outline" size="16" />
@@ -99,6 +104,9 @@
                                     {{ article.meta.comments }}
                                 </li>
                             </ul>
+                            <div class="operation">
+                                <Button size="small" type="error" @click="deleteArticle(article, index)">删除</Button>
+                            </div>
                         </div>
                     </div>
                     <div class="extra">

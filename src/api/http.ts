@@ -4,8 +4,9 @@ import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig, AxiosError } f
 import { IS_PROD, WHITE_API_LIST, AXIOS_DEFAULT_CONFIG } from '@/config'
 import { merge } from '@/utils'
 import { Message } from 'iview'
+import router from '@/router';
 
-let unAuthMessageVisible = false
+let msgVisible = false
 
 export default class Http {
     public static client: AxiosInstance
@@ -62,23 +63,28 @@ export default class Http {
     }
 
     private processError (err: AxiosError) {
-        if (err.response && err.response.status === 401) {
-            if (!unAuthMessageVisible) {
-                unAuthMessageVisible = true
+        if (!msgVisible) {
+            msgVisible = true
+            if (err.response && err.response.status === 401) {
                 Message.error({
                     content: err.response.data.message,
                     onClose: () => {
-                        unAuthMessageVisible = false
+                        msgVisible = false
+                    },
+                })
+                return
+            }
+            // 如果是手动取消的请求，不显示错误信息
+            if (axios.isCancel(err)) {
+                console.error(err)
+            } else {
+                Message.error({
+                    content: err.response && err.response.data.message || '网络错误',
+                    onClose: () => {
+                        msgVisible = false
                     },
                 })
             }
-            return
-        }
-        // 如果是手动取消的请求，不显示错误信息
-        if (axios.isCancel(err)) {
-            console.error(err)
-        } else {
-            Message.error(err.response && err.response.data.message || '网络错误')
         }
         throw err
     }

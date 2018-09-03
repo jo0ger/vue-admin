@@ -2,7 +2,7 @@
 
 import * as constant from './constant'
 import { Constant } from './constant'
-import { findExtendsItem } from './share'
+import { findExtendsItem, moment } from './share'
 
 /**
  * 常量的filter
@@ -19,3 +19,7 @@ export const constantFilter = (value: any, key: string) => {
 }
 
 export const extendsFilter = findExtendsItem
+
+export const dateFormat = (val, format = 'YYYY-MM-DD HH:mm') => {
+    return moment(val).format(format)
+}

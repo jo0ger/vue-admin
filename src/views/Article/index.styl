@@ -33,11 +33,13 @@
             font-weight bold
 
             &.original {
-                background-color $info-color
+                background-color rgba($info-color, .3)
+                color $info-color
             }
         
             &.reprint {
-                background-color $warning-color
+                background-color rgba($warning-color, .3)
+                color $warning-color
             }
         }
 
@@ -57,8 +59,8 @@
             .thumb {
                 img {
                     max-height 150px
-                    border-radius 8px
-                    box-shadow 1px 10px 10px rgba($black-color, 0.1)
+                    border-radius 4px
+                    // box-shadow 1px 10px 10px rgba($black-color, 0.1)
                 }
             }
         }
@@ -86,14 +88,34 @@
             }
 
             .description {
-                margin-right 128px
+                margin-bottom $padding-sm
                 line-height 22px
                 text-align justify                  
                 lineLimit(3)
             }
+
+            .time {
+                color $sub-color
+
+                span {
+                    margin-right $padding-md
+                }
+            }
         }
 
         .action {
+            display flex
+            justify-content space-between
+            align-items center
+            
+            & > * {
+                display inline-block
+            }
+
+            .meta-list {
+                flex 1 1
+            }
+            
             .meta-item {
                 display inline-block
                 padding 0 $padding-xs
@@ -102,10 +124,19 @@
                 .icon {
                     margin-right $padding-xs
                 }
+            }
 
-                &:first-child {
-                    padding-left 0
-                }
+            .operation {
+                opacity 0
+                visibility hidden
+                transition all .3s $ease-out
+            }
+        }
+
+        &:hover {
+            .operation {
+                opacity 1
+                visibility visible
             }
         }
     }

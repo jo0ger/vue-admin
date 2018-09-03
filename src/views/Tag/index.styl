@@ -1,9 +1,49 @@
 /**
- * @desc Tag
+ * @desc Category
  * @author Jooger <iamjooger@gmail.com>
- * @date 2018-09-02 13:52:03
+ * @date 2018-09-02 13:51:58
  */
 
 @import '~@/assets/style/init'
 
-.tag {}
+.tag-page {
+    .create-btn {
+        width 100%
+        height 170px
+        font-size 14px
+    }
+    
+    .tag-item {
+        margin-bottom $padding-sm
+    
+        .action {
+            display flex
+            margin 0 -16px -16px
+            border-top 1px solid $divider-color
+
+            &-item {
+                flex 1 1
+                margin $padding-sm 0
+                text-align center
+                
+                &:not(:last-child) {
+                    border-right 1px solid $divider-color
+                }
+
+                .action-icon {
+                    color rgba($black-color, .45)
+
+                    &:hover {
+                        color $primary-color
+                    }
+                }
+            }
+        }
+
+        .description {
+            height 40px
+            margin-bottom $padding-md
+            lineLimit(2)
+        }
+    }
+}

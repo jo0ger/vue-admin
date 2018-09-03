@@ -95,4 +95,23 @@ export default class Article extends Vue {
             ...this.filter,
         })
     }
+
+    private async deleteArticle (article, index) {
+        this.$Modal.confirm({
+            title: '提示',
+            render: h => {
+                return h('p', null, [
+                    '确认删除吗？',
+                    h('br'),
+                    h('b', `《${article.title}》`),
+                ])
+            },
+            onOk: async () => {
+                const res = await this.api.article.deleteItem(article._id)
+                this.$Message.success(res.message)
+                this.aList.splice(index, 1)
+                this.pageInfo.total--
+            },
+        })
+    }
 }
