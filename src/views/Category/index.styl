@@ -9,7 +9,7 @@
 .category-page {
     .create-btn {
         width 100%
-        height 170px
+        height 186px
         font-size 14px
     }
     
@@ -40,10 +40,33 @@
             }
         }
 
-        .description {
-            height 40px
+        .content {
+            display flex
             margin-bottom $padding-md
-            lineLimit(2)
+
+            .description {
+                flex 1 1
+                height 40px
+                lineLimit(2)
+            }
+
+            .count {
+                flex 0 0 50px
+                margin-left $padding-sm
+
+                p {
+                    color $sub-color
+                    font-size $font-size-sm
+                    margin-bottom 4px
+                    text-align center
+
+                    &:last-child {
+                        color $content-color
+                        font-size 24px
+                        margin 0
+                    }
+                }
+            }
         }
     }
 }

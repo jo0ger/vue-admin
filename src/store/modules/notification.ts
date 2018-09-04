@@ -1,7 +1,7 @@
 /// <reference path="../../typings/api.d.ts" />
 
 import api from '@/api'
-import { FETCH_LIST_REQUEST, FETCH_LIST_SUCCESS, FETCH_LIST_FAILURE} from '../mutation-types'
+import { FETCH_LIST_REQUEST, FETCH_LIST_SUCCESS, FETCH_LIST_FAILURE } from '../mutation-types'
 import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'
 
 interface State extends StateTree {

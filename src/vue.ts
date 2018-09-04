@@ -11,7 +11,8 @@ import { cloneDeep, merge, processModel, findExtendsItem, constant, filters } fr
 import * as config from '@/config'
 import { namespace } from 'vuex-class'
 
-const { Getter } = namespace('auth')
+const aMod = namespace('auth')
+const sMod = namespace('setting')
 
 @Component({
     filters: {
@@ -19,7 +20,8 @@ const { Getter } = namespace('auth')
     },
 })
 export default class Base extends Vue {
-    @Getter('info') protected admin!: WebApi.UserModule.User
+    @aMod.Getter('info') protected admin!: WebApi.UserModule.User
+    @sMod.Getter('data') protected setting!: WebApi.SettingModule.Setting
 
     protected config = config
     protected api = api

@@ -6,9 +6,18 @@
 
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
+import { Container } from '@/components/common'
 
 @Component({
     name: 'Auth',
+    components: {
+        Container,
+    },
 })
 export default class Auth extends Vue {
+    private editMode = false
+
+    private addTag () {}
+
+    private deleteTag (item, index) {}
 }

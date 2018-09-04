@@ -108,6 +108,7 @@ export default [
         component: () => import('@/views/Auth/index.vue'),
         meta: {
             title: '个人信息',
+            icon: 'md-person',
         },
     },
     {

@@ -27,7 +27,13 @@
                             backgroundColor: findExtendsItem(item.extends, 'background')
                         }"
                         v-else>{{ item.name.slice(0, 2) }}</Avatar>
-                    <p class="description">{{ item.description }}</p>
+                    <div class="content">
+                        <p class="description">{{ item.description }}</p>
+                        <div class="count">
+                            <p>关联文章</p>
+                            <p>{{ item.count }}</p>
+                        </div>
+                    </div>
                     <ul class="action">
                         <li class="action-item">
                             <span><a><Icon type="ios-create-outline" size="18" class="action-icon"></Icon></a></span>

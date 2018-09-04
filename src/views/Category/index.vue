@@ -27,13 +27,23 @@
                             backgroundColor: findExtendsItem(item.extends, 'background')
                         }"
                         v-else>{{ item.name.slice(0, 2) }}</Avatar>
-                    <p class="description">{{ item.description }}</p>
+                    <div class="content">
+                        <p class="description">{{ item.description }}</p>
+                        <div class="count">
+                            <p>关联文章</p>
+                            <p>{{ item.count }}</p>
+                        </div>
+                    </div>
                     <ul class="action">
                         <li class="action-item">
-                            <span><a><Icon type="ios-create-outline" size="18" class="action-icon"></Icon></a></span>
+                            <Tooltip placement="top" content="编辑">
+                                <span><a><Icon type="ios-create-outline" size="20" class="action-icon"></Icon></a></span>
+                            </Tooltip>
                         </li>
                         <li class="action-item">
-                            <span><a><Icon type="ios-trash-outline" size="18" class="action-icon" @click="deleteItem(item)"></Icon></a></span>
+                            <Tooltip placement="top" content="删除">
+                                <span><a><Icon type="ios-trash-outline" size="20" class="action-icon" @click="deleteItem(item)"></Icon></a></span>
+                            </Tooltip>
                         </li>
                     </ul>
                 </Card>

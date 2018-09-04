@@ -12,6 +12,7 @@ import routes from '@/router/routes'
 
 const authMod = namespace('auth')
 const nMod = namespace('notification')
+const sMod = namespace('setting')
 
 @Component({
     name: 'Default',
@@ -36,11 +37,15 @@ export default class Default extends Vue {
     @nMod.Action('getList')
     private getNList
 
+    @sMod.Action('getData')
+    private getSData
+
     get routeMenus () {
         return this.genMenu(routes)
     }
 
     public created () {
+        this.getSData()
         this.getNList({
             page: 1,
             viewed: false,

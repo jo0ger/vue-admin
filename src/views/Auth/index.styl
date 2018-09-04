@@ -6,4 +6,76 @@
 
 @import '~@/assets/style/init'
 
-.auth {}
+.auth-page {
+    .account {
+        margin-bottom $padding-md
+        text-align center
+
+        .avatar {
+            width 100px
+            height @width
+            margin-bottom $padding-md
+            border-radius 50%
+        }
+
+        .name {
+            margin-bottom $padding-xs
+            font-family Oleo Script
+        }
+
+        .slogan {
+            color $sub-color
+        }
+    }
+
+    .profile {
+        p {
+            display flex
+            margin-bottom $padding-xs
+            line-height 24px
+
+            .icon {
+                flex 0 0 20px
+                margin-right $padding-xs
+                line-height 24px
+            }
+
+            &.description {
+                .icon {
+                    color $info-color
+                }
+            }
+
+            &.skill {
+                .icon {
+                    color $success-color
+                }
+            }
+
+            &.hobby {
+                .icon {
+                    color $error-color
+                }
+            }
+
+            &.location {
+                .icon {
+                    color $warning-color
+                }
+            }
+
+            &.company {
+                .icon {
+                    color $sub-color
+                }
+            }
+        }
+
+    }
+
+    .tags {
+        .label {
+            margin-bottom $padding-md
+        }
+    }
+}

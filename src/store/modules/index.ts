@@ -3,6 +3,7 @@ import * as auth from './auth'
 import * as notification from './notification'
 import * as category from './category'
 import * as tag from './tag'
+import * as setting from './setting'
 import { getStoreModule } from '@/utils'
 
 export default {
@@ -11,4 +12,5 @@ export default {
     notification: getStoreModule(notification),
     category: getStoreModule(category),
     tag: getStoreModule(tag),
+    setting: getStoreModule(setting),
 }
