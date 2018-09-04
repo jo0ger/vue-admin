@@ -36,7 +36,7 @@
                     </div>
                     <ul class="action">
                         <li class="action-item">
-                            <span><a><Icon type="ios-create-outline" size="18" class="action-icon"></Icon></a></span>
+                            <span><a><Icon type="ios-create-outline" size="18" class="action-icon" @click="edit(item)"></Icon></a></span>
                         </li>
                         <li class="action-item">
                             <span><a><Icon type="ios-trash-outline" size="18" class="action-icon" @click="deleteItem(item)"></Icon></a></span>
@@ -45,6 +45,9 @@
                 </Card>
             </Col>
         </Row>
+        <CTDialog v-model="ctDialogVisible"
+            type="tag"
+            :id="curTag && curTag._id || ''"></CTDialog>
     </Container>
 </template>
 

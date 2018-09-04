@@ -23,23 +23,23 @@
                     </div>
                     <div class="profile">
                         <p class="description">
-                            <Icon class="icon" type="md-person" />
+                            <Icon size="16" class="icon" type="md-person" />
                             {{ setting.site.description }}
                         </p>
                         <p class="skill">
-                            <Icon class="icon" type="md-hammer" />
+                            <Icon size="16" class="icon" type="md-hammer" />
                             {{ setting.site.skill }}
                         </p>
                         <p class="hobby">
-                            <Icon class="icon" type="md-heart" />
+                            <Icon size="16" class="icon" type="md-heart" />
                             {{ setting.site.hobby }}
                         </p>
                         <p class="location">
-                            <Icon class="icon" type="md-compass" />
+                            <Icon size="16" class="icon" type="md-compass" />
                             {{ setting.site.location }}
                         </p>
                         <p class="company">
-                            <Icon class="icon" type="md-code-working" />
+                            <Icon size="16" class="icon" type="md-trophy" />
                             {{ setting.site.company }}
                         </p>
                     </div>
@@ -57,6 +57,7 @@
                 <Card>
                     <Tabs value="name1">
                         <TabPane label="友链" name="name1">友链</TabPane>
+                        <TabPane label="更新密码" name="name2">更新密码</TabPane>
                     </Tabs>
                 </Card>
             </Col>

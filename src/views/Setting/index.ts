@@ -6,9 +6,18 @@
 
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
+import { Container } from '@/components/common'
 
 @Component({
     name: 'Setting',
+    components: {
+        Container,
+    },
 })
 export default class Setting extends Vue {
+    private menu = 'keys'
+
+    private menuSelect (menu) {
+        this.menu = menu
+    }
 }

@@ -6,8 +6,8 @@
 
 import Vue from '@/vue'
 import { namespace } from 'vuex-class'
-import { Component } from '@/utils/decorators'
-import { Container } from '@/components/common'
+import { Component, Watch } from '@/utils/decorators'
+import { Container, CTDialog } from '@/components/common'
 
 const { Getter, Action } = namespace('tag')
 
@@ -15,6 +15,7 @@ const { Getter, Action } = namespace('tag')
     name: 'Tag',
     components: {
         Container,
+        CTDialog,
     },
 })
 export default class Tag extends Vue {
@@ -27,6 +28,16 @@ export default class Tag extends Vue {
         keyword: '',
     }
 
+    private ctDialogVisible = false
+    private curTag = null
+
+    @Watch('ctDialogVisible')
+    ctDialogVisibleWatch (val) {
+        if (!val) {
+            this.curTag = null
+        }
+    }
+
     private created () {
         this.search()
     }
@@ -35,9 +46,14 @@ export default class Tag extends Vue {
         await this.getTList(this.processModel(this.query))
     }
 
-    private add () {}
-
-    private edit () {}
+    private add () {
+        this.ctDialogVisible = true
+    }
+    
+    private edit (item) {
+        this.ctDialogVisible = true
+        this.curTag = item
+    }
 
     private deleteItem (item) {
         this.$Modal.confirm({

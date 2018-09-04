@@ -4,9 +4,31 @@
  * @date 2018-09-02 13:53:56
  -->
 <template>
-    <div class="setting">
-        Setting
-    </div>
+    <Container class="setting-page" :title="$route.meta.title">
+        <Avatar slot="logo" :icon="$route.meta.icon" style="color: #87e8de;background-color: #e6fffb"></Avatar>
+        <Card>
+            <div class="content">
+                <Menu theme="light" :active-name="menu" class="setting-menu" @on-select="menuSelect">
+                    <MenuItem name="keys">
+                        <Icon type="md-document" />
+                        Keys配置
+                    </MenuItem>
+                    <MenuItem name="limit">
+                        <Icon type="md-chatbubbles" />
+                        Limit管理
+                    </MenuItem>
+                </Menu>
+                <div class="details">
+                    <div class="keys" v-if="menu === 'keys'">
+                        <h2 class="label">Keys设置</h2>
+                    </div>
+                    <div class="keys" v-if="menu === 'limit'">
+                        <h2 class="label">Limit设置</h2>
+                    </div>
+                </div>
+            </div>
+        </Card>
+    </Container>
 </template>
 
 <script lang="ts" src="./index.ts"></script>

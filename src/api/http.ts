@@ -100,7 +100,7 @@ export default class Http {
         let payload = data
         if (payload instanceof FormData) {
             // pass
-        } else if (method === 'post') {
+        } else if (method === 'post' || method === 'patch') {
             payload = JSON.stringify(data)
         }
         return payload

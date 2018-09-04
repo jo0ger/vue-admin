@@ -6,8 +6,8 @@
 
 import Vue from '@/vue'
 import { namespace } from 'vuex-class'
-import { Component } from '@/utils/decorators'
-import { Container } from '@/components/common'
+import { Component, Watch } from '@/utils/decorators'
+import { Container, CTDialog } from '@/components/common'
 
 const { Getter, Action } = namespace('category')
 
@@ -15,6 +15,7 @@ const { Getter, Action } = namespace('category')
     name: 'Category',
     components: {
         Container,
+        CTDialog,
     },
 })
 export default class Category extends Vue {
@@ -27,6 +28,16 @@ export default class Category extends Vue {
         keyword: '',
     }
 
+    private ctDialogVisible = false
+    private curCategory = null
+
+    @Watch('ctDialogVisible')
+    ctDialogVisibleWatch (val) {
+        if (!val) {
+            this.curCategory = null
+        }
+    }
+
     private created () {
         this.search()
     }
@@ -35,9 +46,14 @@ export default class Category extends Vue {
         await this.getCList(this.processModel(this.query))
     }
 
-    private add () {}
-
-    private edit () {}
+    private add () {
+        this.ctDialogVisible = true
+    }
+    
+    private edit (item) {
+        this.ctDialogVisible = true
+        this.curCategory = item
+    }
 
     private deleteItem (item) {
         this.$Modal.confirm({

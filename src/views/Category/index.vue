@@ -37,7 +37,7 @@
                     <ul class="action">
                         <li class="action-item">
                             <Tooltip placement="top" content="编辑">
-                                <span><a><Icon type="ios-create-outline" size="20" class="action-icon"></Icon></a></span>
+                                <span><a><Icon type="ios-create-outline" size="20" class="action-icon" @click="edit(item)"></Icon></a></span>
                             </Tooltip>
                         </li>
                         <li class="action-item">
@@ -49,6 +49,9 @@
                 </Card>
             </Col>
         </Row>
+        <CTDialog v-model="ctDialogVisible"
+            type="category"
+            :id="curCategory && curCategory._id || ''"></CTDialog>
     </Container>
 </template>
 
