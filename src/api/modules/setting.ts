@@ -7,7 +7,7 @@ import { Controller } from '@/utils/decorators'
 export class SettingApi extends Api {
     public getData () {
         type Res = WebApi.SettingModule.getData.Res
-        return this.get<null, Res>('')
+        return this.get<null, Res>()
     }
 
     public update (id: string, data: WebApi.SettingModule.update.Req) {

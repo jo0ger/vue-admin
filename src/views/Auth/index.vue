@@ -24,30 +24,30 @@
                     <div class="profile">
                         <p class="description">
                             <Icon size="16" class="icon" type="md-person" />
-                            {{ setting.site.description }}
+                            {{ setting.personal.description }}
                         </p>
                         <p class="skill">
                             <Icon size="16" class="icon" type="md-hammer" />
-                            {{ setting.site.skill }}
+                            {{ setting.personal.skill }}
                         </p>
                         <p class="hobby">
                             <Icon size="16" class="icon" type="md-heart" />
-                            {{ setting.site.hobby }}
+                            {{ setting.personal.hobby }}
                         </p>
                         <p class="location">
                             <Icon size="16" class="icon" type="md-compass" />
-                            {{ setting.site.location }}
+                            {{ setting.personal.location }}
                         </p>
                         <p class="company">
                             <Icon size="16" class="icon" type="md-trophy" />
-                            {{ setting.site.company }}
+                            {{ setting.personal.company }}
                         </p>
                     </div>
                     <Divider></Divider>
                     <div class="tags">
                         <h3 class="label">标签</h3>
                         <div class="tag-list">
-                            <Tag v-for="(item, index) in setting.site.tags" :key="item" :name="item" closable @on-close="deleteTag(item, index)">{{ item }}</Tag>
+                            <Tag v-for="(item, index) in setting.personal.tags" :key="item" :name="item" closable @on-close="deleteTag(item, index)">{{ item }}</Tag>
                             <Button icon="ios-add" type="dashed" size="small" @click="addTag">添加标签</Button>
                         </div>
                     </div>

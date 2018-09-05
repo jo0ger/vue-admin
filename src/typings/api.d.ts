@@ -217,18 +217,11 @@ declare namespace WebApi {
     namespace UserModule {
         type User = ModuleShare & {
             name: string
-            description: string
             email: string
             avatar: string
             role: number
             password?: string
             mute: boolean
-            company: string
-            location: string
-            github: {
-                id: string
-                login: string,
-            },
         }
 
         namespace list {
@@ -358,12 +351,6 @@ declare namespace WebApi {
         type Setting = ModuleShare & {
             site: {
                 welcome: string
-                description: string
-                hobby: string
-                skill: string
-                music: string
-                location: string
-                company: string
                 links: Array<{
                     name: string
                     github: string
@@ -372,6 +359,16 @@ declare namespace WebApi {
                     site: string,
                 }>
                 musicId: string,
+            }
+            personal: {
+                slogan: string
+                description: string
+                tag: string[],
+                hobby: string[],
+                skill: string[],
+                location: string
+                company: string
+                github: object
             }
             keys: {
                 aliyun: {
@@ -448,6 +445,34 @@ declare namespace WebApi {
                 password: string
             }
             export type Res = IResponse<{}>
+        }
+    }
+
+    namespace StatModule {
+        interface CountItem {
+            today: number
+            total: number
+        }
+        
+        namespace count {
+            export type Res = IResponse<{
+                [key: string]: CountItem
+            }>
+        }
+
+        namespace trend {
+            export interface Req {
+                startDate: string
+                endDate: string
+                dimension: string
+                target: string
+            }
+            export type Res = IResponse<Req & {
+                trend: {
+                    date: string
+                    count: number
+                }[]
+            }>
         }
     }
 }

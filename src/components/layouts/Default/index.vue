@@ -10,7 +10,7 @@
                 <div class="user">
                     <img class="avatar" :src="admin.avatar" alt="" srcset="">
                     <h2 class="name">{{ admin.name }}</h2>
-                    <p class="slogan">{{ admin.slogan }}</p>
+                    <p class="slogan">{{ setting.personal && setting.personal.slogan }}</p>
                 </div>
                 <div class="action">
                     <router-link class="notification" :to="{ name: 'Notification' }">

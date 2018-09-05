@@ -6,5 +6,32 @@
 
 @import '~@/assets/style/init'
 
-.dashboard {
+.dashboard-page {
+    .stat-card {
+        margin-bottom $padding-md
+
+        .total {
+            margin-bottom $padding-sm
+            text-align right
+
+            span {
+                display inline-block
+                margin-left $padding-md
+                font-size 30px
+                line-height 38px
+            }
+        }
+
+        .divider {
+            margin $padding-md 0
+        }
+
+        .today {
+            text-align left
+        }
+
+        .dimension {
+            margin-right $padding-sm
+        }
+    }
 }

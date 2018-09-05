@@ -36,12 +36,12 @@ export default class CTDialog extends Vue {
 
     @Prop() private id!: string
 
-    @cMod.Getter('list') cList
-    @cMod.Action('update') updateCItem
-    @cMod.Action('getList') getCList
-    @tMod.Getter('list') tList
-    @tMod.Action('update') updateTItem
-    @tMod.Action('getList') getTList
+    @cMod.Getter('list') private cList
+    @cMod.Action('update') private updateCItem
+    @cMod.Action('getList') private getCList
+    @tMod.Getter('list') private tList
+    @tMod.Action('update') private updateTItem
+    @tMod.Action('getList') private getTList
 
     private model: any = getDefMod()
 

@@ -7,7 +7,7 @@
 import Vue from 'vue'
 import api from '@/api'
 import { Component } from '@/utils/decorators'
-import { cloneDeep, merge, processModel, findExtendsItem, constant, filters } from '@/utils'
+import { cloneDeep, merge, processModel, findExtendsItem, constant, filters, moment } from '@/utils'
 import * as config from '@/config'
 import { namespace } from 'vuex-class'
 
@@ -31,6 +31,8 @@ export default class Base extends Vue {
     protected cloneDeep = cloneDeep
     protected processModel = processModel
     protected findExtendsItem = findExtendsItem
+    protected moment = moment
+    protected formatDate = filters.dateFormat
 
     constructor () {
         super()
