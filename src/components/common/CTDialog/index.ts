@@ -43,7 +43,7 @@ export default class CTDialog extends Vue {
     @tMod.Action('update') updateTItem
     @tMod.Action('getList') getTList
 
-    private model = getDefMod()
+    private model: any = getDefMod()
 
     private get title () {
         return '编辑' + {

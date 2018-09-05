@@ -112,12 +112,12 @@ export default [
         },
     },
     {
-        name: 'error-page',
+        name: 'Error',
         path: '/error/:errorCode',
         component: Error,
     },
     {
-        name: 'page-not-found',
+        name: 'Page404',
         path: '*',
         redirect: {
             path: '/error/404',

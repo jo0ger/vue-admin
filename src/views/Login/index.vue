@@ -12,10 +12,10 @@
                 <div class="main">
                     <Form ref="form" :model="model" :rules="ruleValidate">
                         <FormItem prop="username">
-                            <Input prefix="md-contact" placeholder="请输入登录名" v-model.trim="model.username" />
+                            <Input prefix="md-contact" placeholder="请输入登录名" v-model.trim="model.username" @on-enter="submit" />
                         </FormItem>
                         <FormItem prop="password">
-                            <Input type="password" prefix="md-key" placeholder="请输入密码" v-model.trim="model.password" />
+                            <Input type="password" prefix="md-key" placeholder="请输入密码" v-model.trim="model.password" @on-enter="submit" />
                         </FormItem>
                         <FormItem>
                             <Button type="primary" :loading="loading" long @click="submit">登录</Button>

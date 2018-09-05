@@ -44,7 +44,7 @@ export default class Default extends Vue {
         return this.genMenu(routes)
     }
 
-    public created () {
+    private created () {
         this.getSData()
         this.getNList({
             page: 1,

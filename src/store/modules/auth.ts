@@ -20,7 +20,6 @@ const CLEAR_INFO = 'CLEAR_INFO'
 const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-const FETCH_INFO_REQUEST = 'FETCH_INFO_REQUEST'
 const FETCH_INFO_FAILURE = 'FETCH_INFO_FAILURE'
 const FETCH_INFO_SUCCESS = 'FETCH_INFO_SUCCESS'
 const EDIT_INFO_REQUEST = 'EDIT_INFO_REQUEST'
@@ -59,13 +58,10 @@ export const mutations: Mutations<State> = {
     [LOGOUT_REQUEST]: s => (s.loading = true),
     [LOGOUT_FAILURE]: s => (s.loading = false),
     [LOGOUT_SUCCESS]: s => (s.loading = false),
-    [FETCH_INFO_REQUEST]: s => (s.loading = true),
     [FETCH_INFO_FAILURE]: s => {
-        s.loading = false
         s.token = ''
     },
     [FETCH_INFO_SUCCESS]: (s, { token, info }) => {
-        s.loading = false
         s.info = info
         s.token = token
     },
@@ -106,15 +102,19 @@ export const actions: Actions<State, RootState> = {
     },
     async getInfo ({ commit, state }) {
         if (state.loading) return
-        commit(FETCH_INFO_REQUEST)
-        const { success, data } = await api.auth.info()
-        if (success) {
-            storage.set(AUTH_CACHE_KEY, data)
-            commit(FETCH_INFO_SUCCESS, data)
-        } else {
-            commit(FETCH_INFO_FAILURE)
+        try {
+            const { success, data } = await api.auth.info()
+            if (success) {
+                storage.set(AUTH_CACHE_KEY, data)
+                commit(FETCH_INFO_SUCCESS, data)
+            } else {
+                commit(FETCH_INFO_FAILURE)
+            }
+            return success
+        } catch (error) {
+            // pass
         }
-        return success
+        return false
     },
     async update ({ commit, state }, payload) {
         if (state.loading || !state.info._id) return

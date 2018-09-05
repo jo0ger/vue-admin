@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { ROUTER_DEFAULT_CONFIG } from '@/config'
 import { merge } from '@/utils'
-import { Message } from 'iview'
+import { Message, LoadingBar } from 'iview'
 import routes from './routes'
 
 Vue.use(Router)
@@ -13,6 +13,7 @@ export default router
 
 export function connectStore (store) {
     router.beforeEach(async (to, from, next) => {
+        LoadingBar.start()
         if (!store.getters['auth/isLogin']) {
             await store.dispatch('auth/getInfo')
         }
@@ -23,6 +24,7 @@ export function connectStore (store) {
                 Message.info('已登录')
                 if (from.name) {
                     // 从别的页面通过路由跳转（浏览器前进后退）
+                    LoadingBar.end()
                     return next(false)
                 } else {
                     // 直接从地址栏输入/login回车跳转
@@ -36,6 +38,7 @@ export function connectStore (store) {
                     Message.warning('请先登录')
                 }
                 if (from.name === 'Login') {
+                    LoadingBar.end()
                     return next(false)
                 }
                 const query: any = {}
@@ -54,6 +57,11 @@ export function connectStore (store) {
         next()
     })
     router.afterEach(async (to, from) => {
+        if (to.name === 'Error') {
+            LoadingBar.error()
+        } else {
+            LoadingBar.finish()
+        }
         try {
             const defaultComp: any = to.matched[0].components.default
             const layout = defaultComp.options.layout
