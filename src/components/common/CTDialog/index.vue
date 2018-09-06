@@ -4,7 +4,7 @@
  * @date 2018-09-05 01:00:20
  -->
 <template>
-    <Modal class="ct-dialog" width="400" :title="title" v-model="visible" v-bind="$attrs" v-on="$listeners" :mask-closable="false">
+    <Modal class="ct-dialog" width="500" :title="title" v-model="visible" v-bind="$attrs" v-on="$listeners" :mask-closable="false">
         <Form :label-width="60">
             <FormItem label="名称">
                 <Input v-model="model.name" placeholder="请填写名称"></Input>

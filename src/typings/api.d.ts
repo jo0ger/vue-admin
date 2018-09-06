@@ -82,7 +82,7 @@ declare namespace WebApi {
                 keyword?: string
                 startDate?: Date
                 endDate?: Date
-                orderBy?: -1 | 1
+                order?: -1 | 1
                 sortBy?: string,
             }
 

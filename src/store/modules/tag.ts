@@ -16,6 +16,7 @@ import {
     DELETE_ITEM_FAILURE,
 } from '../mutation-types'
 import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'
+import { Message } from 'iview'
 
 interface State extends StateTree {
     loading: boolean
@@ -80,33 +81,39 @@ export const actions: Actions<State, RootState> = {
     async create ({ commit, dispatch, state }, payload) {
         if (state.loading) return
         commit(CREATE_ITEM_REQUEST)
-        const { success } = await api.tag.create(payload)
+        const { success, message } = await api.tag.create(payload)
         if (success) {
             commit(CREATE_ITEM_SUCCESS)
+            Message.success(message)
         } else {
             commit(CREATE_ITEM_FAILURE)
+            Message.error(message)
         }
         return success
     },
     async update ({ commit, state }, { id, payload }) {
         if (state.loading) return
         commit(UPDATE_ITEM_REQUEST)
-        const { success, data } = await api.tag.update(id, payload)
+        const { success, data, message } = await api.tag.update(id, payload)
         if (success) {
             commit(UPDATE_ITEM_SUCCESS, data)
+            Message.success(message)
         } else {
             commit(UPDATE_ITEM_FAILURE)
+            Message.error(message)
         }
         return success
     },
     async deleteItem ({ commit, state }, id) {
         if (state.loading) return
         commit(DELETE_ITEM_REQUEST)
-        const { success } = await api.tag.deleteItem(id)
+        const { success, message } = await api.tag.deleteItem(id)
         if (success) {
             commit(DELETE_ITEM_SUCCESS)
+            Message.success(message)
         } else {
             commit(DELETE_ITEM_FAILURE)
+            Message.error(message)
         }
         return success
     },

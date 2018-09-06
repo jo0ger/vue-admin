@@ -11,7 +11,7 @@
             共找到 <b style="color: #FF8D13">{{ cList.length }}</b> 个分类，
         </Alert>
         <Row :gutter="16" class="category-list">
-            <Col v-bind="colResponsiveProps">
+            <Col v-bind="colResponsiveProps" class="category-item">
                 <Button icon="md-add" type="dashed" class="create-btn" @click="add">添加分类</Button>
             </Col>
             <Col v-bind="colResponsiveProps" v-for="item in cList" :key="item._id" class="category-item">

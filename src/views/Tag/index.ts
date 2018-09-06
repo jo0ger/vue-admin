@@ -73,7 +73,8 @@ export default class Tag extends Vue {
                 ])
             },
             onOk: async () => {
-                this.deleteTItem(item._id)
+                await this.deleteTItem(item._id)
+                await this.getTList()
             },
         })
     }

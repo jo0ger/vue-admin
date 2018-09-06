@@ -19,15 +19,6 @@ import G2 from '@antv/g2'
     },
 })
 export default class Dashboard extends Vue {
-    private topColResponsiveProps = {
-        xs: 24,
-        sm: 12,
-        md: 12,
-        lg: 6
-    }
-
-    date = []
-
     private chartInstance: any = {}
 
     private mounted () {
@@ -74,21 +65,46 @@ export default class Dashboard extends Vue {
         return []
     }
 
+    private async getRangeTrendList (target: string, startDate, endDate, sortBy, order) {
+        const res = await this.api.article.list({
+            startDate,
+            endDate,
+            order,
+            sortBy,
+            page: 1,
+            limit: 7
+        })
+        if (res.success) {
+            return res.data.list
+        }
+    }
+
     private async dateRangeChange (ctrl) {
         const range = ctrl.control.range
-        if (range === 'other') {
-            
-        } else {
+        ctrl.control.date = []
+        if (range !== 'other') {
             const rangeMap = {
                 week: 6,
                 month: 29,
-                year: 364
+                threeMonth: 89
             }
-            const today = this.moment()
-            const endDate = today.format('YYYY-MM-DD 23:59:59')
-            const startDate = this.formatDate(today.subtract(rangeMap[range], 'day'), 'YYYY-MM-DD 00:00:00')
-            ctrl.trend = await this.getRangeTrend(ctrl.target, ctrl.control.dimension, startDate, endDate)
-            this.chartInstance[ctrl.target].changeData(ctrl.trend)
+            ctrl.control.date[1] = new Date()
+            ctrl.control.date[0] = new Date(this.moment().subtract(rangeMap[range], 'day').valueOf())
+            this.selectDate(ctrl)
+        }
+    }
+
+    private async selectDate (ctrl) {
+        const { control, target, list } = ctrl
+        const startDate = this.moment(control.date[0]).format('YYYY-MM-DD 00:00:00')
+        const endDate = this.moment(control.date[1]).format('YYYY-MM-DD 23:59:59')
+        ctrl.trend = await this.getRangeTrend(target, control.dimension, startDate, endDate)
+        const chart = this.chartInstance[ctrl.target]
+        chart.changeData(ctrl.trend)
+        chart.render()
+        // 获取排行榜
+        if (list) {
+            ctrl.list.data = await this.getRangeTrendList(target, startDate, endDate, list.sortBy, list.order)
         }
     }
 
@@ -122,7 +138,7 @@ export default class Dashboard extends Vue {
             container: target + '-trend-chart',
             forceFit: true,
             height: 300,
-            padding: [60],
+            padding: [40, 60],
         })
         chart.source(control.weekTrend)
         chart.scale('count', {
@@ -134,24 +150,48 @@ export default class Dashboard extends Vue {
                 type: 'line',
             }
         })
-        chart.axis('date', {
-            title: {
-                fill: '#404040',
-                fontSize: '16'
-            },
-        })
+        chart.axis('date', true)
         chart.axis('count', {
             title: control.weekTrendChart.alias
         })
-        chart.area().position('date*count').shape('smooth').color(control.weekTrendChart.color).opacity(control.weekTrendChart.opacity)
+        chart.area().position('date*count').shape('smooth').color(control.weekTrendChart.color).opacity(control.weekTrendChart.opacity - .4)
+        chart.line().position('date*count').shape('smooth').color(control.weekTrendChart.color).size(2)
         chart.render()
     }
 
-    private async selectDate (ctrl) {
-        const { control, target } = ctrl
-        const startDate = this.moment(control.date[0]).format('YYYY-MM-DD HH:mm:ss')
-        const endDate = this.moment(control.date[1]).format('YYYY-MM-DD HH:mm:ss')
-        ctrl.trend = await this.getRangeTrend(target, control.dimension, startDate, endDate)
+    private getCountColResponsiveProps (key) {
+        return {
+            pv: {
+                xs: 24,
+                sm: 12,
+                md: 8,
+                lg: 8
+            },
+            up: {
+                xs: 24,
+                sm: 12,
+                md: 8,
+                lg: 8
+            },
+            comment: {
+                xs: 24,
+                sm: 12,
+                md: 8,
+                lg: 8
+            },
+            message: {
+                xs: 24,
+                sm: 12,
+                md: 12,
+                lg: 12
+            },
+            user: {
+                xs: 24,
+                sm: 24,
+                md: 12,
+                lg: 12
+            }
+        }[key]
     }
 
     private beforeDestroy () {
@@ -179,10 +219,15 @@ export default class Dashboard extends Vue {
                 dimension: 'day',
                 date: [],
                 range: 'week'
+            },
+            list: {
+                sortBy: 'meta.pvs',
+                order: -1,
+                data: []
             }
         },
-        like: {
-            target: 'like',
+        up: {
+            target: 'up',
             title: '文章点赞数',
             count: {
                 today: 0,
@@ -199,6 +244,11 @@ export default class Dashboard extends Vue {
                 dimension: 'day',
                 date: [],
                 range: 'week'
+            },
+            list: {
+                sortBy: 'meta.ups',
+                order: -1,
+                data: []
             }
         },
         comment: {
@@ -211,7 +261,7 @@ export default class Dashboard extends Vue {
             weekTrend: [],
             weekTrendChart: {
                 alias: '评论量',
-                color: '#46cdcf',
+                color: '#f5b17b',
                 opacity: .8
             },
             trend: [],
@@ -219,6 +269,11 @@ export default class Dashboard extends Vue {
                 dimension: 'day',
                 date: [],
                 range: 'week'
+            },
+            list: {
+                sortBy: 'meta.comments',
+                order: -1,
+                data: []
             }
         },
         message: {
@@ -232,6 +287,26 @@ export default class Dashboard extends Vue {
             weekTrendChart: {
                 alias: '留言数',
                 color: '#ff467e',
+                opacity: .8
+            },
+            trend: [],
+            control: {
+                dimension: 'day',
+                date: [],
+                range: 'week'
+            }
+        },
+        user: {
+            target: 'user',
+            title: '新增用户量',
+            count: {
+                today: 0,
+                total: 0,
+            },
+            weekTrend: [],
+            weekTrendChart: {
+                alias: '用户量',
+                color: '#585c72',
                 opacity: .8
             },
             trend: [],

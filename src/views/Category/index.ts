@@ -73,7 +73,8 @@ export default class Category extends Vue {
                 ])
             },
             onOk: async () => {
-                this.deleteCItem(item._id)
+                await this.deleteCItem(item._id)
+                await this.getCList()
             },
         })
     }

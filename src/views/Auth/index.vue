@@ -14,12 +14,12 @@
             </template>
         </div>
         <Row :gutter="24">
-            <Col span="8">
+            <Col span="6">
                 <Card>
                     <div class="account">
                         <img :src="admin.avatar" alt="" class="avatar">
                         <h1 class="name">{{ admin.name }}</h1>
-                        <p class="slogan">{{ admin.slogan }}</p>
+                        <p class="slogan">{{ setting.personal.slogan }}</p>
                     </div>
                     <div class="profile">
                         <p class="description">
@@ -28,11 +28,11 @@
                         </p>
                         <p class="skill">
                             <Icon size="16" class="icon" type="md-hammer" />
-                            {{ setting.personal.skill }}
+                            <Tag v-for="item in setting.personal.skill" color="#06C1AE" :key="item" :name="item">{{ item }}</Tag>
                         </p>
                         <p class="hobby">
                             <Icon size="16" class="icon" type="md-heart" />
-                            {{ setting.personal.hobby }}
+                            <Tag v-for="item in setting.personal.hobby" color="#FF485A" :key="item" :name="item">{{ item }}</Tag>
                         </p>
                         <p class="location">
                             <Icon size="16" class="icon" type="md-compass" />
@@ -47,13 +47,13 @@
                     <div class="tags">
                         <h3 class="label">标签</h3>
                         <div class="tag-list">
-                            <Tag v-for="(item, index) in setting.personal.tags" :key="item" :name="item" closable @on-close="deleteTag(item, index)">{{ item }}</Tag>
+                            <Tag v-for="(item, index) in setting.personal.tag" :key="item" :name="item" closable @on-close="deleteTag(item, index)">{{ item }}</Tag>
                             <Button icon="ios-add" type="dashed" size="small" @click="addTag">添加标签</Button>
                         </div>
                     </div>
                 </Card>
             </Col>
-            <Col span="16">
+            <Col span="18">
                 <Card>
                     <Tabs value="name1">
                         <TabPane label="友链" name="name1">友链</TabPane>

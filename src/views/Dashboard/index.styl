@@ -33,5 +33,69 @@
         .dimension {
             margin-right $padding-sm
         }
+
+        .trend {
+            display flex
+
+            .trend-chart {
+                flex 1 0
+            }
+
+            .rank-list {
+                flex 0 0 350px
+            }
+
+            .article-list {
+                .article {
+                    display flex
+                    margin-top $padding-lg
+
+                    .rank-number {
+                        flex 0 0 20px
+                        display inline-block
+                        width 20px
+                        height @width
+                        line-height @width
+                        margin-right $padding-sm
+                        border-radius 50%
+                        background-color $divider-color
+                        text-align center
+                        font-size 12px
+                    }
+
+                    .title {
+                        flex 1 1
+                        max-width 250px
+                        textOverflow()
+                    }
+
+                    .count {
+                        flex 0 0 30px
+                        margin-left $padding-lg
+                    }
+                    
+                    &:nth-child(1) {
+                        .rank-number {
+                            color $white-color
+                            background-color $error-color
+                        }
+                    }
+
+                    &:nth-child(2) {
+                        .rank-number {
+                            color $white-color
+                            background-color $warning-color
+                        }
+                    }
+
+                    &:nth-child(3) {
+                        .rank-number {
+                            color $white-color
+                            background-color $info-color
+                        }
+                    }
+                }
+            }
+        }
     }
 }
