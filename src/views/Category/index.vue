@@ -11,10 +11,10 @@
             共找到 <b style="color: #FF8D13">{{ cList.length }}</b> 个分类，
         </Alert>
         <Row :gutter="16" class="category-list">
-            <Col span="6">
+            <Col v-bind="colResponsiveProps">
                 <Button icon="md-add" type="dashed" class="create-btn" @click="add">添加分类</Button>
             </Col>
-            <Col span="6" v-for="item in cList" :key="item._id" class="category-item">
+            <Col v-bind="colResponsiveProps" v-for="item in cList" :key="item._id" class="category-item">
                 <Card :title="item.name" :icon="findExtendsItem(item.extends, 'icon')">
                     <Avatar slot="extra"
                         size="small"

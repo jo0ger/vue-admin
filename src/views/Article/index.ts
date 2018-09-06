@@ -24,6 +24,13 @@ export default class Article extends Vue {
     @tMod.Getter('listWidthAll') private tList
     @tMod.Action('getList') private getTList
 
+    private colResponsiveProps = {
+        xs: 24,
+        sm: 24,
+        md: 24,
+        lg: 12
+    }
+
     private cLoading: boolean = false
 
     private aList: WebApi.ArticleModule.Article[] = []

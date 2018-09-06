@@ -24,6 +24,13 @@ export default class Tag extends Vue {
     @Action('getList') private getTList
     @Action('deleteItem') private deleteTItem
 
+    private colResponsiveProps = {
+        xs: 24,
+        sm: 12,
+        md: 12,
+        lg: 6,
+    }
+
     private query = {
         keyword: '',
     }
@@ -32,7 +39,7 @@ export default class Tag extends Vue {
     private curTag = null
 
     @Watch('ctDialogVisible')
-    ctDialogVisibleWatch (val) {
+    private ctDialogVisibleWatch (val) {
         if (!val) {
             this.curTag = null
         }

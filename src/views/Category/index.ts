@@ -24,6 +24,13 @@ export default class Category extends Vue {
     @Action('getList') private getCList
     @Action('deleteItem') private deleteCItem
 
+    private colResponsiveProps = {
+        xs: 24,
+        sm: 12,
+        md: 12,
+        lg: 6
+    }
+
     private query = {
         keyword: '',
     }
@@ -32,7 +39,7 @@ export default class Category extends Vue {
     private curCategory = null
 
     @Watch('ctDialogVisible')
-    ctDialogVisibleWatch (val) {
+    private ctDialogVisibleWatch (val) {
         if (!val) {
             this.curCategory = null
         }

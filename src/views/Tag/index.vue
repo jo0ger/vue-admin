@@ -11,10 +11,10 @@
             共找到 <b style="color: #FF8D13">{{ tList.length }}</b> 个标签
         </Alert>
         <Row :gutter="16" class="tag-list">
-            <Col span="6">
+            <Col v-bind="colResponsiveProps">
                 <Button icon="md-add" type="dashed" class="create-btn" @click="add">添加标签</Button>
             </Col>
-            <Col span="6" v-for="item in tList" :key="item._id" class="tag-item">
+            <Col v-bind="colResponsiveProps" v-for="item in tList" :key="item._id" class="tag-item">
                 <Card :title="item.name" :icon="findExtendsItem(item.extends, 'icon')">
                     <Avatar slot="extra"
                         size="small"

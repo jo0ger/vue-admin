@@ -24,13 +24,24 @@
         </Row>
         <Card class="stat-card" :title="control.title + '趋势统计'" v-for="(control, key) in controls" :key="key">
             <div slot="extra">
-                <RadioGroup type="button" class="dimension">
-                    <Radio label="周"></Radio>
-                    <Radio label="月"></Radio>
-                    <Radio label="年"></Radio>
+                <RadioGroup v-model="control.control.range" type="button" class="dimension" @on-change="dateRangeChange(control)">
+                    <Radio label="week">最近一周</Radio>
+                    <Radio label="month">最近一月</Radio>
+                    <Radio label="year">最近一年</Radio>
+                    <Radio label="other">自定义</Radio>
                 </RadioGroup>
-                <DatePicker type="date" placeholder="Select date" style="width: 200px"></DatePicker>
+                <DatePicker
+                    confirm
+                    type="daterange"
+                    v-model="control.date"
+                    :options="datePickerOption"
+                    placement="bottom-end"
+                    placeholder="选择日期"
+                    style="width: 200px"
+                    @on-ok="selectDate(control)">
+                </DatePicker>
             </div>
+            <div :id="key + '-trend-chart'"></div>
         </Card>
     </Container>
 </template>

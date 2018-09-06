@@ -26,90 +26,13 @@ export default class Dashboard extends Vue {
         lg: 6
     }
 
-    private controls = {
-        pv: {
-            title: '文章浏览量',
-            count: {
-                today: 0,
-                total: 0,
-            },
-            weekTrend: [],
-            weekTrendChart: {
-                alias: '浏览量',
-                color: '#2d8cf0',
-                opacity: .8
-            },
-            trend: [],
-            control: {
-                dimension: 'week',
-                startDate: '',
-                endDate: ''
-            }
-        },
-        like: {
-            title: '文章点赞数',
-            count: {
-                today: 0,
-                total: 0,
-            },
-            weekTrend: [],
-            weekTrendChart: {
-                alias: '点赞数',
-                color: '#F95959',
-                opacity: .8
-            },
-            trend: [],
-            control: {
-                dimension: 'week',
-                startDate: '',
-                endDate: ''
-            }
-        },
-        comment: {
-            title: '文章评论量',
-            count: {
-                today: 0,
-                total: 0,
-            },
-            weekTrend: [],
-            weekTrendChart: {
-                alias: '评论量',
-                color: '#46cdcf',
-                opacity: .8
-            },
-            trend: [],
-            control: {
-                dimension: 'week',
-                startDate: '',
-                endDate: ''
-            }
-        },
-        message: {
-            title: '站内留言数',
-            count: {
-                today: 0,
-                total: 0,
-            },
-            weekTrend: [],
-            weekTrendChart: {
-                alias: '留言数',
-                color: '#ff467e',
-                opacity: .8
-            },
-            trend: [],
-            control: {
-                dimension: 'week',
-                startDate: '',
-                endDate: ''
-            }
-        }
-    }
+    date = []
 
     private chartInstance: any = {}
 
     private mounted () {
         this.getCount()
-        this.getCountWeekTrend()
+        this.getTrends()
     }
 
     private async getCount () {
@@ -121,14 +44,20 @@ export default class Dashboard extends Vue {
         }
     }
 
-    private getCountWeekTrend () {
-        const startDate = this.formatDate(this.moment().subtract(6, 'day'), 'YYYY-MM-DD 00:00:00')
-        const endDate = this.moment().format('YYYY-MM-DD 23:59:59')
+    private getTrends () {
+        const today = this.moment()
+        const endDate = today.format('YYYY-MM-DD 23:59:59')
+        const startDate = this.formatDate(today.subtract(6, 'day'), 'YYYY-MM-DD 00:00:00')
         Object.keys(this.controls).forEach(async key => {
             const curControl = this.controls[key]
-            const trend = await this.getRangeTrend(key, 'day', startDate, endDate)
-            curControl.weekTrend = trend
+            // week trend
+            const weekTrend = await this.getRangeTrend(curControl.target, 'day', startDate, endDate)
+            curControl.weekTrend = weekTrend
             this.initCountChart(key)
+
+            // trend
+            await this.dateRangeChange(curControl)
+            this.initTrendChart(key)
         })
     }
 
@@ -143,6 +72,24 @@ export default class Dashboard extends Vue {
             return res.data.trend
         }
         return []
+    }
+
+    private async dateRangeChange (ctrl) {
+        const range = ctrl.control.range
+        if (range === 'other') {
+            
+        } else {
+            const rangeMap = {
+                week: 6,
+                month: 29,
+                year: 364
+            }
+            const today = this.moment()
+            const endDate = today.format('YYYY-MM-DD 23:59:59')
+            const startDate = this.formatDate(today.subtract(rangeMap[range], 'day'), 'YYYY-MM-DD 00:00:00')
+            ctrl.trend = await this.getRangeTrend(ctrl.target, ctrl.control.dimension, startDate, endDate)
+            this.chartInstance[ctrl.target].changeData(ctrl.trend)
+        }
     }
 
     private initCountChart (target) {
@@ -169,11 +116,164 @@ export default class Dashboard extends Vue {
         chart.render()
     }
 
-    private initTrendChart () {}
+    private initTrendChart (target) {
+        const control = this.controls[target]
+        const chart = this.chartInstance[target] = new G2.Chart({
+            container: target + '-trend-chart',
+            forceFit: true,
+            height: 300,
+            padding: [60],
+        })
+        chart.source(control.weekTrend)
+        chart.scale('count', {
+            alias: control.weekTrendChart.alias,
+            min: 0,
+        })
+        chart.tooltip({
+            crosshairs: {
+                type: 'line',
+            }
+        })
+        chart.axis('date', {
+            title: {
+                fill: '#404040',
+                fontSize: '16'
+            },
+        })
+        chart.axis('count', {
+            title: control.weekTrendChart.alias
+        })
+        chart.area().position('date*count').shape('smooth').color(control.weekTrendChart.color).opacity(control.weekTrendChart.opacity)
+        chart.render()
+    }
+
+    private async selectDate (ctrl) {
+        const { control, target } = ctrl
+        const startDate = this.moment(control.date[0]).format('YYYY-MM-DD HH:mm:ss')
+        const endDate = this.moment(control.date[1]).format('YYYY-MM-DD HH:mm:ss')
+        ctrl.trend = await this.getRangeTrend(target, control.dimension, startDate, endDate)
+    }
 
     private beforeDestroy () {
         Object.values(this.chartInstance).forEach((ins: any) => {
             ins.destroy()
         })
+    }
+
+    private controls = {
+        pv: {
+            target: 'pv',
+            title: '文章浏览量',
+            count: {
+                today: 0,
+                total: 0,
+            },
+            weekTrend: [],
+            weekTrendChart: {
+                alias: '浏览量',
+                color: '#2d8cf0',
+                opacity: .8
+            },
+            trend: [],
+            control: {
+                dimension: 'day',
+                date: [],
+                range: 'week'
+            }
+        },
+        like: {
+            target: 'like',
+            title: '文章点赞数',
+            count: {
+                today: 0,
+                total: 0,
+            },
+            weekTrend: [],
+            weekTrendChart: {
+                alias: '点赞数',
+                color: '#F95959',
+                opacity: .8
+            },
+            trend: [],
+            control: {
+                dimension: 'day',
+                date: [],
+                range: 'week'
+            }
+        },
+        comment: {
+            target: 'comment',
+            title: '文章评论量',
+            count: {
+                today: 0,
+                total: 0,
+            },
+            weekTrend: [],
+            weekTrendChart: {
+                alias: '评论量',
+                color: '#46cdcf',
+                opacity: .8
+            },
+            trend: [],
+            control: {
+                dimension: 'day',
+                date: [],
+                range: 'week'
+            }
+        },
+        message: {
+            target: 'message',
+            title: '站内留言数',
+            count: {
+                today: 0,
+                total: 0,
+            },
+            weekTrend: [],
+            weekTrendChart: {
+                alias: '留言数',
+                color: '#ff467e',
+                opacity: .8
+            },
+            trend: [],
+            control: {
+                dimension: 'day',
+                date: [],
+                range: 'week'
+            }
+        }
+    }
+
+    private get datePickerOption () {
+        return {
+            shortcuts: [
+                {
+                    text: '最近1周',
+                    value () {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                        return [start, end];
+                    }
+                },
+                {
+                    text: '最近1个月',
+                    value () {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                        return [start, end];
+                    }
+                },
+                {
+                    text: '最近3个月',
+                    value () {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                        return [start, end];
+                    }
+                }
+            ]
+        }
     }
 }
