@@ -9,14 +9,10 @@
 
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
-import { Container } from '@/components/common'
 import G2 from '@antv/g2'
 
 @Component({
     name: 'Dashboard',
-    components: {
-        Container ,
-    },
 })
 export default class Dashboard extends Vue {
     private chartInstance: any = {}

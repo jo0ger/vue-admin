@@ -10,6 +10,7 @@ import { Component } from '@/utils/decorators'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import '@/assets/style/index.styl'
+import { Container } from '@/components/common'
 
 Vue.config.productionTip = IS_PROD
 
@@ -25,6 +26,8 @@ Component.registerHooks([
     'beforeRouteLeave',
     'beforeRouteUpdate',
 ])
+
+Vue.component('Container', Container)
 
 new Vue({
   router,

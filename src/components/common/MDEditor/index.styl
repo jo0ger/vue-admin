@@ -1,0 +1,83 @@
+/**
+ * @desc MDEditor
+ * @author Jooger <zzy1198258955@163.com>
+ * @date 2018-09-07 23:41:38
+ */
+@import '~@/assets/style/init';
+
+.md-editor {
+    position relative
+    background-color $white-color
+
+    .command {
+        color $primary-color
+        border-bottom 1px solid $divider-color
+
+        &-item {
+            display inline-block
+            width 48px
+            height @width
+            line-height @height
+            text-align center
+
+            .iconfont {
+                display inline-block
+                transition all 0.3s $ease
+            }
+
+            &:hover {
+                .iconfont {
+                    transform scale(1.2)
+                }
+            }
+        }
+    }
+
+    .content {
+        position relative
+
+        .edit-pane,
+        .preview-pane {
+            position absolute
+            width 100%
+            height @width
+        }
+
+        .edit-pane {
+            .edit-area {
+                width 100%
+                height @width
+                padding $padding-md
+                border none
+                outline none
+                font-size 14px
+            }
+        }
+
+        .preview-pane {
+            padding $padding-md
+            overflow-y auto
+            background-color $white-color
+        }
+    }
+
+    &.preview-mode {
+        .command-item {
+            &:hover {
+                .iconfont {
+                    transform scale(1)
+                }
+            }
+
+            &:not(.command-item-preview) {
+                opacity 0.5
+                cursor not-allowed
+            }
+        }
+
+        .command-item-preview {
+            background-color $primary-color
+            color $white-color
+        }
+    }
+}

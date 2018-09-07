@@ -6,7 +6,6 @@
 
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
-import { Container } from '@/components/common'
 import { ArticleItem } from './components'
 import { namespace } from 'vuex-class'
 
@@ -16,7 +15,6 @@ const tMod = namespace('tag')
 @Component({
     name: 'Article',
     components: {
-        Container,
         ArticleItem,
     },
 })

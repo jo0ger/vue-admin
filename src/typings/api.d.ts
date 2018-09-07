@@ -47,7 +47,7 @@ declare namespace WebApi {
 
     export interface ModuleShare {
         _id?: string
-        createdAt?: string
+        createdAt?: string | Date
         updatedAt?: string
         extends?: Array<{
             key?: string
@@ -137,8 +137,8 @@ declare namespace WebApi {
             renderedContnt?: string
             keywords?: string[]
             thumb?: string
-            category?: CategoryModule.Category
-            tag?: TagModule.Tag[]
+            category?: CategoryModule.Category | string
+            tag?: TagModule.Tag[] | string[]
             publishedAt?: string
             meta?: {
                 pvs: number

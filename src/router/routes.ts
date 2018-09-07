@@ -37,11 +37,21 @@ export default [
         },
     },
     {
+        path: '/articles/create',
+        name: 'ArticleCreate',
+        component: () => import('@/views/Article/children/Detail/index.vue'),
+        meta: {
+            title: '文章创建',
+            icon: 'md-create',
+        },
+    },
+    {
         path: '/articles/:id',
         name: 'ArticleDetail',
         component: () => import('@/views/Article/children/Detail/index.vue'),
         meta: {
             title: '文章详情',
+            icon: 'md-apps',
         },
     },
     {

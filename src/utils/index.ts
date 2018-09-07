@@ -7,6 +7,8 @@ export * from './share'
 
 export * from './store-module'
 
+export * from './markdown'
+
 export {
     constant,
     decorators,
