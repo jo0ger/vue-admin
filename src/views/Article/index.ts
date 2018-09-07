@@ -32,7 +32,7 @@ export default class Article extends Vue {
         total: 0,
         current: 1,
         pages: 0,
-        limit: 10,
+        limit: 20,
     }
 
     private query = {

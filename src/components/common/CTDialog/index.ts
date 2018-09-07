@@ -38,15 +38,17 @@ export default class CTDialog extends Vue {
 
     @cMod.Getter('list') private cList
     @cMod.Action('update') private updateCItem
+    @cMod.Action('create') private createCItem
     @cMod.Action('getList') private getCList
     @tMod.Getter('list') private tList
     @tMod.Action('update') private updateTItem
+    @tMod.Action('create') private createTItem
     @tMod.Action('getList') private getTList
 
     private model: any = getDefMod()
 
     private get title () {
-        return '编辑' + {
+        return this.id ? '编辑' : '创建' + {
             category: '分类',
             tag: '标签',
         }[this.type] || ''
@@ -89,13 +91,13 @@ export default class CTDialog extends Vue {
     }
 
     private async submit () {
-        const success = this.id ? await this[{
-            category: 'updateCItem',
-            tag: 'updateTItem',
-        }[this.type]]({
+        const success = await this[{
+            category: this.id ? 'updateCItem' : 'createCItem',
+            tag: this.id ? 'updateTItem' : 'createTItem',
+        }[this.type]](this.id ? {
             id: this.id,
-            payload: this.model
-        }) : await this.api[this.type].create(this.model)
+            payload: this.processModel(this.model)
+        } : this.processModel(this.model))
         if (success) {
             this.visible = false
             this[{

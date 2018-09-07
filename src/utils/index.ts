@@ -2,6 +2,7 @@ import * as constant from './constant'
 import * as decorators from './decorators'
 import * as filters from './filters'
 import storage from './storage'
+import AliOSS from './alioss'
 
 export * from './share'
 
@@ -14,4 +15,5 @@ export {
     decorators,
     storage,
     filters,
+    AliOSS,
 }

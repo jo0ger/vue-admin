@@ -14,14 +14,14 @@
             <Row :gutter="16">
                 <Col span="8">
                     <Card class="info-card" title="基本信息">
-                        <Form ref="baseInfoForm" :model="model" :label-width="60">
+                        <Form ref="baseInfoForm" :model="model" :label-width="60" :rules="rule">
                             <FormItem label="标题" prop="title">
-                                <Input v-model="model.title" placeholder="请填写文章标题"></Input>
+                                <Input v-model.trim="model.title" placeholder="请填写文章标题"></Input>
                             </FormItem>
                             <FormItem label="简介" prop="description">
-                                <Input type="textarea" :autosize="{ minRows: 3, maxRows: 6 }" v-model="model.description" placeholder="请填写文章简介"></Input>
+                                <Input type="textarea" :autosize="{ minRows: 3, maxRows: 6 }" v-model.trim="model.description" placeholder="请填写文章简介"></Input>
                             </FormItem>
-                            <FormItem label="关键词" prop="keywords">
+                            <FormItem label="关键词">
                                 <Tag v-for="(keyword, index) in model.keywords" :key="keyword" :name="keyword" closable @on-close="deleteTag(index)">{{ keyword }}</Tag>
                                 <Button icon="md-add" type="dashed" size="small" v-if="!keyword.adding" @click="toggleKeywordAdd">添加标签</Button>
                                 <Input size="small" style="width: 84px;" v-model="keyword.input" v-else @on-enter="addKeyword"></Input>
@@ -39,20 +39,45 @@
                         </Form>
                     </Card>
                     <Card class="info-card" title="分类信息">
-                        <Form ref="classifyForm" :model="model" :label-width="60">
-                            <FormItem label="分类">
-                                <Select v-model="model.category" clearable style="width:200px" placeholder="请选择分类">
-                                    <Option v-for="item in cList" :value="item._id" :key="item._id">{{ item.name }}</Option>
-                                </Select>
+                        <Form ref="classifyForm" :model="model" :label-width="60" :rules="rule">
+                            <FormItem label="分类" prop="category">
+                                <Row :gutter="16">
+                                    <Col span="17">
+                                        <Select v-model="model.category" clearable style="width:200px" placeholder="请选择分类">
+                                            <Option v-for="item in cList" :value="item._id" :key="item._id">{{ item.name }}</Option>
+                                        </Select>
+                                    </Col>
+                                    <Col span="6">
+                                        <Button type="primary" @click="cDialogVisible = true">去创建</Button>
+                                    </Col>
+                                </Row>
                             </FormItem>
-                            <FormItem label="标签">
-                                <Select v-model="model.tag" multiple clearable style="width:200px" placeholder="请选择标签">
-                                    <Option v-for="item in tList" :value="item._id" :key="item._id">{{ item.name }}</Option>
-                                </Select>
+                            <FormItem label="标签" prop="tag">
+                                <Row :gutter="16">
+                                    <Col span="17">
+                                        <Select v-model="model.tag" multiple clearable style="width:200px" placeholder="请选择标签">
+                                            <Option v-for="item in tList" :value="item._id" :key="item._id">{{ item.name }}</Option>
+                                        </Select>
+                                    </Col>
+                                    <Col span="6">
+                                        <Button type="primary" @click="tDialogVisible = true">去创建</Button>
+                                    </Col>
+                                </Row>
                             </FormItem>
                         </Form>
                     </Card>
-                    <Card class="info-card" title="缩略图"></Card>
+                    <Card class="info-card" title="缩略图">
+                        <Uploader
+                            slot="extra"
+                            :name="uploadName"
+                            :url="model.thumb"
+                            @on-success="uploadSuccess"
+                            @on-delete="deleteThumb"></Uploader>
+                        <div class="thumb">
+                            <img :src="model.thumb" alt="" v-if="model.thumb">
+                            <p v-else>请上传缩略图</p>
+                        </div>
+                    </Card>
                 </Col>
                 <Col span="16">
                     <Card class="info-card" title="文章内容">
@@ -62,6 +87,8 @@
                 </Col>
             </Row>
         </div>
+        <CTDialog v-model="cDialogVisible" type="category"></CTDialog>
+        <CTDialog v-model="tDialogVisible" type="tag"></CTDialog>
     </Container>
 </template>
 

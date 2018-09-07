@@ -78,7 +78,7 @@ export const actions: Actions<State, RootState> = {
         }
         return success
     },
-    async create ({ commit, dispatch, state }, payload) {
+    async create ({ commit, state }, payload) {
         if (state.loading) return
         commit(CREATE_ITEM_REQUEST)
         const { success, message } = await api.category.create(payload)

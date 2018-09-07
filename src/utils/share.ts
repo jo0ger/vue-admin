@@ -59,6 +59,10 @@ export function cached (fn: Function) {
  * @param  {Array | Object} query={}
  */
 export const processModel = (query: any = {}) => {
+    const isArr = Array.isArray(query)
+    if (isArr) {
+        return query.filter(item => !['', undefined].includes(item))
+    }
     return Object.keys(query).reduce((m, key) => {
         let val = query[key]
         // undefined和''不传入
@@ -71,7 +75,7 @@ export const processModel = (query: any = {}) => {
             m[key] = val
         }
         return m
-    }, Object.create(Array.isArray(query) ? [] : {}))
+    }, {})
 }
 
 

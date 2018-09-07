@@ -41,3 +41,5 @@ export const ROUTER_DEFAULT_CONFIG = {
 export const AUTH_TOKEN_KEY = 'node-server_token'
 
 export const AUTH_CACHE_KEY = 'jooger.me.info'
+
+export const CDN = 'https://static.jooger.me'
