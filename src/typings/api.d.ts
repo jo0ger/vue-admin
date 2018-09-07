@@ -46,12 +46,12 @@ declare namespace WebApi {
     }> {}
 
     export interface ModuleShare {
-        _id: string
-        createdAt: string
-        updatedAt: string
-        extends: Array<{
-            key: string
-            value: string,
+        _id?: string
+        createdAt?: string
+        updatedAt?: string
+        extends?: Array<{
+            key?: string
+            value?: string,
         }>
     }
 
@@ -130,21 +130,21 @@ declare namespace WebApi {
         }
 
         type Article = ModuleShare & {
-            title: string
-            description: string
-            state: number
-            source: number
-            renderedContnt: string
-            keywords: string[]
-            thumb: string
-            category: CategoryModule.Category
-            tag: TagModule.Tag[]
-            publishedAt: string
-            meta: {
+            title?: string
+            description?: string
+            state?: number
+            source?: number
+            renderedContnt?: string
+            keywords?: string[]
+            thumb?: string
+            category?: CategoryModule.Category
+            tag?: TagModule.Tag[]
+            publishedAt?: string
+            meta?: {
                 pvs: number
                 ups: number
-                comments: number,
-            },
+                comments: number
+            }
         }
     }
 

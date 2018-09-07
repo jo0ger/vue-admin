@@ -7,6 +7,7 @@
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
 import { Container } from '@/components/common'
+import { ArticleItem } from './components'
 import { namespace } from 'vuex-class'
 
 const cMod = namespace('category')
@@ -16,6 +17,7 @@ const tMod = namespace('tag')
     name: 'Article',
     components: {
         Container,
+        ArticleItem,
     },
 })
 export default class Article extends Vue {
@@ -23,13 +25,6 @@ export default class Article extends Vue {
     @cMod.Action('getList') private getCList
     @tMod.Getter('listWidthAll') private tList
     @tMod.Action('getList') private getTList
-
-    private colResponsiveProps = {
-        xs: 24,
-        sm: 24,
-        md: 24,
-        lg: 12
-    }
 
     private cLoading: boolean = false
 
@@ -104,21 +99,15 @@ export default class Article extends Vue {
     }
 
     private async deleteArticle (article, index) {
-        this.$Modal.confirm({
-            title: '提示',
-            render: h => {
-                return h('p', null, [
-                    '确认删除吗？',
-                    h('br'),
-                    h('b', `《${article.title}》`),
-                ])
-            },
-            onOk: async () => {
-                const res = await this.api.article.deleteItem(article._id)
-                this.$Message.success(res.message)
-                this.aList.splice(index, 1)
-                this.pageInfo.total--
-            },
-        })
+        const res = await this.api.article.deleteItem(article._id)
+        this.$Message.success(res.message)
+        this.aList.splice(index, 1)
+        this.pageInfo.total--
+    }
+
+    private async changeState (article, state) {
+        const res = await this.api.article.update(article._id, { state })
+        this.$Message.success(res.message)
+        article.state = state
     }
 }

@@ -1,0 +1,135 @@
+/**
+ * @desc ArticleItem
+ * @author Jooger <zzy1198258955@163.com>
+ * @date 2018-09-07 21:30:08
+ */
+
+@import '~@/assets/style/init'
+
+.article-item {
+    margin-bottom $padding-lg
+    overflow hidden
+
+    .source {
+        position absolute
+        top -8px
+        right -30px
+        width 96px
+        height 48px
+        line-height 36px
+        padding $padding-sm $padding-md
+        transform rotateZ(45deg)
+        text-align center
+        color $white-color
+        font-weight bold
+
+        &.original {
+            background-color rgba($info-color, .3)
+            color $info-color
+        }
+    
+        &.reprint {
+            background-color rgba($warning-color, .3)
+            color $warning-color
+        }
+    }
+
+    .main {
+        display flex
+        padding-right 48px
+    }
+
+    .extra {
+        flex 0 0
+        margin-left 48px
+
+        .thumb {
+            img {
+                max-width 210px
+                max-height 130px
+                border-radius 4px
+                // box-shadow 1px 10px 10px rgba($black-color, 0.1)
+            }
+        }
+    }
+
+    .content {
+        flex 1 1
+        margin-bottom $padding-md
+
+        .title {
+            margin-bottom $padding-sm
+            font-size $font-size-lg
+            line-height 24px
+
+            a {
+                color $content-color
+            }
+        }
+
+        .category {
+            margin-right $padding-sm
+        }
+
+        .tag-list {
+            margin-bottom $padding-sm
+        }
+
+        .description {
+            margin-bottom $padding-sm
+            line-height 22px
+            text-align justify                  
+            lineLimit(3)
+        }
+
+        .time {
+            color $sub-color
+
+            span {
+                margin-right $padding-md
+            }
+        }
+    }
+
+    .action {
+        display flex
+        justify-content space-between
+        align-items center
+        padding-right 48px
+        
+        & > * {
+            display inline-block
+        }
+
+        .meta-list {
+            flex 1 1
+        }
+        
+        .meta-item {
+            display inline-block
+            padding 0 $padding-xs
+            color $sub-color
+
+            .icon {
+                margin-right $padding-xs
+            }
+        }
+
+        .operation {
+            opacity 0
+            visibility hidden
+            transition all .3s $ease-out
+
+            &-item {
+                margin-left $padding-xs
+            }
+        }
+    }
+
+    &:hover {
+        .operation {
+            opacity 1
+            visibility visible
+        }
+    }
+}
