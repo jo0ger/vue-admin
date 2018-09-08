@@ -9,16 +9,23 @@
         <Card>
             <div class="content">
                 <Menu theme="light" :active-name="menu" class="setting-menu" @on-select="menuSelect">
+                    <MenuItem name="site">
+                        <Icon type="md-document" />
+                        站内内容设置
+                    </MenuItem>
                     <MenuItem name="keys">
                         <Icon type="md-document" />
-                        Keys配置
+                        Keys设置
                     </MenuItem>
                     <MenuItem name="limit">
                         <Icon type="md-chatbubbles" />
-                        Limit管理
+                        Limit设置
                     </MenuItem>
                 </Menu>
                 <div class="details">
+                    <div class="keys" v-if="menu === 'site'">
+                        <h2 class="label">站内内容设置</h2>
+                    </div>
                     <div class="keys" v-if="menu === 'keys'">
                         <h2 class="label">Keys设置</h2>
                     </div>

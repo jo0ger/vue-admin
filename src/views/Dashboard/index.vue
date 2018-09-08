@@ -5,7 +5,7 @@
  -->
 <template>
     <Container class="dashboard-page" :title="$route.meta.title">
-        <Avatar slot="logo" icon="md-book" style="color: #ffadd2;background-color: #fff0f6">U</Avatar>
+        <Avatar slot="logo" :icon="$route.meta.icon" style="color: #ffadd2;background-color: #fff0f6">U</Avatar>
         <Row :gutter="16">
             <Col v-bind="getCountColResponsiveProps(key)" v-for="(control, key) in controls" :key="key">
                 <Card class="stat-card" :title="control.title">

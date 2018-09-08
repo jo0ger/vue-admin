@@ -22,7 +22,6 @@ export default [
         meta: {
             title: '仪表盘',
             icon: 'md-stats',
-            // icon: 'md-pulse',
             menu: true,
         },
     },

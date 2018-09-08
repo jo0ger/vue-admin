@@ -9,7 +9,7 @@ import { namespace } from 'vuex-class'
 import { DEFAULT_AVATAR } from '@/config'
 import { Component } from '@/utils/decorators'
 import { TagList, EditInput, Uploader } from '@/components/common'
-import { LinkList } from './components'
+import { LinkList, UpdatePassword } from './components'
 
 const sMod = namespace('setting')
 const aMod = namespace('auth')
@@ -21,6 +21,7 @@ const aMod = namespace('auth')
         EditInput,
         Uploader,
         LinkList,
+        UpdatePassword,
     },
 })
 export default class Auth extends Vue {

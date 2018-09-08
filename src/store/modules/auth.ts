@@ -119,11 +119,22 @@ export const actions: Actions<State, RootState> = {
     async update ({ commit, state }, payload) {
         if (state.loading || !state.info._id) return
         commit(EDIT_INFO_REQUEST)
-        const { success, data } = await api.auth.update(payload)
+        const { success, data, message } = await api.auth.update(payload)
         if (success) {
+            Message.success(message)
             commit(EDIT_INFO_SUCCESS, data)
         } else {
+            Message.error(message)
             commit(EDIT_INFO_FAILURE)
+        }
+        return success
+    },
+    async updatePassword ({ commit, state }, payload) {
+        const { success, data, message } = await api.auth.password(payload)
+        if (success) {
+            Message.success(message)
+        } else {
+            Message.error(message)
         }
         return success
     },

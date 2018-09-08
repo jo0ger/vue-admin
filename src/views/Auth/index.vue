@@ -68,7 +68,9 @@
                         <TabPane label="友链" name="name1">
                             <LinkList></LinkList>
                         </TabPane>
-                        <TabPane label="更新密码" name="name2">更新密码</TabPane>
+                        <TabPane label="更新密码" name="name2">
+                            <UpdatePassword></UpdatePassword>
+                        </TabPane>
                     </Tabs>
                 </Card>
             </Col>
