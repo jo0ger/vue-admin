@@ -110,6 +110,7 @@ export default [
         component: () => import('@/views/Notification/index.vue'),
         meta: {
             title: '通告管理',
+            icon: 'md-notifications'
         },
     },
     {

@@ -24,7 +24,7 @@ export function connectStore (store) {
                 Message.info('已登录')
                 if (from.name) {
                     // 从别的页面通过路由跳转（浏览器前进后退）
-                    LoadingBar.end()
+                    LoadingBar.finish()
                     return next(false)
                 } else {
                     // 直接从地址栏输入/login回车跳转
@@ -38,7 +38,7 @@ export function connectStore (store) {
                     Message.warning('请先登录')
                 }
                 if (from.name === 'Login') {
-                    LoadingBar.end()
+                    LoadingBar.finish()
                     return next(false)
                 }
                 const query: any = {}

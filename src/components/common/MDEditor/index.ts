@@ -40,7 +40,7 @@ export default class MDEditor extends Vue {
 
     private _value = ''
     private previewContent = ''
-    private _setPreviewContent!: Function = noop
+    private _setPreviewContent: Function = noop
 
     private get classes () {
         return {

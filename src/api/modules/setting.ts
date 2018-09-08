@@ -10,10 +10,10 @@ export class SettingApi extends Api {
         return this.get<null, Res>()
     }
 
-    public update (id: string, data: WebApi.SettingModule.update.Req) {
+    public update (data: WebApi.SettingModule.update.Req) {
         type Req = WebApi.SettingModule.update.Req
         type Res = WebApi.SettingModule.update.Res
-        return this.patch<Req, Res>(`/${id}`, data)
+        return this.patch<Req, Res>('', data)
     }
 }
 

@@ -5,50 +5,59 @@
  -->
 <template>
     <Container class="auth-page" :title="$route.meta.title">
-        <Avatar slot="logo" :icon="$route.meta.icon" style="color: #ed4014;background-color: #fff1f0"></Avatar>
-        <div slot="action">
-            <Button type="primary" @click="editMode = true" v-if="!editMode">编辑</Button>
-            <template v-else>
-                <Button type="primary">提交</Button>
-                <Button style="margin-left: 8px" @click="editMode = false">取消</Button>
-            </template>
-        </div>
+        <Avatar slot="logo" :icon="$route.meta.icon" style="color: rgb(83,199,240);background-color: rgba(83,199,240, .2)"></Avatar>
         <Row :gutter="24">
             <Col span="6">
                 <Card>
                     <div class="account">
-                        <img :src="admin.avatar" alt="" class="avatar">
-                        <h1 class="name">{{ admin.name }}</h1>
-                        <p class="slogan">{{ setting.personal.slogan }}</p>
+                        <div class="avatar">
+                            <img :src="admin.avatar" alt="">
+                            <Uploader
+                                name="test/avatar/"
+                                :url="admin.avatar"
+                                @on-success="uploadSuccess"
+                                @on-delete="deleteThumb"></Uploader>
+                        </div>
+                        <h1 class="name">
+                            <EditInput type="textarea" autosize :value="admin.name" @on-submit="(val, done) => authUpdate('name', val, done)"></EditInput>
+                        </h1>
+                        <p class="slogan">
+                            <EditInput type="textarea" autosize :value="setting.personal.slogan" @on-submit="(val, done) => personalUpdate('slogan', val, done)"></EditInput>
+                        </p>
                     </div>
                     <div class="profile">
                         <p class="description">
                             <Icon size="16" class="icon" type="md-person" />
-                            {{ setting.personal.description }}
+                            <EditInput type="textarea" autosize :value="setting.personal.description" @on-submit="(val, done) => personalUpdate('description', val, done)"></EditInput>
                         </p>
                         <p class="skill">
                             <Icon size="16" class="icon" type="md-hammer" />
-                            <Tag v-for="item in setting.personal.skill" color="#06C1AE" :key="item" :name="item">{{ item }}</Tag>
+                            <TagList :value="setting.personal.skill" action-text="添加技能"
+                                @on-change="(val, done) => personalUpdate('skill', val, done)"
+                                @on-delete="val => personalUpdate('skill', val)"></TagList>
                         </p>
                         <p class="hobby">
                             <Icon size="16" class="icon" type="md-heart" />
-                            <Tag v-for="item in setting.personal.hobby" color="#FF485A" :key="item" :name="item">{{ item }}</Tag>
+                            <TagList :value="setting.personal.hobby" action-text="添加爱好"
+                                @on-change="(val, done) => personalUpdate('hobby', val, done)"
+                                @on-delete="val => personalUpdate('hobby', val)"></TagList>
                         </p>
                         <p class="location">
                             <Icon size="16" class="icon" type="md-compass" />
-                            {{ setting.personal.location }}
+                            <EditInput :value="setting.personal.location" @on-submit="(val, done) => personalUpdate('location', val, done)"></EditInput>
                         </p>
                         <p class="company">
                             <Icon size="16" class="icon" type="md-trophy" />
-                            {{ setting.personal.company }}
+                            <EditInput :value="setting.personal.company" @on-submit="(val, done) => personalUpdate('company', val, done)"></EditInput>
                         </p>
                     </div>
                     <Divider></Divider>
                     <div class="tags">
                         <h3 class="label">标签</h3>
                         <div class="tag-list">
-                            <Tag v-for="(item, index) in setting.personal.tag" :key="item" :name="item" closable @on-close="deleteTag(item, index)">{{ item }}</Tag>
-                            <Button icon="ios-add" type="dashed" size="small" @click="addTag">添加标签</Button>
+                            <TagList :value="setting.personal.tag"
+                                @on-change="(val, done) => personalUpdate('tag', val, done)"
+                                @on-delete="val => personalUpdate('tag', val)"></TagList>
                         </div>
                     </div>
                 </Card>
@@ -56,7 +65,9 @@
             <Col span="18">
                 <Card>
                     <Tabs value="name1">
-                        <TabPane label="友链" name="name1">友链</TabPane>
+                        <TabPane label="友链" name="name1">
+                            <LinkList></LinkList>
+                        </TabPane>
                         <TabPane label="更新密码" name="name2">更新密码</TabPane>
                     </Tabs>
                 </Card>

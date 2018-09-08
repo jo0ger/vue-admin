@@ -354,8 +354,8 @@ declare namespace WebApi {
                 links: Array<{
                     name: string
                     github: string
-                    avatar: string
-                    slogan: string
+                    avatar?: string
+                    slogan?: string
                     site: string,
                 }>
                 musicId: string,

@@ -10,6 +10,7 @@ import {
     UPDATE_ITEM_SUCCESS
 } from '../mutation-types'
 import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'
+import { Message } from 'iview'
 
 interface State extends StateTree {
     loading: boolean
@@ -56,11 +57,21 @@ export const actions: Actions<State, RootState> = {
     async update ({ commit, state }, payload) {
         if (state.loading || !state.data._id) return
         commit(UPDATE_ITEM_REQUEST)
-        const { success, data } = await api.setting.update(state.data._id, payload)
+        let linkLoading
+        if (payload.site.links) {
+            linkLoading = Message.loading({
+                content: '友链更新中...',
+                duration: 0
+            })
+        }
+        const { success, data, message } = await api.setting.update(payload)
+        linkLoading && linkLoading()
         if (success) {
             commit(UPDATE_ITEM_SUCCESS, data)
+            Message.success(message)
         } else {
             commit(UPDATE_ITEM_FAILURE)
+            Message.error(message)
         }
         return success
     }

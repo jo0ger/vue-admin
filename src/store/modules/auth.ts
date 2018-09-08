@@ -119,7 +119,7 @@ export const actions: Actions<State, RootState> = {
     async update ({ commit, state }, payload) {
         if (state.loading || !state.info._id) return
         commit(EDIT_INFO_REQUEST)
-        const { success, data } = await api.user.update(state.info._id, payload)
+        const { success, data } = await api.auth.update(payload)
         if (success) {
             commit(EDIT_INFO_SUCCESS, data)
         } else {

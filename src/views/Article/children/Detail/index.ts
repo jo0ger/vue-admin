@@ -7,7 +7,7 @@
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
 import { namespace } from 'vuex-class'
-import { MDEditor, Uploader, CTDialog } from "@/components/common"
+import { MDEditor, Uploader, CTDialog, TagList } from "@/components/common"
 
 const cMod = namespace('category')
 const tMod = namespace('tag')
@@ -18,6 +18,7 @@ const tMod = namespace('tag')
         MDEditor,
         Uploader,
         CTDialog,
+        TagList,
     },
 })
 export default class Detail extends Vue {
@@ -35,11 +36,6 @@ export default class Detail extends Vue {
         thumb: '',
         category: '',
         tag: [],
-    }
-
-    private keyword = {
-        adding: false,
-        input: '',
     }
 
     private cDialogVisible = false
@@ -65,22 +61,6 @@ export default class Detail extends Vue {
         } else {
             this.$Message.error(res.message)
         }
-    }
-
-    private toggleKeywordAdd () {
-        this.keyword.adding = !this.keyword.adding
-        this.keyword.input = ''
-    }
-
-    private addKeyword () {
-        if (this.keyword.input) {
-            (this.model.keywords as string[]).push(this.keyword.input)
-        }
-        this.toggleKeywordAdd()
-    }
-
-    private deleteKeyword (index) {
-        (this.model.keywords as string[]).splice(index, 1)
     }
 
     private async validate () {

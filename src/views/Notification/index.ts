@@ -6,9 +6,13 @@
 
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
+import { Container } from '@/components/common'
 
 @Component({
     name: 'Notification',
+    components: {
+        Container,
+    },
 })
 export default class Notification extends Vue {
 }

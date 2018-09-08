@@ -22,9 +22,7 @@
                                 <Input type="textarea" :autosize="{ minRows: 3, maxRows: 6 }" v-model.trim="model.description" placeholder="请填写文章简介"></Input>
                             </FormItem>
                             <FormItem label="关键词">
-                                <Tag v-for="(keyword, index) in model.keywords" :key="keyword" :name="keyword" closable @on-close="deleteTag(index)">{{ keyword }}</Tag>
-                                <Button icon="md-add" type="dashed" size="small" v-if="!keyword.adding" @click="toggleKeywordAdd">添加标签</Button>
-                                <Input size="small" style="width: 84px;" v-model="keyword.input" v-else @on-enter="addKeyword"></Input>
+                                <TagList v-model="model.keywords" action-text="添加关键词"></TagList>
                             </FormItem>
                             <FormItem label="状态">
                                 <RadioGroup size="small" v-model="model.state" type="button">
@@ -42,8 +40,8 @@
                         <Form ref="classifyForm" :model="model" :label-width="60" :rules="rule">
                             <FormItem label="分类" prop="category">
                                 <Row :gutter="16">
-                                    <Col span="17">
-                                        <Select v-model="model.category" clearable style="width:200px" placeholder="请选择分类">
+                                    <Col span="16">
+                                        <Select v-model="model.category" clearable style="width:100%;" placeholder="请选择分类">
                                             <Option v-for="item in cList" :value="item._id" :key="item._id">{{ item.name }}</Option>
                                         </Select>
                                     </Col>
@@ -54,8 +52,8 @@
                             </FormItem>
                             <FormItem label="标签" prop="tag">
                                 <Row :gutter="16">
-                                    <Col span="17">
-                                        <Select v-model="model.tag" multiple clearable style="width:200px" placeholder="请选择标签">
+                                    <Col span="16">
+                                        <Select v-model="model.tag" multiple clearable style="width:100%;" placeholder="请选择标签">
                                             <Option v-for="item in tList" :value="item._id" :key="item._id">{{ item.name }}</Option>
                                         </Select>
                                     </Col>

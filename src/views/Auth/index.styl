@@ -8,14 +8,18 @@
 
 .auth-page {
     .account {
-        margin-bottom $padding-md
+        margin $padding-md 0
         text-align center
 
         .avatar {
-            width 100px
-            height @width
             margin-bottom $padding-md
-            border-radius 50%
+
+            img {
+                width 100px
+                height @width
+                margin-bottom $padding-xs
+                border-radius 50%
+            }
         }
 
         .name {
@@ -32,13 +36,13 @@
         p {
             display flex
             margin-bottom $padding-xs
-            line-height 24px
+            line-height 1.5
             margin-bottom $padding-md
 
             .icon {
                 flex 0 0 20px
                 margin-right $padding-xs
-                line-height 24px
+                line-height 1.5
             }
 
             &.description {
