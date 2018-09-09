@@ -36,6 +36,7 @@ export default class Detail extends Vue {
         thumb: '',
         category: '',
         tag: [],
+        content: '',
     }
 
     private cDialogVisible = false
@@ -97,6 +98,9 @@ export default class Detail extends Vue {
 
     private async submit () {
         if (!await this.validate()) return
+        if (!this.model.content) {
+            return this.$Message.warning('文章内容必填')
+        }
         const res: any = await (this.$route.params.id ? this.update : this.create)()
         if (res.success) {
             this.$Message.success(res.message)

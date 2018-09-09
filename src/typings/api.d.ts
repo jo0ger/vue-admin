@@ -134,6 +134,7 @@ declare namespace WebApi {
             description?: string
             state?: number
             source?: number
+            content?: string
             renderedContnt?: string
             keywords?: string[]
             thumb?: string

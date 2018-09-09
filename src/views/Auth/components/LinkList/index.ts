@@ -37,7 +37,7 @@ export default class LinkList extends Vue {
 
     private async submit () {
         if (!this.model.name && !this.model.github) {
-            return this.$Message.warning('请填写完整友链信息')
+            return this.$Message.warning('名称和Github必填其一')
         }
         const success = await this.updateSetting({
             site: {

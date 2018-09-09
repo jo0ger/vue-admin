@@ -10,59 +10,77 @@
         </div>
         <div class="wrap">
             <div class="main">
-                <div class="content">
-                    <h4 class="title">
-                        <Tooltip v-if="article.category" placement="right" :content="article.category.description">
-                            <Avatar class="category"
-                                :src="article.category.extends | extendsFilter('image')"
-                                v-if="findExtendsItem(article.category.extends, 'image')">{{ article.category.name }}</Avatar>
-                            <Avatar class="category"
-                                :style="{
-                                    color: findExtendsItem(article.category.extends, 'color'),
-                                    backgroundColor: findExtendsItem(article.category.extends, 'background')
-                                }"
-                                v-else>{{ article.category.name.slice(0, 2) }}</Avatar>
-                        </Tooltip>
-                        <router-link :to="{ name: 'ArticleDetail', params: { id: article._id }}">{{ article.title }}</router-link>
-                    </h4>
-                    <div class="tag-list" v-if="article.tag.length">
-                        <Tooltip v-for="tag in article.tag" :key="tag._id" placement="top" :content="tag.description">
-                            <Tag>{{ tag.name }}</Tag>
-                        </Tooltip>
+                <div class="detail">
+                    <div class="extra">
+                        <div class="thumb" v-if="article.thumb">
+                            <img :src="article.thumb || 'https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png'" alt="">
+                        </div>
                     </div>
-                    <div class="description">{{ article.description }}</div>
-                    <div class="time">
-                        <span>创建于 {{ article.createdAt | dateFormat }}</span>
-                        <span>发布在 <a :href="article.permallink">{{ article.title }}</a></span>
-                    </div>
-                </div>
-                <div class="extra">
-                    <div class="thumb" v-if="article.thumb">
-                        <img :src="article.thumb || 'https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png'" alt="">
+                    <div class="content">
+                        <h4 class="title">
+                            <Tooltip v-if="article.category" placement="right" :content="article.category.description">
+                                <Avatar class="category"
+                                    :src="article.category.extends | extendsFilter('image')"
+                                    v-if="findExtendsItem(article.category.extends, 'image')">{{ article.category.name }}</Avatar>
+                                <Avatar class="category"
+                                    :style="{
+                                        color: findExtendsItem(article.category.extends, 'color'),
+                                        backgroundColor: findExtendsItem(article.category.extends, 'background')
+                                    }"
+                                    v-else>{{ article.category.name.slice(0, 2) }}</Avatar>
+                            </Tooltip>
+                            <router-link :to="{ name: 'ArticleDetail', params: { id: article._id }}">{{ article.title }}</router-link>
+                        </h4>
+                        <div class="tag-list" v-if="article.tag.length">
+                            <Tooltip v-for="tag in article.tag" :key="tag._id" placement="top" :content="tag.description">
+                                <Tag>{{ tag.name }}</Tag>
+                            </Tooltip>
+                        </div>
+                        <div class="description">{{ article.description }}</div>
+                        <div class="meta">
+                            <Tag type="border" size="small" :color="article.state ? 'success' : 'warning'" @click.native="changeState(article, index)">{{ ['未发布', '已发布'][article.state] }}</Tag>
+                            <ul class="meta-list">
+                                <li class="meta-item">
+                                    <Icon class="icon" type="md-eye" />
+                                    {{ article.meta.pvs }}
+                                </li>
+                                <Divider type="vertical" />
+                                <li class="meta-item">
+                                    <Icon class="icon" type="md-thumbs-up" />
+                                    {{ article.meta.ups }}
+                                </li>
+                                <Divider type="vertical" />
+                                <li class="meta-item">
+                                    <Icon class="icon" type="md-text" />
+                                    {{ article.meta.comments }}
+                                </li>
+                            </ul>
+                            <div class="time">
+                                <span>最后编辑于 {{ article.updatedAt | dateFormat }}</span>
+                                <span><Icon wsize="14" type="md-time" /> {{ article.createdAt | dateFormat }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="action">
-                <Tag type="border" size="small" :color="article.state ? 'success' : 'warning'" @click.native="changeState(article, index)">{{ ['未发布', '已发布'][article.state] }}</Tag>
-                <ul class="meta-list">
-                    <li class="meta-item">
-                        <Icon class="icon" type="ios-eye-outline" size="16" />
-                        {{ article.meta.pvs }}
-                    </li>
-                    <Divider type="vertical" />
-                    <li class="meta-item">
-                        <Icon class="icon" type="ios-thumbs-up-outline" size="16" />
-                        {{ article.meta.ups }}
-                    </li>
-                    <Divider type="vertical" />
-                    <li class="meta-item">
-                        <Icon class="icon" type="ios-text-outline" size="16" />
-                        {{ article.meta.comments }}
-                    </li>
-                </ul>
-                <div class="operation">
-                    <Button class="operation-item" size="small" type="primary" :to="{ name: 'ArticleDetail', params: { id: article._id }}">编辑</Button>
-                    <Button class="operation-item" size="small" type="error" @click="deleteArticle(article, index)">删除</Button>
+                <div class="action-item edit" @click="$router.push({ name: 'ArticleDetail', params: { id: article._id }})">
+                    <span class="icon">
+                        <Icon size="12" type="md-create" />
+                    </span>
+                    <span class="label">编辑</span>
+                </div>
+                <a class="action-item view" :href="article.permallink" target="_blank" v-if="article.state">
+                    <span class="icon">
+                        <Icon size="12" type="md-eye" />
+                    </span>
+                    <span class="label">查看</span>
+                </a>
+                <div class="action-item delete" @click="deleteArticle(article, index)">
+                    <span class="icon">
+                        <Icon size="12" type="md-trash" />
+                    </span>
+                    <span class="label">删除</span>
                 </div>
             </div>
         </div>

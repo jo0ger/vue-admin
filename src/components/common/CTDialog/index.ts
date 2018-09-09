@@ -45,6 +45,24 @@ export default class CTDialog extends Vue {
     @tMod.Action('create') private createTItem
     @tMod.Action('getList') private getTList
 
+    private get rule () {
+        const extValidator = (rule, value, callback) => {
+            if (!value.every(({ key, value }) => key && value)) {
+                callback(new Error('扩展项信息请填写完整'))
+            } else {
+                callback()
+            }
+        }
+        return {
+            name: [
+                { required: true, message: '名称必填' },
+            ],
+            extends: [
+                { validator: extValidator },
+            ],
+        }
+    }
+
     private model: any = getDefMod()
 
     private get title () {
@@ -90,20 +108,23 @@ export default class CTDialog extends Vue {
         this.model = getDefMod()
     }
 
-    private async submit () {
-        const success = await this[{
-            category: this.id ? 'updateCItem' : 'createCItem',
-            tag: this.id ? 'updateTItem' : 'createTItem',
-        }[this.type]](this.id ? {
-            id: this.id,
-            payload: this.processModel(this.model),
-        } : this.processModel(this.model))
-        if (success) {
-            this.visible = false
-            this[{
-                category: 'getCList',
-                tag: 'getTList',
-            }[this.type]]()
-        }
+    private submit () {
+        (this.$refs.form as any).validate(async valid => {
+            if (!valid) return
+            const success = await this[{
+                category: this.id ? 'updateCItem' : 'createCItem',
+                tag: this.id ? 'updateTItem' : 'createTItem',
+            }[this.type]](this.id ? {
+                id: this.id,
+                payload: this.processModel(this.model),
+            } : this.processModel(this.model))
+            if (success) {
+                this.visible = false
+                this[{
+                    category: 'getCList',
+                    tag: 'getTList',
+                }[this.type]]()
+            }
+        })
     }
 }

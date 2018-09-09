@@ -27,7 +27,7 @@
                             </p>
                             <p class="site">
                                 <Icon class="icon" type="md-globe" />
-                                {{ link.site }}
+                                <a :href="link.site" target="_blank">{{ link.site }}</a>
                             </p>
                             <p class="github">
                                 <Icon class="icon" type="logo-github" />

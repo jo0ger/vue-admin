@@ -34,14 +34,23 @@
         }
     }
 
-    .main {
+    .wrap {
         display flex
-        padding-right 48px
+    }
+
+    .main {
+        flex 1 0
+        display flex
+        flex-direction column
+    }
+
+    .detail {
+        display flex
     }
 
     .extra {
         flex 0 0
-        margin-left 48px
+        margin-right $padding-lg
 
         .thumb {
             img {
@@ -55,7 +64,6 @@
 
     .content {
         flex 1 1
-        margin-bottom $padding-md
 
         .title {
             margin-bottom $padding-sm
@@ -79,23 +87,14 @@
             margin-bottom $padding-sm
             line-height 22px
             text-align justify                  
-            lineLimit(3)
-        }
-
-        .time {
-            color $sub-color
-
-            span {
-                margin-right $padding-md
-            }
+            lineLimit(2)
         }
     }
 
-    .action {
+    .meta {
         display flex
         justify-content space-between
         align-items center
-        padding-right 48px
         
         & > * {
             display inline-block
@@ -115,21 +114,72 @@
             }
         }
 
-        .operation {
-            opacity 0
-            visibility hidden
-            transition all .3s $ease-out
+        .time {
+            color $sub-color
 
-            &-item {
-                margin-left $padding-xs
+            span {
+                margin-left $padding-md
             }
         }
     }
 
-    &:hover {
-        .operation {
-            opacity 1
-            visibility visible
+    .action {
+        flex 0 0 150px
+        display flex
+        flex-wrap wrap
+        justify-content flex-start
+        align-items center
+        margin 0 ($padding-lg * 2)
+
+        &-item {
+            display flex
+            flex-direction column
+            align-items center
+            width 56px
+            height @width
+            margin $padding-xs
+            padding $padding-xs
+            font-size 12px
+            text-align center
+            background-color $white-color
+            color $content-color
+            border-radius 8px
+            box-shadow 0 0 40px 2px rgba($black-color, .1)
+            cursor pointer
+            transition all .3s $ease
+
+            .icon {
+                flex 0 0 20px
+                width 20px
+                height @width
+                line-height @width
+                margin-bottom 4px
+                border-radius 50%
+                color $white-color
+            }
+
+            &.edit {
+                .icon {
+                    background-color $info-color
+                }
+            }
+        
+            &.view {
+                .icon {
+                    background-color $warning-color
+                }
+            }
+
+            &.delete {
+                .icon {
+                    background-color $error-color
+                }
+            }
+
+            &:hover {
+                box-shadow 0 0 50px 2px rgba($black-color, .1)
+                transform scale(1.1)
+            }
         }
     }
 }

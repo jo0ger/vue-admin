@@ -5,14 +5,14 @@
  -->
 <template>
     <Modal class="ct-dialog" width="500" :title="title" v-model="visible" v-bind="$attrs" v-on="$listeners" :mask-closable="false">
-        <Form :label-width="60">
-            <FormItem label="名称">
+        <Form ref="form" :label-width="60" :model="model" :rules="rule">
+            <FormItem label="名称" prop="name">
                 <Input v-model="model.name" placeholder="请填写名称"></Input>
             </FormItem>
             <FormItem label="描述">
                 <Input type="textarea" v-model="model.description" placeholder="请填写描述"></Input>
             </FormItem>
-            <FormItem label="扩展项">
+            <FormItem label="扩展项" prop="extends">
                 <Row style="margin-bottom: 8px" type="flex" :gutter="8" v-for="(ext, index) in model.extends" :key="index">
                     <Col span="9">
                         <Input v-model="ext.key" placeholder="扩展项Key"></Input>

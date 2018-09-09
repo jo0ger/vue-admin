@@ -70,9 +70,6 @@ export default class MDEditor extends Vue {
     }
 
     private getPreviewContentDebounceFn () {
-        if (this.setPreviewContent) {
-            return this.setPreviewContent
-        }
         return debounce((content = this.value) => {
             if (this.mode.preview) {
                 if (content !== this.val) {
@@ -94,8 +91,8 @@ export default class MDEditor extends Vue {
         case 'preview':
             this.mode.preview = !this.mode.preview
             this.$nextTick(() => {
-            this.setPreviewContent()
-            if (!this.mode.preview) {
+                this.setPreviewContent()
+                if (!this.mode.preview) {
                     (this.$refs.input as any).focus()
                 }
             })
