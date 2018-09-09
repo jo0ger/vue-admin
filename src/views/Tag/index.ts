@@ -56,7 +56,7 @@ export default class Tag extends Vue {
     private add () {
         this.ctDialogVisible = true
     }
-    
+
     private edit (item) {
         this.ctDialogVisible = true
         this.curTag = item

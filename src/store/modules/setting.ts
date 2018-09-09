@@ -7,7 +7,7 @@ import {
     FETCH_DATA_FAILURE,
     UPDATE_ITEM_REQUEST,
     UPDATE_ITEM_FAILURE,
-    UPDATE_ITEM_SUCCESS
+    UPDATE_ITEM_SUCCESS,
 } from '../mutation-types'
 import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'
 import { Message } from 'iview'
@@ -58,14 +58,16 @@ export const actions: Actions<State, RootState> = {
         if (state.loading || !state.data._id) return
         commit(UPDATE_ITEM_REQUEST)
         let linkLoading
-        if (payload.site.links) {
+        if (payload.site && payload.site.links) {
             linkLoading = Message.loading({
                 content: '友链更新中...',
-                duration: 0
+                duration: 0,
             })
         }
         const { success, data, message } = await api.setting.update(payload)
-        linkLoading && linkLoading()
+        if (linkLoading) {
+            linkLoading()
+        }
         if (success) {
             commit(UPDATE_ITEM_SUCCESS, data)
             Message.success(message)
@@ -74,5 +76,5 @@ export const actions: Actions<State, RootState> = {
             Message.error(message)
         }
         return success
-    }
+    },
 }

@@ -7,59 +7,59 @@
 import {
   makeCommandByInsertBefore,
   makeCommandByInsertBeforeAndAfter,
-  makeCode
-} from './commandsHelper'
+  makeCode,
+} from '@/components/common/MDEditor/lib/commandsHelper'
 
 const defaultCommands = [
   {
     key: 'bold',
     title: '加粗',
-    execute: (text, selection) => makeCommandByInsertBeforeAndAfter(text, selection, '**', '**')
+    execute: (text, selection) => makeCommandByInsertBeforeAndAfter(text, selection, '**', '**'),
   },
   {
     key: 'italic',
     title: '斜体',
-    execute: (text, selection) => makeCommandByInsertBeforeAndAfter(text, selection, '_', '_')
+    execute: (text, selection) => makeCommandByInsertBeforeAndAfter(text, selection, '_', '_'),
   },
   {
     key: 'strikethrough',
     title: '删除线',
-    execute: (text, selection) => makeCommandByInsertBeforeAndAfter(text, selection, '~~', '~~')
+    execute: (text, selection) => makeCommandByInsertBeforeAndAfter(text, selection, '~~', '~~'),
   },
   {
     key: 'h1',
     title: 'H1',
-    execute: (text, selection) => makeCommandByInsertBefore(text, selection, '# ')
+    execute: (text, selection) => makeCommandByInsertBefore(text, selection, '# '),
   },
   {
     key: 'h2',
     title: 'H2',
-    execute: (text, selection) => makeCommandByInsertBefore(text, selection, '## ')
+    execute: (text, selection) => makeCommandByInsertBefore(text, selection, '## '),
   },
   {
     key: 'h3',
     title: 'H3',
-    execute: (text, selection) => makeCommandByInsertBefore(text, selection, '## ')
+    execute: (text, selection) => makeCommandByInsertBefore(text, selection, '## '),
   },
   {
     key: 'code',
     title: '代码',
-    execute: (text, selection) => makeCode(text, selection)
+    execute: (text, selection) => makeCode(text, selection),
   },
   {
     key: 'link',
     title: '链接',
-    execute: (text, selection) => makeCommandByInsertBeforeAndAfter(text, selection, '[', '](url)')
+    execute: (text, selection) => makeCommandByInsertBeforeAndAfter(text, selection, '[', '](url)'),
   },
   {
     key: 'image',
     title: '图片',
-    execute: (text, selection) => makeCommandByInsertBeforeAndAfter(text, selection, '![', '](imgUrl)')
+    execute: (text, selection) => makeCommandByInsertBeforeAndAfter(text, selection, '![', '](imgUrl)'),
   },
   {
     key: 'preview',
-    title: '预览'
-  }
+    title: '预览',
+  },
   // {
   //   key: 'compare',
   //   title: '对照'
@@ -83,5 +83,5 @@ export default {
       throw new Error('扩展Commands必须是数组类型')
     }
     return defaultCommands.concat(commands)
-  }
+  },
 }

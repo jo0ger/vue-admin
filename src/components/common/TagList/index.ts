@@ -26,7 +26,7 @@ export default class TagList extends Vue {
     private val: string[] = []
 
     @Watch('value', {
-        immediate: true
+        immediate: true,
     })
     private watchValue (val, oldVal) {
         if (oldVal !== val) {

@@ -15,7 +15,7 @@ import { debounce } from 'lodash'
     name: 'MDEditor',
 })
 export default class MDEditor extends Vue {
-    static commands = commands
+    public static commands = commands
 
     @Prop({ default: 650 })
     private height!: number
@@ -26,7 +26,7 @@ export default class MDEditor extends Vue {
     @Prop({
         default () {
             return commands.getDefaultCommands()
-        }
+        },
     })
     private commands!: any[]
 
@@ -38,9 +38,9 @@ export default class MDEditor extends Vue {
         preview: false,
     }
 
-    private _value = ''
+    private val = ''
     private previewContent = ''
-    private _setPreviewContent: Function = noop
+    private setPreviewContent: () => void = noop
 
     private get classes () {
         return {
@@ -58,25 +58,25 @@ export default class MDEditor extends Vue {
 
     @Watch('value')
     private watchValue () {
-        this._setPreviewContent()
+        this.setPreviewContent()
     }
 
     private created () {
-        this._setPreviewContent = this.getPreviewContentDebounceFn()
+        this.setPreviewContent = this.getPreviewContentDebounceFn()
     }
 
     private beforeDestroy () {
-        this._setPreviewContent = noop
+        this.setPreviewContent = noop
     }
 
     private getPreviewContentDebounceFn () {
-        if (this._setPreviewContent) {
-            return this._setPreviewContent
+        if (this.setPreviewContent) {
+            return this.setPreviewContent
         }
         return debounce((content = this.value) => {
             if (this.mode.preview) {
-                if (content !== this._value) {
-                    this._value = content
+                if (content !== this.val) {
+                    this.val = content
                     this.previewContent = content ? marked(content) : ''
                 }
             }
@@ -94,16 +94,16 @@ export default class MDEditor extends Vue {
         case 'preview':
             this.mode.preview = !this.mode.preview
             this.$nextTick(() => {
-            this._setPreviewContent()
-                if (!this.mode.preview) {
+            this.setPreviewContent()
+            if (!this.mode.preview) {
                     (this.$refs.input as any).focus()
                 }
             })
-        break
+            break
         default:
             if (this.mode.preview) return
             this.executeCommand(cmd)
-        break
+            break
         }
     }
 
@@ -113,7 +113,7 @@ export default class MDEditor extends Vue {
     }
 
     private executeCommand (cmd) {
-        const $input = this.$refs.input as any 
+        const $input = this.$refs.input as any
         const newValue = cmd.execute ? cmd.execute(this.value, getSelection($input)) : null
         if (!newValue) return
         $input.focus()

@@ -50,7 +50,7 @@ export default class Api extends Http {
         if (prefix && typeof prefix === 'string') {
             return prefix + url
         }
-        
+
         return url
     }
 

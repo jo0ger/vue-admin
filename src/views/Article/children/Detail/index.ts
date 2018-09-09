@@ -7,7 +7,7 @@
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
 import { namespace } from 'vuex-class'
-import { MDEditor, Uploader, CTDialog, TagList } from "@/components/common"
+import { MDEditor, Uploader, CTDialog, TagList } from '@/components/common'
 
 const cMod = namespace('category')
 const tMod = namespace('tag')
@@ -69,14 +69,14 @@ export default class Detail extends Vue {
                 return new Promise(resolve => {
                     (this.$refs[key] as any).validate(resolve)
                 })
-            })
+            }),
         )
         return v1 && v2
     }
 
     private async create () {
         const res = await this.api.article.create(
-            this.processModel(this.model)
+            this.processModel(this.model),
         )
         if (res.success) {
             this.$router.push({ name: 'Article' })
@@ -87,7 +87,7 @@ export default class Detail extends Vue {
     private async update () {
         const res = await this.api.article.update(
             this.$route.params.id,
-            this.processModel(this.model)
+            this.processModel(this.model),
         )
         if (res.success) {
             this.$router.back()
@@ -116,17 +116,17 @@ export default class Detail extends Vue {
     private get rule () {
         return {
             title: [
-                { required: true, message: '请填写标题' }
+                { required: true, message: '请填写标题' },
             ],
             description: [
-                { required: true, message: '请填写简介' }
+                { required: true, message: '请填写简介' },
             ],
             category: [
-                { required: true, message: '请选择分类' }
+                { required: true, message: '请选择分类' },
             ],
             tag: [
-                { required: true, type: 'array', min: 1, message: '请选择标签', trigger: 'change' }
-            ]
+                { required: true, type: 'array', min: 1, message: '请选择标签', trigger: 'change' },
+            ],
         }
     }
 }

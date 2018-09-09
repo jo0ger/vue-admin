@@ -7,7 +7,7 @@
 export const insertText = (text, insertionText, position) => {
   return {
     newText: `${text.slice(0, position)}${insertionText}${text.slice(position)}`,
-    insertionTextLen: insertionText.length
+    insertionTextLen: insertionText.length,
   }
 }
 
@@ -15,7 +15,7 @@ export const insertBefore = (text, selection, insertionText) => {
   const { newText, insertionTextLen } = insertText(text, insertionText, selection[0])
   return {
     newText,
-    newSelection: selection.map(item => item + insertionTextLen)
+    newSelection: selection.map(item => item + insertionTextLen),
   }
 }
 
@@ -23,7 +23,7 @@ export const insertAfter = (text, selection, insertionText) => {
   const { newText } = insertText(text, insertionText, selection[1])
   return {
     newText,
-    newSelection: [selection[0], selection[1] + insertionText.length]
+    newSelection: [selection[0], selection[1] + insertionText.length],
   }
 }
 
@@ -43,7 +43,7 @@ export const insertEmptyLineBefore = (text, selection) => {
   }
   return {
     newText: text,
-    newSelection: selection
+    newSelection: selection,
   }
 }
 
@@ -57,7 +57,7 @@ export const insertEmptyLineAfter = (text, selection) => {
   }
   return {
     newText: text,
-    newSelection: selection
+    newSelection: selection,
   }
 }
 

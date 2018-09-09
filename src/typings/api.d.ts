@@ -143,8 +143,8 @@ declare namespace WebApi {
             meta?: {
                 pvs: number
                 ups: number
-                comments: number
-            }
+                comments: number,
+            },
         }
     }
 
@@ -221,7 +221,7 @@ declare namespace WebApi {
             avatar: string
             role: number
             password?: string
-            mute: boolean
+            mute: boolean,
         }
 
         namespace list {
@@ -368,7 +368,7 @@ declare namespace WebApi {
                 skill: string[],
                 location: string
                 company: string
-                github: object
+                github: object,
             }
             keys: {
                 aliyun: {
@@ -453,10 +453,10 @@ declare namespace WebApi {
             today: number
             total: number
         }
-        
+
         namespace count {
             export type Res = IResponse<{
-                [key: string]: CountItem
+                [key: string]: CountItem,
             }>
         }
 
@@ -468,10 +468,10 @@ declare namespace WebApi {
                 target: string
             }
             export type Res = IResponse<Req & {
-                trend: {
+                trend: Array<{
                     date: string
-                    count: number
-                }[]
+                    count: number,
+                }>,
             }>
         }
     }

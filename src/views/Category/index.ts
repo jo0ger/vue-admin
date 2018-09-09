@@ -28,7 +28,7 @@ export default class Category extends Vue {
         xs: 24,
         sm: 12,
         md: 12,
-        lg: 6
+        lg: 6,
     }
 
     private query = {
@@ -56,7 +56,7 @@ export default class Category extends Vue {
     private add () {
         this.ctDialogVisible = true
     }
-    
+
     private edit (item) {
         this.ctDialogVisible = true
         this.curCategory = item

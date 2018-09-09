@@ -10,15 +10,15 @@ import {
   insertBeforeAndAfter,
   getSurroundingSelection,
   insertEmptyLineBefore,
-  insertEmptyLineAfter
-} from './textHelper'
+  insertEmptyLineAfter,
+} from '@/components/common/MDEditor/lib/textHelper'
 
 export const makeCommandByInsertBefore = (text, selection, beforeText) => {
   selection = getSurroundingSelection(text, selection)
   const { newText, newSelection } = insertBefore(text, selection, beforeText)
   return {
     text: newText,
-    selection: newSelection
+    selection: newSelection,
   }
 }
 
@@ -29,7 +29,7 @@ export const makeCommandByInsertBeforeAndAfter = (text, selection, beforeText, a
   const { newText, newSelection } = insertBeforeAndAfter(text, selection, beforeText, afterText)
   return {
     text: newText,
-    selection: newSelection
+    selection: newSelection,
   }
 }
 
@@ -40,7 +40,7 @@ export const makeCode = (text, selection, codeType = '') => {
     return makeCommandByInsertBeforeAndAfter(text, selection, '`', '`')
   }
 
-  let insertionText = {}
+  let insertionText: any = {}
   // 如果需要在前面插入换行，do it
   insertionText = insertEmptyLineBefore(text, selection)
   text = insertionText.newText

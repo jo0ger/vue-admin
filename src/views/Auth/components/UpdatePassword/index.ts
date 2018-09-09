@@ -14,12 +14,12 @@ const { Action } = namespace('auth')
     name: 'UpdatePassword',
 })
 export default class UpdatePassword extends Vue {
-    @Action updatePassword
-    
+    @Action public updatePassword
+
     private model = {
         oldPassword: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
     }
 
     private async submit () {
@@ -27,7 +27,7 @@ export default class UpdatePassword extends Vue {
             if (!valid) return
             await this.updatePassword({
                 oldPassword: this.model.oldPassword,
-                password: this.model.password
+                password: this.model.password,
             })
             this.model.password = ''
             this.model.oldPassword = ''
@@ -57,14 +57,14 @@ export default class UpdatePassword extends Vue {
         }
         return {
             oldPassword: [
-                { required: true, message: '请填写原密码', trigger: 'blur' }
+                { required: true, message: '请填写原密码', trigger: 'blur' },
             ],
             password: [
-                { validator: passValidator, required: true, trigger: 'blur' }
+                { validator: passValidator, required: true, trigger: 'blur' },
             ],
             confirmPassword: [
-                { validator: confirmPassValidator, required: true, trigger: 'blur' }
-            ]
+                { validator: confirmPassValidator, required: true, trigger: 'blur' },
+            ],
         }
     }
 }

@@ -67,7 +67,7 @@ export default class CTDialog extends Vue {
             setTimeout(() => this.clearModel(), 500)
         }
     }
-    
+
     private deleteExt (ext, index) {
         this.model.extends.splice(index, 1)
     }
@@ -96,7 +96,7 @@ export default class CTDialog extends Vue {
             tag: this.id ? 'updateTItem' : 'createTItem',
         }[this.type]](this.id ? {
             id: this.id,
-            payload: this.processModel(this.model)
+            payload: this.processModel(this.model),
         } : this.processModel(this.model))
         if (success) {
             this.visible = false

@@ -15,7 +15,159 @@ import G2 from '@antv/g2'
     name: 'Dashboard',
 })
 export default class Dashboard extends Vue {
+
+    private get datePickerOption () {
+        return {
+            shortcuts: [
+                {
+                    text: '最近1周',
+                    value () {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                        return [start, end];
+                    },
+                },
+                {
+                    text: '最近1个月',
+                    value () {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                        return [start, end];
+                    },
+                },
+                {
+                    text: '最近3个月',
+                    value () {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                        return [start, end];
+                    },
+                },
+            ],
+        }
+    }
     private chartInstance: any = {}
+
+    private controls = {
+        pv: {
+            target: 'pv',
+            title: '文章浏览量',
+            count: {
+                today: 0,
+                total: 0,
+            },
+            weekTrend: [],
+            weekTrendChart: {
+                alias: '浏览量',
+                color: '#2d8cf0',
+                opacity: .8,
+            },
+            trend: [],
+            control: {
+                dimension: 'day',
+                date: [],
+                range: 'week',
+            },
+            list: {
+                sortBy: 'meta.pvs',
+                order: -1,
+                data: [],
+            },
+        },
+        up: {
+            target: 'up',
+            title: '文章点赞数',
+            count: {
+                today: 0,
+                total: 0,
+            },
+            weekTrend: [],
+            weekTrendChart: {
+                alias: '点赞数',
+                color: '#F95959',
+                opacity: .8,
+            },
+            trend: [],
+            control: {
+                dimension: 'day',
+                date: [],
+                range: 'week',
+            },
+            list: {
+                sortBy: 'meta.ups',
+                order: -1,
+                data: [],
+            },
+        },
+        comment: {
+            target: 'comment',
+            title: '文章评论量',
+            count: {
+                today: 0,
+                total: 0,
+            },
+            weekTrend: [],
+            weekTrendChart: {
+                alias: '评论量',
+                color: '#f5b17b',
+                opacity: .8,
+            },
+            trend: [],
+            control: {
+                dimension: 'day',
+                date: [],
+                range: 'week',
+            },
+            list: {
+                sortBy: 'meta.comments',
+                order: -1,
+                data: [],
+            },
+        },
+        message: {
+            target: 'message',
+            title: '站内留言数',
+            count: {
+                today: 0,
+                total: 0,
+            },
+            weekTrend: [],
+            weekTrendChart: {
+                alias: '留言数',
+                color: '#ff467e',
+                opacity: .8,
+            },
+            trend: [],
+            control: {
+                dimension: 'day',
+                date: [],
+                range: 'week',
+            },
+        },
+        user: {
+            target: 'user',
+            title: '新增用户量',
+            count: {
+                today: 0,
+                total: 0,
+            },
+            weekTrend: [],
+            weekTrendChart: {
+                alias: '用户量',
+                color: '#585c72',
+                opacity: .8,
+            },
+            trend: [],
+            control: {
+                dimension: 'day',
+                date: [],
+                range: 'week',
+            },
+        },
+    }
 
     private mounted () {
         this.getCount()
@@ -68,7 +220,7 @@ export default class Dashboard extends Vue {
             order,
             sortBy,
             page: 1,
-            limit: 7
+            limit: 7,
         })
         if (res.success) {
             return res.data.list
@@ -82,7 +234,7 @@ export default class Dashboard extends Vue {
             const rangeMap = {
                 week: 6,
                 month: 29,
-                threeMonth: 89
+                threeMonth: 89,
             }
             ctrl.control.date[1] = new Date()
             ctrl.control.date[0] = new Date(this.moment().subtract(rangeMap[range], 'day').valueOf())
@@ -120,11 +272,15 @@ export default class Dashboard extends Vue {
         chart.tooltip({
             crosshairs: {
                 type: 'line',
-            }
+            },
         })
         chart.axis('date', false)
         chart.axis('count', false)
-        chart.area().position('date*count').shape('smooth').color(control.weekTrendChart.color).opacity(control.weekTrendChart.opacity)
+        chart.area()
+            .position('date*count')
+            .shape('smooth')
+            .color(control.weekTrendChart.color)
+            .opacity(control.weekTrendChart.opacity)
         chart.render()
     }
 
@@ -144,14 +300,22 @@ export default class Dashboard extends Vue {
         chart.tooltip({
             crosshairs: {
                 type: 'line',
-            }
+            },
         })
         chart.axis('date', true)
         chart.axis('count', {
-            title: control.weekTrendChart.alias
+            title: control.weekTrendChart.alias,
         })
-        chart.area().position('date*count').shape('smooth').color(control.weekTrendChart.color).opacity(control.weekTrendChart.opacity - .4)
-        chart.line().position('date*count').shape('smooth').color(control.weekTrendChart.color).size(2)
+        chart.area()
+            .position('date*count')
+            .shape('smooth')
+            .color(control.weekTrendChart.color)
+            .opacity(control.weekTrendChart.opacity - .4)
+        chart.line()
+            .position('date*count')
+            .shape('smooth')
+            .color(control.weekTrendChart.color)
+            .size(2)
         chart.render()
     }
 
@@ -161,32 +325,32 @@ export default class Dashboard extends Vue {
                 xs: 24,
                 sm: 12,
                 md: 8,
-                lg: 8
+                lg: 8,
             },
             up: {
                 xs: 24,
                 sm: 12,
                 md: 8,
-                lg: 8
+                lg: 8,
             },
             comment: {
                 xs: 24,
                 sm: 12,
                 md: 8,
-                lg: 8
+                lg: 8,
             },
             message: {
                 xs: 24,
                 sm: 12,
                 md: 12,
-                lg: 12
+                lg: 12,
             },
             user: {
                 xs: 24,
                 sm: 24,
                 md: 12,
-                lg: 12
-            }
+                lg: 12,
+            },
         }[key]
     }
 
@@ -194,157 +358,5 @@ export default class Dashboard extends Vue {
         Object.values(this.chartInstance).forEach((ins: any) => {
             ins.destroy()
         })
-    }
-
-    private controls = {
-        pv: {
-            target: 'pv',
-            title: '文章浏览量',
-            count: {
-                today: 0,
-                total: 0,
-            },
-            weekTrend: [],
-            weekTrendChart: {
-                alias: '浏览量',
-                color: '#2d8cf0',
-                opacity: .8
-            },
-            trend: [],
-            control: {
-                dimension: 'day',
-                date: [],
-                range: 'week'
-            },
-            list: {
-                sortBy: 'meta.pvs',
-                order: -1,
-                data: []
-            }
-        },
-        up: {
-            target: 'up',
-            title: '文章点赞数',
-            count: {
-                today: 0,
-                total: 0,
-            },
-            weekTrend: [],
-            weekTrendChart: {
-                alias: '点赞数',
-                color: '#F95959',
-                opacity: .8
-            },
-            trend: [],
-            control: {
-                dimension: 'day',
-                date: [],
-                range: 'week'
-            },
-            list: {
-                sortBy: 'meta.ups',
-                order: -1,
-                data: []
-            }
-        },
-        comment: {
-            target: 'comment',
-            title: '文章评论量',
-            count: {
-                today: 0,
-                total: 0,
-            },
-            weekTrend: [],
-            weekTrendChart: {
-                alias: '评论量',
-                color: '#f5b17b',
-                opacity: .8
-            },
-            trend: [],
-            control: {
-                dimension: 'day',
-                date: [],
-                range: 'week'
-            },
-            list: {
-                sortBy: 'meta.comments',
-                order: -1,
-                data: []
-            }
-        },
-        message: {
-            target: 'message',
-            title: '站内留言数',
-            count: {
-                today: 0,
-                total: 0,
-            },
-            weekTrend: [],
-            weekTrendChart: {
-                alias: '留言数',
-                color: '#ff467e',
-                opacity: .8
-            },
-            trend: [],
-            control: {
-                dimension: 'day',
-                date: [],
-                range: 'week'
-            }
-        },
-        user: {
-            target: 'user',
-            title: '新增用户量',
-            count: {
-                today: 0,
-                total: 0,
-            },
-            weekTrend: [],
-            weekTrendChart: {
-                alias: '用户量',
-                color: '#585c72',
-                opacity: .8
-            },
-            trend: [],
-            control: {
-                dimension: 'day',
-                date: [],
-                range: 'week'
-            }
-        }
-    }
-
-    private get datePickerOption () {
-        return {
-            shortcuts: [
-                {
-                    text: '最近1周',
-                    value () {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                        return [start, end];
-                    }
-                },
-                {
-                    text: '最近1个月',
-                    value () {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-                        return [start, end];
-                    }
-                },
-                {
-                    text: '最近3个月',
-                    value () {
-                        const end = new Date();
-                        const start = new Date();
-                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                        return [start, end];
-                    }
-                }
-            ]
-        }
     }
 }

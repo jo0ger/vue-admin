@@ -14,7 +14,7 @@ const sMod = namespace('setting')
     name: 'LinkList',
 })
 export default class LinkList extends Vue {
-    @sMod.Action('update') updateSetting
+    @sMod.Action('update') public updateSetting
 
     private linkColResponsiveProps = {
         xs: 24,
@@ -41,8 +41,8 @@ export default class LinkList extends Vue {
         }
         const success = await this.updateSetting({
             site: {
-                links: this.setting.site.links.concat(this.model)
-            }
+                links: this.setting.site.links.concat(this.model),
+            },
         })
         if (success) {
             this.close()
@@ -53,7 +53,7 @@ export default class LinkList extends Vue {
         const links = this.setting.site.links.slice()
         links.splice(index, 1)
         await this.updateSetting({
-            site: { links }
+            site: { links },
         })
     }
 

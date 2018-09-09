@@ -25,26 +25,26 @@ const aMod = namespace('auth')
     },
 })
 export default class Auth extends Vue {
-    @sMod.Action('update') updateSetting
-    @aMod.Action('update') updateAuth
+    @sMod.Action('update') public updateSetting
+    @aMod.Action('update') public updateAuth
 
-    private async personalUpdate (path, val, done) {
+    private async personalUpdate (path, val, done?: () => void) {
         const success = await this.updateSetting({
             personal: {
-                [path]: val
-            }
+                [path]: val,
+            },
         })
-        if (success) {
-            done && done()
+        if (success && done) {
+            done()
         }
     }
 
-    private async authUpdate (path, val, done?: Function) {
+    private async authUpdate (path, val, done?: () => void) {
         const success = await this.updateAuth({
-            [path]: val
+            [path]: val,
         })
-        if (success) {
-            done && done()
+        if (success && done) {
+            done()
         }
     }
 
