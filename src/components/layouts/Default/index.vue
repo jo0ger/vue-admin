@@ -47,7 +47,9 @@
         </Sider>
         <Layout style="overflow-y: auto; height: 100vh; position: relative;">
             <Content class="app-content">
-                <router-view></router-view>
+                <transition name="fade" mode="out-in">
+                    <router-view></router-view>
+                </transition>
             </Content>
         </Layout>
     </Layout>
