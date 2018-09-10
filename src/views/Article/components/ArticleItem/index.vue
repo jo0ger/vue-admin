@@ -56,8 +56,8 @@
                                 </li>
                             </ul>
                             <div class="time">
-                                <span>最后编辑于 {{ article.updatedAt | dateFormat }}</span>
-                                <span><Icon wsize="14" type="md-time" /> {{ article.createdAt | dateFormat }}</span>
+                                <span><Icon wsize="14" type="md-time" /> <Time :time="article.createdAt"></Time></span>
+                                <span><Icon wsize="14" type="md-create" /><Time :time="article.updatedAt"></Time></span>
                             </div>
                         </div>
                     </div>
