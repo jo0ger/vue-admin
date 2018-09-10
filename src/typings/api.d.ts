@@ -282,6 +282,18 @@ declare namespace WebApi {
         namespace deleteItem {
             export type Res = IResponse<boolean>
         }
+
+        namespace getUnviewedCount {
+            export type Res = IResponse<{
+                total: number,
+                counts: {
+                    general: number,
+                    comment: number,
+                    like: number,
+                    user: number,
+                }
+            }>
+        }
     }
 
     namespace CommentModule {

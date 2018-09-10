@@ -30,6 +30,11 @@ export class NotificationApi extends Api {
         type Res = WebApi.NotificationModule.deleteItem.Res
         return this.delete<Res>(`/${id}`)
     }
+
+    public getUnviewedCount () {
+        type Res = WebApi.NotificationModule.getUnviewedCount.Res
+        return this.get<null, Res>('/count/unviewed')
+    }
 }
 
 export default new NotificationApi()

@@ -17,6 +17,9 @@ export default class ArticleItem extends Vue {
     @Prop({ required: true })
     private index!: number
 
+    @Prop({ default: false })
+    private tip!: boolean
+
     private deleteArticle (article) {
         this.$Modal.confirm({
             title: '提示',

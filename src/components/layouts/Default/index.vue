@@ -13,8 +13,8 @@
                     <p class="slogan">{{ setting.personal && setting.personal.slogan }}</p>
                 </div>
                 <div class="action">
-                    <router-link class="notification" :to="{ name: 'Notification' }">
-                        <Badge :count="nPageInfo.total">
+                    <router-link class="notification" :to="{ name: 'Notification', query: { viewed: false } }">
+                        <Badge :count="nTotal">
                             <Icon type="md-notifications" size="18" color="#fff"></Icon>
                         </Badge>
                     </router-link>

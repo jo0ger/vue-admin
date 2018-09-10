@@ -4,7 +4,7 @@
  * @date 2018-09-07 21:30:08
  -->
 <template>
-    <Card class="article-item">
+    <Card class="article-item" :class="{ 'article-item-tip': tip }">
         <div class="source" :class="[article.source ? 'reprint' : 'original']" v-if="article.source !== undefined">
             {{ article.source | constantFilter('ARTICLE_SOURCE') }}
         </div>
@@ -18,7 +18,7 @@
                     </div>
                     <div class="content">
                         <h4 class="title">
-                            <Tooltip v-if="article.category" placement="right" :content="article.category.description">
+                            <Tooltip v-if="article.category" placement="right" max-width="200" :content="article.category.description">
                                 <Avatar class="category"
                                     :src="article.category.extends | extendsFilter('image')"
                                     v-if="findExtendsItem(article.category.extends, 'image')">{{ article.category.name }}</Avatar>
@@ -32,7 +32,7 @@
                             <router-link :to="{ name: 'ArticleDetail', params: { id: article._id }}">{{ article.title }}</router-link>
                         </h4>
                         <div class="tag-list" v-if="article.tag.length">
-                            <Tooltip v-for="tag in article.tag" :key="tag._id" placement="top" :content="tag.description">
+                            <Tooltip max-width="200" v-for="tag in article.tag" :key="tag._id" placement="top" :content="tag.description">
                                 <Tag>{{ tag.name }}</Tag>
                             </Tooltip>
                         </div>
@@ -56,14 +56,14 @@
                                 </li>
                             </ul>
                             <div class="time">
-                                <span><Icon wsize="14" type="md-time" /> <Time :time="article.createdAt"></Time></span>
+                                <span><Icon wsize="14" type="md-time" /><Time :time="article.createdAt"></Time></span>
                                 <span><Icon wsize="14" type="md-create" /><Time :time="article.updatedAt"></Time></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="action">
+            <div class="action" v-if="!tip">
                 <div class="action-item edit" @click="$router.push({ name: 'ArticleDetail', params: { id: article._id }})">
                     <span class="icon">
                         <Icon size="12" type="md-create" />

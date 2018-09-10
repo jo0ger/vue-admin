@@ -10,7 +10,7 @@ import { RouteConfig } from 'vue-router'
 import { Component } from '@/utils/decorators'
 import routes from '@/router/routes'
 
-const authMod = namespace('auth')
+const aMod = namespace('auth')
 const nMod = namespace('notification')
 const sMod = namespace('setting')
 
@@ -25,17 +25,14 @@ const sMod = namespace('setting')
     },
 })
 export default class Default extends Vue {
-    @authMod.Action
+    @aMod.Action
     private logout
 
-    @nMod.Getter('list')
-    private nList
+    @nMod.Getter('total')
+    private nTotal
 
-    @nMod.Getter('pageInfo')
-    private nPageInfo
-
-    @nMod.Action('getList')
-    private getNList
+    @nMod.Action('getUnviewedCount')
+    private getNUnviewedCount
 
     @sMod.Action('getData')
     private getSData
@@ -46,10 +43,7 @@ export default class Default extends Vue {
 
     private created () {
         this.getSData()
-        this.getNList({
-            page: 1,
-            viewed: false,
-        })
+        this.getNUnviewedCount()
     }
 
     private genMenu (r: RouteConfig[]) {
