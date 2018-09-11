@@ -395,7 +395,7 @@ declare namespace WebApi {
                     secret: string,
                 },
                 aliApiGateway: {
-                    [key: string]: any
+                    [key: string]: any,
                 },
                 mail: {
                     user: string

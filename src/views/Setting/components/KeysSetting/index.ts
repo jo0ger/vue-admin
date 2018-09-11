@@ -84,10 +84,13 @@ export default class KeysSetting extends Vue {
     }
 
     private async submit () {
-        await this.updateSetting({
+        const success = await this.updateSetting({
             keys: {
-                [this.type]: this.model[this.type]
+                [this.type]: this.model[this.type],
             },
         })
+        if (success) {
+            this.close()
+        }
     }
 }

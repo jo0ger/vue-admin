@@ -39,7 +39,7 @@
                 </Form>
                 <Form v-if="type === 'alinode'" :label-width="80">
                     <FormItem label="AppId">
-                        <Input v-model.trim="model[type].appId"></Input>
+                        <Input v-model.trim="model[type].appid"></Input>
                     </FormItem>
                     <FormItem label="Secret">
                         <Input v-model.trim="model[type].secret"></Input>

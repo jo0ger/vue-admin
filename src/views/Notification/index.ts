@@ -125,7 +125,7 @@ export default class Notification extends Vue {
             h('Badge', {
                 props: {
                     count: this.nCounts[type.type],
-                    className: 'unviewed-count'
+                    className: 'unviewed-count',
                 },
                 style: {
                     marginLeft: 8 + 'px',

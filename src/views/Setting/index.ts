@@ -31,8 +31,8 @@ export default class Setting extends Vue {
         this.menu = menu
         this.$router.replace({
             query: {
-                tab: menu
-            }
+                tab: menu,
+            },
         })
     }
 }
