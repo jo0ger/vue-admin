@@ -11,14 +11,19 @@
         display flex
 
         .setting-menu {
+            flex 0 0 200px
+            width 200px
             margin-left (0 - $padding-md)
             margin-right $padding-lg
         }
-    }
-
-    .details {
-        .label {
-            margin-bottom $padding-lg
+        
+        .details {
+            flex 1 1
+            padding 0 $padding-lg
+        
+            .label {
+                margin-bottom $padding-lg
+            }
         }
     }
 }

@@ -122,6 +122,8 @@
 <style lang="stylus" scoped src="./index.styl"></style>
 
 <style lang="stylus">
+@import '~@/assets/style/init'
+
 .notification-page {
     .viewed-card {
         .ivu-card-body {
@@ -135,6 +137,11 @@
 
     .ivu-tabs {
         overflow -webkit-paged-x
+    }
+
+    .unviewed-count {
+        background-color rgba(241,64,75, .2)
+        color rgb(241,64,75)
     }
 }
 </style>

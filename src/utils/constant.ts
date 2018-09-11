@@ -51,7 +51,7 @@ export const NOTIFICATION_TYPE: ConstantItem = [
         label: '用户通知',
         value: '3',
         type: 'user',
-        icon: 'md-persons',
+        icon: 'md-people',
     },
     {
         label: '系统通知',

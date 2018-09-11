@@ -9,7 +9,7 @@ import { namespace } from 'vuex-class'
 import { DEFAULT_AVATAR } from '@/config'
 import { Component } from '@/utils/decorators'
 import { TagList, EditInput, Uploader } from '@/components/common'
-import { LinkList, UpdatePassword } from './components'
+import { UpdatePassword } from './components'
 
 const sMod = namespace('setting')
 const aMod = namespace('auth')
@@ -20,13 +20,14 @@ const aMod = namespace('auth')
         TagList,
         EditInput,
         Uploader,
-        LinkList,
         UpdatePassword,
     },
 })
 export default class Auth extends Vue {
     @sMod.Action('update') public updateSetting
     @aMod.Action('update') public updateAuth
+
+    private menu: 'info' | 'pass' = 'info'
 
     private async personalUpdate (path, val, done?: () => void) {
         const success = await this.updateSetting({
@@ -54,5 +55,9 @@ export default class Auth extends Vue {
 
     private deleteThumb () {
         this.authUpdate('avatar', DEFAULT_AVATAR)
+    }
+
+    private menuSelect (menu) {
+        this.menu = menu
     }
 }

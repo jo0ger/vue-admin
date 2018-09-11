@@ -394,11 +394,14 @@ declare namespace WebApi {
                     appid: string
                     secret: string,
                 },
+                aliApiGateway: {
+                    [key: string]: any
+                },
                 mail: {
                     user: string
                     pass: string,
                 },
-                github: {
+                github?: {
                     clientID: string
                     clientSecret: string,
                 },

@@ -7,6 +7,27 @@
 @import '~@/assets/style/init'
 
 .auth-page {
+    .content {
+        display flex
+
+        .auth-menu {
+            flex 0 0 200px
+            width 200px
+            margin-left (0 - $padding-md)
+            margin-right $padding-lg
+        }
+
+        .details {
+            flex 1 1
+        }
+    }
+
+    .account-info {
+        max-width 500px
+        margin 0 auto
+        padding $padding-lg
+    }
+
     .account {
         margin $padding-md 0
         text-align center
@@ -33,6 +54,8 @@
     }
 
     .profile {
+        margin-top $padding-lg * 2
+
         p {
             display flex
             margin-bottom $padding-xs

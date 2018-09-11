@@ -31,7 +31,7 @@ export default [
         component: () => import('@/views/Article/index.vue'),
         meta: {
             title: '文章管理',
-            icon: 'md-book',
+            icon: 'md-bookmarks',
             menu: true,
         },
     },

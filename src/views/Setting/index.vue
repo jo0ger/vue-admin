@@ -13,6 +13,10 @@
                         <Icon type="md-document" />
                         站内内容设置
                     </MenuItem>
+                    <MenuItem name="links">
+                        <Icon type="md-document" />
+                        友链设置
+                    </MenuItem>
                     <MenuItem name="keys">
                         <Icon type="md-document" />
                         Keys设置
@@ -25,12 +29,19 @@
                 <div class="details">
                     <div class="keys" v-if="menu === 'site'">
                         <h2 class="label">站内内容设置</h2>
+                        <SiteSetting></SiteSetting>
+                    </div>
+                    <div class="links" v-if="menu === 'links'">
+                        <h2 class="label">友链配置</h2>
+                        <LinkList></LinkList>
                     </div>
                     <div class="keys" v-if="menu === 'keys'">
                         <h2 class="label">Keys设置</h2>
+                        <KeysSetting></KeysSetting>
                     </div>
                     <div class="keys" v-if="menu === 'limit'">
                         <h2 class="label">Limit设置</h2>
+                        <LimitSetting></LimitSetting>
                     </div>
                 </div>
             </div>
