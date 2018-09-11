@@ -39,20 +39,24 @@ export const NOTIFICATION_TYPE: ConstantItem = [
         label: '点赞通知',
         value: '2',
         type: 'like',
+        icon: 'md-thumbs-up',
     },
     {
         label: '评论通知',
         value: '1',
         type: 'comment',
+        icon: 'md-text',
     },
     {
         label: '用户通知',
         value: '3',
         type: 'user',
+        icon: 'md-persons',
     },
     {
         label: '系统通知',
         value: '0',
         type: 'general',
+        icon: 'md-cog',
     },
 ]

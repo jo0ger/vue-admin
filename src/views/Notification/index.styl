@@ -9,6 +9,11 @@
 .notification-page {
     .n-list {
         padding $padding-md
+
+        .pager {
+            margin $padding-md 0
+            text-align right
+        }
     }
 
     .n-item {
@@ -59,18 +64,19 @@
         }
 
         .verb {
-            margin-top $padding-sm
+            margin-top $padding-xs
             margin-right 200px
 
             &-content {
                 lineLimit(3)
                 word-break break-all
+                font-size 12px
             }
         }
 
         .meta {
             display flex
-            margin-top $padding-sm
+            margin-top $padding-xs
             color $sub-color
             font-size 12px
 

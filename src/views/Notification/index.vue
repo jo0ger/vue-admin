@@ -23,6 +23,7 @@
                             <MenuItem name="unviewed">
                                 <Icon size="16" type="md-attach" />
                                 未读
+                                <Badge style="float: right; right: 0;" :count="nTotal"></Badge>
                             </MenuItem>
                             <MenuItem name="viewed">
                                 <Icon size="16" type="md-checkmark-circle-outline" />
@@ -36,8 +37,9 @@
                 <Card>
                     <Tabs v-model="query.type" @on-click="typeChange">
                         <TabPane
-                            :label="type.label"
+                            :label="mode !== 'unviewed' ? type.label : h => renderCount(h, type)"
                             :name="type.value"
+                            :icon="type.icon"
                             v-for="type in constant.NOTIFICATION_TYPE"
                             :key="type.value">
                             <div class="n-list">
@@ -45,6 +47,11 @@
                                     共找到 <b style="color: #FF8D13">{{ listMap[type.value].pageInfo.total }}</b> 条通告，
                                     共 <b style="color: #FF8D13">{{ listMap[type.value].pageInfo.pages }}</b> 页
                                 </Alert>
+                                <div class="pager">
+                                    <Page
+                                        :total="listMap[type.value].pageInfo.total"
+                                        @on-change="pageChange"></Page>
+                                </div>
                                 <div class="n-item" v-for="(item, index) in listMap[type.value].list" :key="item._id">
                                     <div class="viewed-tag" v-if="item.viewed">已读</div>
                                     <div class="wrap">

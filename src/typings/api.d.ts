@@ -291,7 +291,7 @@ declare namespace WebApi {
                     comment: number,
                     like: number,
                     user: number,
-                }
+                },
             }>
         }
     }

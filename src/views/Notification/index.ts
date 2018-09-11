@@ -21,23 +21,24 @@ const nMod = namespace('notification')
     },
 })
 export default class Notification extends Vue {
-    @nMod.Getter('total') nTotal
-    @nMod.Action('view') viewN
-    @nMod.Action('viewAll') viewAllN
-    @nMod.Action('delete') deleteN
+    @nMod.Getter('total') public nTotal
+    @nMod.Getter('counts') public nCounts
+    @nMod.Action('view') public viewN
+    @nMod.Action('viewAll') public viewAllN
+    @nMod.Action('delete') public deleteN
 
     private mode: 'unviewed' | 'viewed' | 'all' = 'all'
     private query: {
         type: string,
-        classify?: number
+        classify?: number,
     } = {
-        type: '2'
+        type: '2',
     }
     private listMap: {
         [key: string]: {
             list: WebApi.NotificationModule.Notification[],
-            pageInfo: WebApi.PageInfo
-        }
+            pageInfo: WebApi.PageInfo,
+        },
     } = NOTIFICATION_TYPE.reduce((sum, item) => {
         sum[item.value] = {
             list: [],
@@ -70,7 +71,7 @@ export default class Notification extends Vue {
         if (res.success) {
             this.listMap[params.type] = {
                 list: res.data.list,
-                pageInfo: res.data.pageInfo
+                pageInfo: res.data.pageInfo,
             }
         }
     }
@@ -82,6 +83,10 @@ export default class Notification extends Vue {
 
     private typeChange (name) {
         this.$nextTick(() => this.getList(1))
+    }
+
+    private pageChange (page) {
+        this.getList(page)
     }
 
     private async viewItem (item, index, type) {
@@ -112,5 +117,20 @@ export default class Notification extends Vue {
                 l.pageInfo.total--
             },
         })
+    }
+
+    private renderCount (h, type) {
+        return h('span', [
+            h('span', type.label),
+            h('Badge', {
+                props: {
+                    count: this.nCounts[type.type],
+                },
+                style: {
+                    marginLeft: 8 + 'px',
+                    top: -2 + 'px',
+                },
+            }),
+        ])
     }
 }

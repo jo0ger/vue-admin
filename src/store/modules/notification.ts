@@ -49,7 +49,7 @@ export const mutations: Mutations<State> = {
         s.counts = counts
     },
     [VIEW_ITEM]: (s, type) => {
-        const hit = NOTIFICATION_TYPE.find(item => item.value == type.value)
+        const hit = NOTIFICATION_TYPE.find(item => item.value === type.value)
         if (hit) {
             const key = hit.type
             s.total--
