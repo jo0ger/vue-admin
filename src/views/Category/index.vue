@@ -8,7 +8,7 @@
         <Avatar slot="logo" :icon="$route.meta.icon" style="color: #f56a00;background-color: #fde3cf"></Avatar>
         <Input slot="action" search enter-button="搜索" placeholder="搜索分类" style="width: 300px" v-model.trim="query.keyword" @on-search="search" @on-enter="search" />
         <Alert show-icon :type="cList.length ? 'info' : 'warning'">
-            共找到 <b style="color: #FF8D13">{{ cList.length }}</b> 个分类，
+            共找到 <b style="color: #FF8D13">{{ cList.length }}</b> 个分类
         </Alert>
         <Row :gutter="16" class="category-list">
             <Col v-bind="colResponsiveProps" class="category-item">

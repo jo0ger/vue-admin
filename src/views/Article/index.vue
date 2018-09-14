@@ -70,7 +70,7 @@
                 @on-change-state="changeState"></ArticleItem>
             <Spin size="large" fix v-if="false"></Spin>
             <div class="loadmore" v-if="pageInfo.current < pageInfo.pages">
-                <Button style="width: 150px" :loading="cLoading" @click="loadmore">加载更多</Button>
+                <Button style="width: 150px" :loading="aLoading" @click="loadmore">加载更多</Button>
             </div>
         </div>
     </Container>

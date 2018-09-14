@@ -14,7 +14,7 @@
                     </Tooltip>
                     <div class="total">
                         总{{control.title.slice(-3)}}
-                        <span>{{ control.count.total }}</span>
+                        <span :style="{ color: control.weekTrendChart.color }">{{ control.count.total }}</span>
                     </div>
                     <div :id="key + '-count-chart'"></div>
                     <Divider class="divider"></Divider>

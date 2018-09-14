@@ -11,9 +11,9 @@
         <div class="wrap">
             <div class="main">
                 <div class="detail">
-                    <div class="extra">
+                    <div class="extra" v-if="article.thumb">
                         <div class="thumb" v-if="article.thumb">
-                            <img :src="article.thumb || 'https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png'" alt="">
+                            <img :src="article.thumb" alt="">
                         </div>
                     </div>
                     <div class="content">

@@ -24,7 +24,7 @@ export default class Article extends Vue {
     @tMod.Getter('listWidthAll') private tList
     @tMod.Action('getList') private getTList
 
-    private cLoading: boolean = false
+    private aLoading: boolean = false
 
     private aList: WebApi.ArticleModule.Article[] = []
 
@@ -59,13 +59,13 @@ export default class Article extends Vue {
     }
 
     private async search (payload: any = {}) {
-        if (this.cLoading) return
+        if (this.aLoading) return
         payload = Object.assign({}, payload, this.pageReq)
-        this.cLoading = true
+        this.aLoading = true
         const res = await this.api.article.list(
             this.processModel(payload),
         )
-        this.cLoading = false
+        this.aLoading = false
         if (payload.page > this.pageInfo.current) {
             // loadmore
             this.aList.push(...res.data.list)

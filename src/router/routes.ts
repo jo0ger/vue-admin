@@ -89,7 +89,7 @@ export default [
         component: () => import('@/views/User/index.vue'),
         meta: {
             title: '用户管理',
-            icon: 'md-contact',
+            icon: 'md-people',
             menu: true,
         },
     },

@@ -157,7 +157,7 @@ export default class Dashboard extends Vue {
             weekTrend: [],
             weekTrendChart: {
                 alias: '用户量',
-                color: '#585c72',
+                color: '#46cdcf',
                 opacity: .8,
             },
             trend: [],

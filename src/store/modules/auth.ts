@@ -84,6 +84,7 @@ export const actions: Actions<State, RootState> = {
             storage.set(AUTH_TOKEN_KEY, data.token)
             await dispatch('getInfo')
         } else {
+            Message.error(message)
             commit(LOGIN_FAILURE)
         }
         return success
@@ -91,11 +92,13 @@ export const actions: Actions<State, RootState> = {
     async logout ({ commit, dispatch, state }) {
         if (state.loading) return
         commit(LOGOUT_REQUEST)
-        const { success } = await api.auth.logout()
+        const { success, message } = await api.auth.logout()
         if (success) {
+            Message.success(message)
             dispatch('clearAuthInfo')
             commit(LOGOUT_SUCCESS)
         } else {
+            Message.error(message)
             commit(LOGOUT_FAILURE)
         }
         return success

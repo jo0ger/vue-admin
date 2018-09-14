@@ -6,4 +6,104 @@
 
 @import '~@/assets/style/init'
 
-.user {}
+.user-page {
+    .user-item {
+        position relative
+        margin-bottom $padding-md
+        box-shadow 0 0 30px 2px rgba($black-color, .07)
+        background-color $white-color
+        border-radius 8px
+        overflow hidden
+
+        .tag {
+            position absolute
+            top -3px
+            right -15px
+            width 48px
+            height 24px
+            line-height 32px
+            transform rotateZ(45deg)
+            text-align center
+            color $white-color
+            font-weight bold
+            font-size 12px
+
+            &.today {
+                background-color $success-color
+            }
+
+            &.week {
+                background-color $info-color
+            }
+        }
+
+        .wrap {
+            display flex
+            justify-content space-between
+            padding $padding-lg
+        }
+
+        .avatar {
+            flex 0 0 48px
+            position relative
+            margin-right $padding-md
+            text-align center
+
+            img {
+                width 48px
+                height @width
+                border-radius 50%
+                box-shadow 1px 10px 10px rgba($black-color, .1)
+            }
+
+            .mute {
+                position absolute
+                right 0px
+                bottom 36px
+                width 20px
+                height @width
+                border-radius 50%
+                background-color $error-color
+                border 2px solid $white-color
+                box-shadow 1px 10px 10px rgba($error-color, .1)
+            }
+
+            .action {
+                margin-top $padding-sm
+            }
+        }
+
+        .content {
+            flex 1 1
+            text-align left
+
+            p {
+                margin-top $padding-sm
+                color $sub-color
+                textOverflow()
+
+                .icon {
+                    margin-right $padding-sm
+                }
+            }
+        }
+
+        .meta {
+            display flex
+            flex-direction column
+            justify-content space-between
+            align-items flex-end
+
+            .time {
+                font-weight bold
+            }
+
+            .comment-count {
+                font-style italic
+                .icon {
+                    margin-left $padding-sm
+                }
+            }
+        }
+    }    
+}
