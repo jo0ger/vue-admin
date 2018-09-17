@@ -9,7 +9,7 @@
 
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
-import G2 from '@antv/g2'
+import { G2 } from '@/plugins'
 
 @Component({
     name: 'Dashboard',

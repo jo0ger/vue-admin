@@ -11,7 +11,6 @@ declare module 'vue/types/options' {
 declare module 'vue/types/vue' {
     interface Vue {
         $Modal: any
-        $Notice: any
         $Message: any
         $meta: any
     }

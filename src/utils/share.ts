@@ -1,8 +1,35 @@
-import { Store } from 'vuex'
-import { isObject, isDate } from 'lodash'
+import {
+    Store,
+} from 'vuex'
 import dayjs from 'dayjs'
 
-export { cloneDeep, merge, isArray, isNumber, isFunction, isObject, isRegExp, isString, isSet, isMap } from 'lodash'
+import {
+    cloneDeep,
+    merge,
+    isArray,
+    isNumber,
+    isFunction,
+    isObject,
+    isRegExp,
+    isString,
+    isSet,
+    isMap,
+    isDate,
+} from 'lodash'
+
+export {
+    cloneDeep,
+    merge,
+    isArray,
+    isNumber,
+    isFunction,
+    isObject,
+    isRegExp,
+    isString,
+    isSet,
+    isMap,
+    isDate,
+}
 
 export const moment = dayjs
 

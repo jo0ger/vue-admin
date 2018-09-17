@@ -1,5 +1,5 @@
 import marked from 'marked'
-import highlight from 'highlight.js'
+import { highlight } from '@/plugins'
 
 const languages = [
     'xml',
@@ -17,23 +17,6 @@ const languages = [
     'sql',
     'stylus',
 ]
-// highlight.registerLanguage('xml', require('highlight.js/lib/languages/xml'))
-// highlight.registerLanguage('bash', require('highlight.js/lib/languages/bash'))
-// highlight.registerLanguage('css', require('highlight.js/lib/languages/css'))
-// highlight.registerLanguage('markdown', require('highlight.js/lib/languages/markdown'))
-// highlight.registerLanguage('http', require('highlight.js/lib/languages/http'))
-// highlight.registerLanguage('java', require('highlight.js/lib/languages/java'))
-// highlight.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'))
-// highlight.registerLanguage('json', require('highlight.js/lib/languages/json'))
-// highlight.registerLanguage('makefile', require('highlight.js/lib/languages/makefile'))
-// highlight.registerLanguage('nginx', require('highlight.js/lib/languages/nginx'))
-// highlight.registerLanguage('python', require('highlight.js/lib/languages/python'))
-// highlight.registerLanguage('scss', require('highlight.js/lib/languages/scss'))
-// highlight.registerLanguage('sql', require('highlight.js/lib/languages/sql'))
-// highlight.registerLanguage('stylus', require('highlight.js/lib/languages/stylus'))
-highlight.configure({
-    classPrefix: '', // don't append class prefix
-})
 
 const renderer = new marked.Renderer()
 

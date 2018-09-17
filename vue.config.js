@@ -3,5 +3,10 @@ module.exports = {
     outputDir: 'dist',
     assetsDir: '.',
     indexPath: 'index.html',
-    filenameHashing: true
+    filenameHashing: true,
+    pluginOptions: {
+        webpackBundleAnalyzer: {
+            openAnalyzer: process.env.NODE_ENV !== 'production'
+        }
+    }
 }
