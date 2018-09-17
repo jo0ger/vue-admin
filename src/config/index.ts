@@ -3,7 +3,7 @@
  */
 
 // 生产环境
-export const IS_PROD = process.env.BUILD_ENV === 'production'
+export const IS_PROD = process.env.NODE_ENV === 'production'
 
 // 表格默认size
 export const DEFAULT_PAGE_SIZE = 10
