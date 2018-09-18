@@ -6,7 +6,7 @@
 
 import Vue from '@/vue'
 import { Component, Prop } from '@/utils/decorators'
-import { AliOSS } from '@/utils'
+import { getAliOssClient } from '@/lazyload'
 
 @Component({
     name: 'Uploader',
@@ -18,14 +18,28 @@ export default class Uploader extends Vue {
     @Prop({ default: '' })
     private url!: string
 
+    @Prop({ default: 'file' })
+    private type!: string
+
     private ossClient: any = null
     private file: any = null
     private uploading: boolean = false
 
-    private getOssClient () {
-        if (this.ossClient) return this.ossClient
-        this.ossClient = new AliOSS(this.setting.keys.aliyun)
-        return this.ossClient
+    private typeMap = {
+        file: {
+            accept: '',
+            text: '文件',
+            dir: 'file/',
+        },
+        image: {
+            accept: 'image/*',
+            text: '图片',
+            dir: 'img/',
+        },
+    }
+
+    private get accept () {
+        return this.typeMap[this.type].accept
     }
 
     private beforeUpload (file) {
@@ -37,11 +51,12 @@ export default class Uploader extends Vue {
     private async upload () {
         if (this.uploading) return
         if (!this.file) {
-            return this.$Message.warning('请选择图片')
+            return this.$Message.warning('请选择' + this.typeMap[this.type].text)
         }
         this.uploading = true
         const filename = this.file.name.split('.').join(`_${new Date().getTime()}.`)
-        const res = await this.getOssClient().multipartUpload('img/' + this.name + filename, this.file)
+        const client = await getAliOssClient(this.setting.keys.aliyun)
+        const res = await client.multipartUpload(this.typeMap[this.type].dir + this.name + filename, this.file)
         this.uploading = false
         this.$emit('on-success', res.url)
     }

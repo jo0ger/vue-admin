@@ -9,7 +9,7 @@
 
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
-import { G2 } from '@/plugins'
+import { getG2 } from '@/lazyload'
 
 @Component({
     name: 'Dashboard',
@@ -192,11 +192,11 @@ export default class Dashboard extends Vue {
             // week trend
             const weekTrend = await this.getRangeTrend(curControl.target, 'day', startDate, endDate)
             curControl.weekTrend = weekTrend
-            this.initCountChart(key)
+            await this.initCountChart(key)
 
             // trend
             await this.dateRangeChange(curControl)
-            this.initTrendChart(key)
+            await this.initTrendChart(key)
         })
     }
 
@@ -256,8 +256,9 @@ export default class Dashboard extends Vue {
         }
     }
 
-    private initCountChart (target) {
+    private async initCountChart (target) {
         const control = this.controls[target]
+        const G2 = await getG2()
         const chart = this.chartInstance[target] = new G2.Chart({
             container: target + '-count-chart',
             forceFit: true,
@@ -284,8 +285,9 @@ export default class Dashboard extends Vue {
         chart.render()
     }
 
-    private initTrendChart (target) {
+    private async initTrendChart (target) {
         const control = this.controls[target]
+        const G2 = await getG2()
         const chart = this.chartInstance[target] = new G2.Chart({
             container: target + '-trend-chart',
             forceFit: true,

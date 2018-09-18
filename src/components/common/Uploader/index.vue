@@ -8,7 +8,7 @@
         <Upload
             action=""
             :show-upload-list="false"
-            accept="image/*"
+            :accept="accept"
             :before-upload="beforeUpload">
             <Button type="primary" icon="md-cloud-upload" size="small" :loading="uploading">{{ url ? '更换' : '上传' }}</Button>
         </Upload>

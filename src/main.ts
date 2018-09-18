@@ -7,7 +7,7 @@ import router, { connectStore } from '@/router'
 import store from '@/store'
 import { IS_PROD } from '@/config'
 import { Component } from '@/utils/decorators'
-import { iView } from '@/plugins'
+import iView from '@/iview'
 import '@/assets/style/index.styl'
 import { Container } from '@/components/common'
 

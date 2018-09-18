@@ -8,6 +8,7 @@ import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
 import { namespace } from 'vuex-class'
 import { MDEditor, Uploader, CTDialog, TagList } from '@/components/common'
+import { IS_PROD } from '@/config'
 
 const cMod = namespace('category')
 const tMod = namespace('tag')
@@ -43,7 +44,7 @@ export default class Detail extends Vue {
     private tDialogVisible = false
 
     private get uploadName () {
-        return `test/${this.moment().format('YYYYMMDD')}/`
+        return `${IS_PROD ? 'source' : 'test'}/${this.moment().format('YYYYMMDD')}/`
     }
 
     private created () {

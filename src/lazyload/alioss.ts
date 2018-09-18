@@ -1,7 +1,7 @@
 import OSS from 'ali-oss'
 import { CDN } from '@/config'
 
-export default class AliOSS {
+export class AliOSS {
     private client: any = null
 
     constructor (opt) {
@@ -17,4 +17,11 @@ export default class AliOSS {
             ) || '',
         }
     }
+}
+
+let client: any = null
+
+export default (opt?: any) => {
+    if (client) return client
+    return (client = new AliOSS(opt))
 }

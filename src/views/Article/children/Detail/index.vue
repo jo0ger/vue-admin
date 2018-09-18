@@ -67,6 +67,7 @@
                     <Card class="info-card" title="缩略图">
                         <Uploader
                             slot="extra"
+                            type="image"
                             :name="uploadName"
                             :url="model.thumb"
                             @on-success="uploadSuccess"

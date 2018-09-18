@@ -8,7 +8,7 @@ import Vue from '@/vue'
 import { Component, Prop, Watch } from '@/utils/decorators'
 import commands from './lib/commands'
 import { getSelection, setSelection } from './lib/selectionHelper'
-import { marked, noop } from '@/utils'
+import { markdown, noop } from '@/utils'
 import { debounce } from 'lodash'
 
 @Component({
@@ -74,7 +74,7 @@ export default class MDEditor extends Vue {
             if (this.mode.preview) {
                 if (content !== this.val) {
                     this.val = content
-                    this.previewContent = content ? marked(content) : ''
+                    this.previewContent = content ? markdown.render(content) : ''
                 }
             }
         }, 500)
