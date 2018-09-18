@@ -86,3 +86,7 @@ export default function (Vue, opts = {}) {
     Vue.prototype.$Spin = Spin;
 }
 
+export {
+    Message,
+    LoadingBar,
+}

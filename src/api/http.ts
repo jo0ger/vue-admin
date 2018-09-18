@@ -3,7 +3,7 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios'
 import { IS_PROD, WHITE_API_LIST, AXIOS_DEFAULT_CONFIG } from '@/config'
 import { merge } from '@/utils'
-import { Message } from 'iview'
+import { Message } from '@/iview'
 import router from '@/router';
 
 let msgVisible = false

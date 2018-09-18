@@ -4,7 +4,7 @@ import api from '@/api'
 import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'
 import { NOTIFICATION_TYPE } from '@/utils/constant'
 import { DELETE_ITEM_REQUEST, DELETE_ITEM_FAILURE, DELETE_ITEM_SUCCESS } from '../mutation-types'
-import { Message } from 'iview'
+import { Message } from '@/iview'
 
 const FETCH_COUNT_REQUEST = 'FETCH_COUNT_REQUEST'
 const FETCH_COUNT_SUCCESS = 'FETCH_COUNT_SUCCESS'
