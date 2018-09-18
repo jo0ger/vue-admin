@@ -61,6 +61,11 @@ export default class KeysSetting extends Vue {
             desc: '163邮箱的账号密码',
             type: 'mail',
         },
+        {
+            name: 'Github',
+            desc: 'Github clientID和clientSecret',
+            type: 'github',
+        },
     ]
 
     private visible: boolean = false

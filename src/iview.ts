@@ -27,12 +27,14 @@ import {
     Spin,
     Table,
     Tabs,
+    TabPane,
     Tag,
     Time,
     Tooltip,
     Upload,
     Select,
     Option,
+    Notice,
 } from 'iview'
 
 const iview = {
@@ -63,17 +65,24 @@ const iview = {
     Spin,
     Table,
     Tabs,
+    TabPane,
     Tag,
     Time,
     Tooltip,
     Upload,
     Select,
     Option,
+    Notice,
 }
 
 export default function (Vue, opts = {}) {
     Object.keys(iview).forEach(key => {
         Vue.component(key, iview[key])
     })
+    Vue.prototype.$Loading = LoadingBar;
+    Vue.prototype.$Message = Message;
+    Vue.prototype.$Modal = Modal;
+    Vue.prototype.$Notice = Notice;
+    Vue.prototype.$Spin = Spin;
 }
 

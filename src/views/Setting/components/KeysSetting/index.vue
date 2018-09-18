@@ -59,6 +59,14 @@
                         <Input v-model.trim="model[type].pass"></Input>
                     </FormItem>
                 </Form>
+                <Form v-if="type === 'github'" :label-width="80">
+                    <FormItem label="clientID">
+                        <Input v-model.trim="model[type].clientID"></Input>
+                    </FormItem>
+                    <FormItem label="clientSecret">
+                        <Input v-model.trim="model[type].clientSecret"></Input>
+                    </FormItem>
+                </Form>
             </div>
             <div slot="footer" style="text-align: center;">
                 <Button type="primary" @click="submit">提交</Button>

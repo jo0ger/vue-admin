@@ -80,14 +80,14 @@
                                             </Tooltip>
                                         </p>
                                         <div class="meta">
-                                            <div class="time">
-                                                <Icon type="md-time" />
+                                            <div class="meta-item time" v-if="item.createdAt">
+                                                <Icon class="icon" type="md-time" />
                                                 <Time :time="item.createdAt"></Time>
                                             </div>
-                                            <div class="target" v-if="item.target">
+                                            <div class="meta-item target" v-if="item.target">
                                                 <span class="target-item article" v-if="item.target.article">
-                                                    <Icon type="md-book" />
-                                                    <Poptip placement="bottom-start" trigger="click">
+                                                    <Icon class="icon" type="md-book" />
+                                                    <Poptip width="800" placement="bottom-start" trigger="click">
                                                         <ArticleItem slot="content" :article="item.target.article" :tip="true" :index="index"></ArticleItem>
                                                         {{ item.target.article.title }}
                                                     </Poptip>
