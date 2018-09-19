@@ -1,5 +1,3 @@
-///<reference path="../../typings/api.d.ts" />
-
 import Api from '@/api/api'
 import { Controller } from '@/utils/decorators'
 

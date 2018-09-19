@@ -1,5 +1,3 @@
-/// <reference path="../typings/api.d.ts" />
-
 import * as constant from './constant'
 import { Constant } from './constant'
 import { findExtendsItem, moment } from './share'

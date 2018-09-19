@@ -1,5 +1,3 @@
-///<reference path="../typings/api.d.ts" />
-
 export * from 'vue-property-decorator'
 
 export const symbolApiPrefix = Symbol('prefix')

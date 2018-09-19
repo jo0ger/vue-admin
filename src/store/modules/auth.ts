@@ -1,6 +1,3 @@
-/// <reference path="../../typings/api.d.ts" />
-
-
 import api from '@/api'
 import { AUTH_CACHE_KEY, AUTH_TOKEN_KEY } from '@/config'
 import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'

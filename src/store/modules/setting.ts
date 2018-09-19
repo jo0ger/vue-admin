@@ -1,5 +1,3 @@
-/// <reference path="../../typings/api.d.ts" />
-
 import api from '@/api'
 import {
     FETCH_DATA_REQUEST,

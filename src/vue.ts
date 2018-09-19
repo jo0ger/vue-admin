@@ -1,5 +1,3 @@
-/// <reference path="./typings/api.d.ts" />
-
 /**
  * 所有组件的基类
  */

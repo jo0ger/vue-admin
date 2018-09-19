@@ -1,6 +1,3 @@
-/// <reference path="../../typings/api.d.ts" />
-
-
 /**
  * @desc Dashboard
  * @author Jooger <iamjooger@gmail.com>
