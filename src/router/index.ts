@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { ROUTER_DEFAULT_CONFIG } from '@/config'
 import { merge } from '@/utils'
-import { Message, LoadingBar } from '@/iview'
+import { Message, LoadingBar } from 'iview'
 import routes from './routes'
 
 Vue.use(Router)

@@ -2,7 +2,7 @@ import api from '@/api'
 import { AUTH_CACHE_KEY, AUTH_TOKEN_KEY } from '@/config'
 import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'
 import { storage } from '@/utils'
-import { Message } from '@/iview'
+import { Message } from 'iview'
 
 interface State extends StateTree {
     loading: boolean

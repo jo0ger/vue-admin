@@ -8,7 +8,7 @@ import {
     UPDATE_ITEM_SUCCESS,
 } from '../mutation-types'
 import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'
-import { Message } from '@/iview'
+import { Message } from 'iview'
 
 interface State extends StateTree {
     loading: boolean

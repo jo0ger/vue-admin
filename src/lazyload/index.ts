@@ -6,7 +6,6 @@ export const getAliOssClient = async (opt?: any) => {
 
 export const getG2 = async () => {
     const module = await import(/* webpackChunkName: 'g2' */ '@/lazyload/g2')
-    console.log(module)
     return module.default || module
 }
 

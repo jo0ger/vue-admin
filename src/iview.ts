@@ -75,7 +75,7 @@ const iview = {
     Notice,
 }
 
-export default function (Vue, opts = {}) {
+const install = (Vue, opts = {}) => {
     Object.keys(iview).forEach(key => {
         Vue.component(key, iview[key])
     })
@@ -86,7 +86,6 @@ export default function (Vue, opts = {}) {
     Vue.prototype.$Spin = Spin;
 }
 
-export {
-    Message,
-    LoadingBar,
+export default {
+    install,
 }

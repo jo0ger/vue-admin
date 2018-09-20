@@ -1,7 +1,7 @@
 import api from '@/api'
 import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'
 import { NOTIFICATION_TYPE } from '@/utils/constant'
-import { Message } from '@/iview'
+import { Message } from 'iview'
 
 const FETCH_COUNT_REQUEST = 'FETCH_COUNT_REQUEST'
 const FETCH_COUNT_SUCCESS = 'FETCH_COUNT_SUCCESS'
