@@ -3,12 +3,6 @@ module.exports = {
         '@vue/app'
     ],
     plugins: [
-        'lodash',
-        [
-            'import', {
-                'libraryName': 'iview',
-                'libraryDirectory': 'src/components'
-            }
-        ]
+        'lodash'
     ]
 }

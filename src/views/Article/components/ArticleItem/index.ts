@@ -23,8 +23,9 @@ export default class ArticleItem extends Vue {
     private deleteArticle (article) {
         this.$Modal.confirm({
             title: '提示',
-            render: h => {
-                return h('p', null, [
+            render: () => {
+                const h = this.$createElement
+                return h('p', {}, [
                     '确认删除吗？',
                     h('br'),
                     h('b', `《${article.title}》`),

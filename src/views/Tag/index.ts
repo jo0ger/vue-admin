@@ -65,8 +65,9 @@ export default class Tag extends Vue {
     private deleteItem (item) {
         this.$Modal.confirm({
             title: '提示',
-            render: h => {
-                return h('p', null, [
+            render: () => {
+                const h = this.$createElement
+                return h('p', {}, [
                     '确认删除吗？',
                     h('br'),
                     h('b', `《${item.name}》`),

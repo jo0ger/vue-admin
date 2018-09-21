@@ -102,8 +102,9 @@ export default class Notification extends Vue {
     private deleteItem (item, index, type) {
         this.$Modal.confirm({
             title: '提示',
-            render: h => {
-                return h('p', null, [
+            render: () => {
+                const h = this.$createElement
+                return h('p', {}, [
                     '确认删除吗？',
                 ])
             },

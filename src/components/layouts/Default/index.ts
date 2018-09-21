@@ -66,11 +66,12 @@ export default class Default extends Vue {
         this.$Modal.confirm({
             title: '提示',
             content: '确认退出吗？',
-            onOk: async () => {
-                const success = await this.logout()
-                if (success) {
-                    this.$router.push({ name: 'Login' })
-                }
+            onOk: () => {
+                this.logout().then(success => {
+                    if (success) {
+                        this.$router.push({ name: 'Login' })
+                    }
+                })
             },
         })
     }

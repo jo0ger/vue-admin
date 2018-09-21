@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { MetaInfo } from 'vue-meta'
+import { Message, ModalInstance, LoadingBar } from "iview"
 
 declare module 'vue/types/options' {
     interface ComponentOptions<V extends Vue> {
@@ -10,9 +11,16 @@ declare module 'vue/types/options' {
 
 declare module 'vue/types/vue' {
     interface Vue {
-        $Modal: any
-        $Message: any
+        $Modal: ModalInstance
+        $Message: Message
         $meta: any
     }
     interface VueConstructor<V extends Vue> {}
+}
+declare module "iview/dist/types/message" {
+    export const Message:Message
+}
+
+declare module "iview/dist/types/loading-bar" {
+    export const LoadingBar:LoadingBar
 }
