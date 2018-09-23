@@ -100,7 +100,7 @@ export default class CTDialog extends Vue {
             tag: 'tList',
         }[this.type]].find(item => item._id === this.id)
         if (hit) {
-            this.model = hit
+            this.model = this.cloneDeep(hit)
         }
     }
 
