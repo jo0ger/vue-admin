@@ -7,7 +7,7 @@
     <Container class="notification-page" :title="$route.meta.title">
         <Avatar slot="logo" :icon="$route.meta.icon" style="color: rgb(241,64,75);background-color: rgba(241,64,75, .2)"></Avatar>
         <Row :gutter="16">
-            <Col span="6">
+            <Col span="4">
                 <Card class="viewed-card">
                     <div class="content">
                         <Menu
@@ -33,7 +33,7 @@
                     </div>
                 </Card>
             </Col>
-            <Col span="18">
+            <Col span="20">
                 <Card>
                     <Tabs v-model="query.type" @on-click="typeChange">
                         <TabPane

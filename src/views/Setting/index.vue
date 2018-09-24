@@ -14,15 +14,15 @@
                         站内内容设置
                     </MenuItem>
                     <MenuItem name="links">
-                        <Icon type="md-document" />
+                        <Icon type="md-link" />
                         友链设置
                     </MenuItem>
                     <MenuItem name="keys">
-                        <Icon type="md-document" />
+                        <Icon type="md-key" />
                         Keys设置
                     </MenuItem>
                     <MenuItem name="limit">
-                        <Icon type="md-chatbubbles" />
+                        <Icon type="md-cut" />
                         Limit设置
                     </MenuItem>
                 </Menu>

@@ -7,7 +7,7 @@
     <div class="link-list">
         <Button icon="md-add" type="dashed" long class="add-link-btn" @click="addLink">添加友链</Button>
         <Row :gutter="16">
-            <Col v-bind="linkColResponsiveProps" v-for="(link, index) in setting.site.links" :key="link._id">
+            <Col v-bind="linkColResponsiveProps" v-for="(link, index) in setting.site.links" :key="index">
                 <div class="link-item">
                     <Poptip
                         class="delete-btn"
@@ -31,7 +31,7 @@
                             </p>
                             <p class="github">
                                 <Icon class="icon" type="logo-github" />
-                                {{ link.github }}
+                                <a :href="'https://github.com/' + link.github" target="_blank">{{ link.github }}</a>
                             </p>
                         </div>
                     </div>

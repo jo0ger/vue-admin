@@ -4489,6 +4489,10 @@ highlight.js@^9.12.0:
   version "9.12.0"
   resolved "http://registry.npm.taobao.org/highlight.js/download/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
 
+highlightjs@^9.10.0:
+  version "9.10.0"
+  resolved "http://registry.npm.taobao.org/highlightjs/download/highlightjs-9.10.0.tgz#fca9b78ddaa3b1abca89d6c3ee105ad270a80190"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/hmac-drbg/download/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -5186,6 +5190,28 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
+iview-editor@^1.1.1:
+  version "1.1.1"
+  resolved "http://registry.npm.taobao.org/iview-editor/download/iview-editor-1.1.1.tgz#d3698cd575f4de8d8a027b0c52cc2263eeeab5ba"
+  dependencies:
+    highlightjs "^9.10.0"
+    iview "^2.11.0"
+    marked "^0.3.19"
+    vue "^2.5.16"
+
+iview@^2.11.0:
+  version "2.14.3"
+  resolved "http://registry.npm.taobao.org/iview/download/iview-2.14.3.tgz#0f32a450f956cce2ac60a4df5a6eba30816a0708"
+  dependencies:
+    async-validator "^1.8.2"
+    deepmerge "^2.1.0"
+    element-resize-detector "^1.1.14"
+    js-calendar "^1.2.3"
+    lodash.throttle "^4.1.1"
+    popper.js "^1.14.1"
+    tinycolor2 "^1.4.1"
+    v-click-outside-x "^3.0.0"
+
 iview@^3.0.1:
   version "3.1.1"
   resolved "http://registry.npm.taobao.org/iview/download/iview-3.1.1.tgz#dfac7ca5eafa0ed67d92f083e021de425eec61af"
@@ -5674,6 +5700,10 @@ map-visit@^1.0.0:
   resolved "http://registry.npm.taobao.org/map-visit/download/map-visit-1.0.0.tgz#ecdca8f13144e660f1b5bd41f12f3479d98dfb8f"
   dependencies:
     object-visit "^1.0.0"
+
+marked@^0.3.19:
+  version "0.3.19"
+  resolved "http://registry.npm.taobao.org/marked/download/marked-0.3.19.tgz#5d47f709c4c9fc3c216b6d46127280f40b39d790"
 
 marked@^0.5.0:
   version "0.5.0"
@@ -8994,7 +9024,7 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "http://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.5.17:
+vue@^2.5.16, vue@^2.5.17:
   version "2.5.17"
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
 

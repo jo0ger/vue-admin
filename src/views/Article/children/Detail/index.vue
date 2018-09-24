@@ -79,9 +79,17 @@
                     </Card>
                 </Col>
                 <Col span="16">
-                    <Card class="info-card" title="文章内容">
-                        <Button type="primary" icon="md-cloud-upload" slot="extra">上传文件</Button>
-                        <MDEditor v-model="model.content"></MDEditor>
+                    <Card class="info-card">
+                        <!-- <MDEditor v-model="model.content"></MDEditor> -->
+                        <i-editor v-model="model.content"
+                            ref="editor"
+                            affix
+                            paste
+                            :autosize="{ minRows: 50 }"
+                            placeholder="请输入文章内容"
+                            write-name="文章内容"
+                            :config="{ action: '' }"
+                            :before-upload="beforeUpload"></i-editor>
                     </Card>
                 </Col>
             </Row>

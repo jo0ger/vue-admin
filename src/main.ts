@@ -8,7 +8,9 @@ import store from '@/store'
 import { IS_PROD } from '@/config'
 import { Component } from '@/utils/decorators'
 import iView from 'iview'
+import iEditor from 'iview-editor'
 import 'iview/dist/styles/iview.css'
+import 'iview-editor/dist/iview-editor.css'
 import '@/assets/style/index.styl'
 import { Container } from '@/components/common'
 
@@ -18,6 +20,7 @@ Vue.use(VueMeta, {
     keyName: 'head',
 })
 Vue.use(iView)
+Vue.use(iEditor)
 
 connectStore(store)
 

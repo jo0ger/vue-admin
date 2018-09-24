@@ -8,10 +8,25 @@ import Vue from '@/vue'
 import { Component, Prop } from '@/utils/decorators'
 import { getAliOssClient } from '@/lazyload'
 
+export const uploadTypeMap = {
+    file: {
+        accept: '',
+        text: '文件',
+        dir: 'file/',
+    },
+    image: {
+        accept: 'image/*',
+        text: '图片',
+        dir: 'img/',
+    },
+}
+
 @Component({
     name: 'Uploader',
 })
 export default class Uploader extends Vue {
+    public static uploadTypeMap = uploadTypeMap
+
     @Prop({ default: new Date().getTime().toString() })
     private name!: string
 
@@ -25,18 +40,7 @@ export default class Uploader extends Vue {
     private file: any = null
     private uploading: boolean = false
 
-    private typeMap = {
-        file: {
-            accept: '',
-            text: '文件',
-            dir: 'file/',
-        },
-        image: {
-            accept: 'image/*',
-            text: '图片',
-            dir: 'img/',
-        },
-    }
+    private typeMap = uploadTypeMap
 
     private get accept () {
         return this.typeMap[this.type].accept

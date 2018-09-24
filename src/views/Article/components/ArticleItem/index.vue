@@ -70,7 +70,7 @@
                     </span>
                     <span class="label">编辑</span>
                 </div>
-                <a class="action-item view" :href="article.permallink" target="_blank" v-if="article.state">
+                <a class="action-item view" :href="this.config.SITE + '/articles/' + article._id" target="_blank" v-if="article.state">
                     <span class="icon">
                         <Icon size="12" type="md-eye" />
                     </span>

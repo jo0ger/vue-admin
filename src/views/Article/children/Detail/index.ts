@@ -9,6 +9,7 @@ import { Component } from '@/utils/decorators'
 import { namespace } from 'vuex-class'
 import { MDEditor, Uploader, CTDialog, TagList } from '@/components/common'
 import { IS_PROD } from '@/config'
+import { getAliOssClient } from '@/lazyload'
 
 const cMod = namespace('category')
 const tMod = namespace('tag')
@@ -116,6 +117,26 @@ export default class Detail extends Vue {
 
     private deleteThumb () {
         this.model.thumb = ''
+    }
+
+    private beforeUpload (file) {
+        this.upload(file)
+        return false
+    }
+
+    private async upload (file) {
+        if (!file) {
+            return this.$Message.warning('请选择图片')
+        }
+        const filename = file.name.split('.').join(`_${new Date().getTime()}.`)
+        const client = await getAliOssClient(this.setting.keys.aliyun)
+        const res = await client.multipartUpload(
+            (Uploader as any).uploadTypeMap.image.dir + this.uploadName + filename,
+            file,
+        )
+        const url = res.url as string
+        (this.$refs.editor as any).handleUploadSuccess(url)
+        return false
     }
 
     private get rule () {

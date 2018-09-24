@@ -11,6 +11,7 @@
                 <div class="keys-item"
                     :class="item.type"
                     :key="item.type">
+                    <i class="icon iconfont" :class="[item.icon]"></i>
                     <div class="content">
                         <h4 class="name">{{ item.name }}</h4>
                         <p class="desc">{{ item.desc }}</p>

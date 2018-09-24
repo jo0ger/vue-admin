@@ -45,26 +45,31 @@ export default class KeysSetting extends Vue {
             name: '阿里云OSS',
             desc: '阿里云OSS的相关配置参数',
             type: 'aliyun',
+            icon: 'icon-aliyun',
         },
         {
             name: '阿里Node性能平台',
             desc: '阿里Node性能平台的相关配置参数',
             type: 'alinode',
+            icon: 'icon-monitor',
         },
         {
             name: '阿里Api网关',
             desc: '阿里Api网关的相关配置参数',
             type: 'aliApiGateway',
+            icon: 'icon-api',
         },
         {
             name: '163邮箱',
             desc: '163邮箱的账号密码',
             type: 'mail',
+            icon: 'icon-wangyi',
         },
         {
             name: 'Github',
             desc: 'Github clientID和clientSecret',
             type: 'github',
+            icon: 'icon-github',
         },
     ]
 
