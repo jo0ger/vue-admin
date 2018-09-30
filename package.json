@@ -25,6 +25,7 @@
     "marked": "^0.5.0",
     "normalize.css": "^8.0.0",
     "particles.js": "^2.0.0",
+    "raven-js": "^3.27.0",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",

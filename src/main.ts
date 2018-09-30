@@ -13,6 +13,8 @@ import 'iview/dist/styles/iview.css'
 import 'iview-editor/dist/iview-editor.css'
 import '@/assets/style/index.styl'
 import { Container } from '@/components/common'
+import Raven from 'raven-js'
+import RavenVue from 'raven-js/plugins/vue'
 
 Vue.config.productionTip = IS_PROD
 
@@ -31,6 +33,13 @@ Component.registerHooks([
 ])
 
 Vue.component('Container', Container)
+
+if (IS_PROD) {
+    Raven
+        .config('https://17bb196a2fee4086a3731696b69be634@sentry.io/1291386')
+        .addPlugin(RavenVue, Vue)
+        .install()
+}
 
 new Vue({
   router,
