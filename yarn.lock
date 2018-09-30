@@ -687,6 +687,10 @@
   version "5.2.5"
   resolved "http://registry.npm.taobao.org/@types/mocha/download/@types/mocha-5.2.5.tgz#8a4accfc403c124a0bafe8a9fc61a05ec1032073"
 
+"@types/node@^10.11.3":
+  version "10.11.3"
+  resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-10.11.3.tgz#c055536ac8a5e871701aa01914be5731539d01ee"
+
 "@types/node@^10.5.2":
   version "10.10.1"
   resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-10.10.1.tgz#d5c96ca246a418404914d180b7fdd625ad18eca6"
