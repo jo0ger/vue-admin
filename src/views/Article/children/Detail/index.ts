@@ -66,6 +66,12 @@ export default class Detail extends Vue {
         }
     }
 
+    private sourceChange (source) {
+        if (source === 0 && this.model.from) {
+            this.model.from = ''
+        }
+    }
+
     private async validate () {
         const [v1, v2] = await Promise.all(
             ['baseInfoForm', 'classifyForm'].map(key => {
@@ -140,6 +146,13 @@ export default class Detail extends Vue {
     }
 
     private get rule () {
+        const fromValidator = (rule, value, cb) => {
+            if (this.model.source !== 1) {
+                cb()
+            } else if (!value) {
+                cb(new Error('请填写转载地址'))
+            }
+        }
         return {
             title: [
                 { required: true, message: '请填写标题' },
@@ -152,6 +165,9 @@ export default class Detail extends Vue {
             ],
             tag: [
                 { required: true, type: 'array', min: 1, message: '请选择标签', trigger: 'change' },
+            ],
+            from: [
+                { validator: fromValidator, trigger: 'blur' },
             ],
         }
     }

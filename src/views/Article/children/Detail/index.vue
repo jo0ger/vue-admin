@@ -30,9 +30,12 @@
                                 </RadioGroup>
                             </FormItem>
                             <FormItem label="来源">
-                                <RadioGroup size="small" v-model="model.source" type="button">
+                                <RadioGroup size="small" v-model="model.source" type="button" @on-change="sourceChange">
                                     <Radio v-for="item in constant.ARTICLE_SOURCE" :key="item.value" :label="item.value">{{ item.label }}</Radio>
                                 </RadioGroup>
+                            </FormItem>
+                            <FormItem label="转载自" prop="from" required v-if="model.source === 1">
+                                <Input v-model.trim="model.from" placeholder="请填写转载地址"></Input>
                             </FormItem>
                         </Form>
                     </Card>

@@ -10,10 +10,14 @@
     margin (0 - $padding-lg) (0 - $padding-lg) 0
 
     .header {
+        position fixed
+        top 0
+        right 0
+        left 200px
         display flex
         justify-content space-between
         padding $padding-md 2 * $padding-md 0
-        z-index 9999
+        z-index 99
         background-color $white-color
         border-bottom 1px solid $divider-color
 
@@ -43,6 +47,7 @@
 
     .content {
         margin $padding-lg
+        margin-top $padding-lg + 65px
 
         .filter {
             margin-bottom $padding-md

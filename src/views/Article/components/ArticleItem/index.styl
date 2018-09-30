@@ -27,7 +27,7 @@
             background-color rgba($info-color, .3)
             color $info-color
         }
-    
+
         &.reprint {
             background-color rgba($warning-color, .3)
             color $warning-color
@@ -87,7 +87,7 @@
             margin-bottom $padding-sm
             line-height 22px
             text-align justify
-            color $sub-color               
+            color $sub-color
             lineLimit(2)
         }
     }
@@ -96,7 +96,7 @@
         display flex
         justify-content space-between
         align-items center
-        
+
         & > * {
             display inline-block
         }
@@ -104,7 +104,7 @@
         .meta-list {
             flex 1 1
         }
-        
+
         .meta-item {
             display inline-block
             padding 0 $padding-xs
@@ -163,15 +163,27 @@
                 color $white-color
             }
 
+            &.publish {
+                .icon {
+                    background-color $success-color
+                }
+
+                &.publish-down {
+                    .icon {
+                        background-color $orange-6
+                    }
+                }
+            }
+
             &.edit {
                 .icon {
                     background-color $info-color
                 }
             }
-        
+
             &.view {
                 .icon {
-                    background-color $success-color
+                    background-color $title-color
                 }
             }
 

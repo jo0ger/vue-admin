@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="row desc" v-if="hasDescSlots || desc">
-                    <p v-if="desc">{{ desc </p>
+                    <p v-if="desc">{{ desc }}</p>
                     <slot name="desc" v-else></slot>
                 </div>
             </div>

@@ -137,6 +137,7 @@ declare namespace WebApi {
             content?: string
             renderedContnt?: string
             keywords?: string[]
+            from?: string
             thumb?: string
             category?: CategoryModule.Category | string
             tag?: TagModule.Tag[] | string[]

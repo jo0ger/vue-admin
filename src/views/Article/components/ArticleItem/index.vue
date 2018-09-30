@@ -18,7 +18,7 @@
                     </div>
                     <div class="content">
                         <h4 class="title">
-                            <Tooltip v-if="article.category" placement="right" max-width="200" :content="article.category.description">
+                            <Tooltip v-if="article.category" placement="right" max-width="200" :content="article.category.description || '暂无简介'">
                                 <Avatar class="category"
                                     :src="article.category.extends | extendsFilter('image')"
                                     v-if="findExtendsItem(article.category.extends, 'image')">{{ article.category.name }}</Avatar>
@@ -32,13 +32,13 @@
                             <router-link :to="{ name: 'ArticleDetail', params: { id: article._id }}">{{ article.title }}</router-link>
                         </h4>
                         <div class="tag-list" v-if="article.tag.length">
-                            <Tooltip max-width="200" v-for="tag in article.tag" :key="tag._id" placement="top" :content="tag.description">
+                            <Tooltip max-width="200" v-for="tag in article.tag" :key="tag._id" placement="top" :content="tag.description || '暂无简介'">
                                 <Tag>{{ tag.name }}</Tag>
                             </Tooltip>
                         </div>
                         <div class="description">{{ article.description }}</div>
                         <div class="meta">
-                            <Tag type="border" size="small" :color="article.state ? 'success' : 'warning'" @click.native="changeState(article, index)">{{ ['未发布', '已发布'][article.state] }}</Tag>
+                            <Tag size="small" :color="article.state ? 'success' : 'warning'">{{ ['未发布', '已发布'][article.state] }}</Tag>
                             <ul class="meta-list">
                                 <li class="meta-item">
                                     <Icon class="icon" type="md-eye" />
@@ -64,6 +64,12 @@
                 </div>
             </div>
             <div class="action" v-if="!tip">
+                <div class="action-item publish" :class="[article.state && 'publish-down']" @click="changeState(article, index)">
+                    <span class="icon">
+                        <Icon size="12" :type="['md-trending-up', 'md-trending-down'][article.state]" />
+                    </span>
+                    <span class="label">{{ ['发布', '下线'][article.state] }}</span>
+                </div>
                 <div class="action-item edit" @click="$router.push({ name: 'ArticleDetail', params: { id: article._id }})">
                     <span class="icon">
                         <Icon size="12" type="md-create" />
