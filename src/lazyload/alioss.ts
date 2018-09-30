@@ -2,7 +2,7 @@ import OSS from 'ali-oss'
 import { CDN } from '@/config'
 
 export default class AliOSS {
-    private client: any = null
+    public client: any = null
 
     constructor (opt) {
         this.client = new OSS(opt)

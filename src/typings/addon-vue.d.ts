@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { MetaInfo } from 'vue-meta'
 import { Message, ModalInstance, LoadingBar } from "iview"
+import AliOSS from '@/lazyload/alioss'
 
 declare module 'vue/types/options' {
     interface ComponentOptions<V extends Vue> {
@@ -14,6 +15,7 @@ declare module 'vue/types/vue' {
         $Modal: ModalInstance
         $Message: Message
         $meta: any
+        $alioss: AliOSS
     }
     interface VueConstructor<V extends Vue> {}
 }

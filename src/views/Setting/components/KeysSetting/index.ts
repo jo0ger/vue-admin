@@ -94,6 +94,7 @@ export default class KeysSetting extends Vue {
     }
 
     private async submit () {
+        if (!this.type) return
         const success = await this.updateSetting({
             keys: {
                 [this.type]: this.model[this.type],
@@ -101,6 +102,10 @@ export default class KeysSetting extends Vue {
         })
         if (success) {
             this.close()
+        }
+        if (this.type === 'aliyun') {
+            // 重新生成alioss的client
+            this.mountAliossClient()
         }
     }
 }

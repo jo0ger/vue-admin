@@ -58,8 +58,7 @@ export default class Uploader extends Vue {
         }
         this.uploading = true
         const filename = this.file.name.split('.').join(`_${new Date().getTime()}.`)
-        const client = await getAliOssClient(this.setting.keys.aliyun)
-        const res = await client.multipartUpload(this.typeMap[this.type].dir + this.name + filename, this.file)
+        const res = await this.$alioss.multipartUpload(this.typeMap[this.type].dir + this.name + filename, this.file)
         this.uploading = false
         this.$emit('on-success', res.url)
     }

@@ -42,7 +42,7 @@ export default class Default extends Vue {
     }
 
     private created () {
-        this.getSData()
+        this.getSData().then(() => this.mountAliossClient())
         this.getNUnviewedCount()
     }
 
