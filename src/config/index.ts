@@ -47,3 +47,11 @@ export const SITE = 'https://jooger.me'
 export const CDN = 'https://static.jooger.me'
 
 export const DEFAULT_AVATAR = CDN + '/img/common/avatar.png'
+
+export const UPLOAD_NAME = {
+    LOGO: `${IS_PROD ? 'common' : 'test'}/logo/`,
+    AUTH: `${IS_PROD ? 'common' : 'test'}/avatar/`,
+    ARTICLE_THUMB () {
+        return `${IS_PROD ? 'source' : 'test'}/${this.moment().format('YYYYMMDD')}/`
+    },
+}

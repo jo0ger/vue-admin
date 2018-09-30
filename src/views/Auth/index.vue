@@ -24,10 +24,11 @@
                         <div class="account-info">
                             <div class="account">
                                 <div class="avatar">
-                                    <img :src="admin.avatar" alt="">
+                                    <img :src="admin.avatar" alt="" v-if="admin.avatar">
                                     <Uploader
-                                        name="test/avatar/"
+                                        :name="config.UPLOAD_NAME.AUTH"
                                         :url="admin.avatar"
+                                        type="image"
                                         @on-success="uploadSuccess"
                                         @on-delete="deleteThumb"></Uploader>
                                 </div>
@@ -40,27 +41,37 @@
                             </div>
                             <div class="profile">
                                 <p class="description">
-                                    <Icon size="16" class="icon" type="md-person" />
+                                    <Tooltip placement="top" content="个人简介">
+                                        <Icon size="16" class="icon" type="md-person" />
+                                    </Tooltip>
                                     <EditInput type="textarea" autosize :value="setting.personal.description" @on-submit="(val, done) => personalUpdate('description', val, done)"></EditInput>
                                 </p>
                                 <p class="skill">
-                                    <Icon size="16" class="icon" type="md-hammer" />
+                                    <Tooltip placement="top" content="掌握技能">
+                                        <Icon size="16" class="icon" type="md-hammer" />
+                                    </Tooltip>
                                     <TagList :value="setting.personal.skill" action-text="添加技能"
                                         @on-change="(val, done) => personalUpdate('skill', val, done)"
                                         @on-delete="val => personalUpdate('skill', val)"></TagList>
                                 </p>
                                 <p class="hobby">
-                                    <Icon size="16" class="icon" type="md-heart" />
+                                    <Tooltip placement="top" content="个人爱好">
+                                        <Icon size="16" class="icon" type="md-heart" />
+                                    </Tooltip>
                                     <TagList :value="setting.personal.hobby" action-text="添加爱好"
                                         @on-change="(val, done) => personalUpdate('hobby', val, done)"
                                         @on-delete="val => personalUpdate('hobby', val)"></TagList>
                                 </p>
                                 <p class="location">
-                                    <Icon size="16" class="icon" type="md-compass" />
+                                    <Tooltip placement="top" content="当前所在地">
+                                        <Icon size="16" class="icon" type="md-compass" />
+                                    </Tooltip>
                                     <EditInput :value="setting.personal.location" @on-submit="(val, done) => personalUpdate('location', val, done)"></EditInput>
                                 </p>
                                 <p class="company">
-                                    <Icon size="16" class="icon" type="md-trophy" />
+                                    <Tooltip placement="top" content="当前任职公司">
+                                        <Icon size="16" class="icon" type="md-trophy" />
+                                    </Tooltip>
                                     <EditInput :value="setting.personal.company" @on-submit="(val, done) => personalUpdate('company', val, done)"></EditInput>
                                 </p>
                             </div>

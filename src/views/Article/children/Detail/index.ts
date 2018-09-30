@@ -45,7 +45,7 @@ export default class Detail extends Vue {
     private tDialogVisible = false
 
     private get uploadName () {
-        return `${IS_PROD ? 'source' : 'test'}/${this.moment().format('YYYYMMDD')}/`
+        return this.config.UPLOAD_NAME.ARTICLE_THUMB.call(this)
     }
 
     private created () {

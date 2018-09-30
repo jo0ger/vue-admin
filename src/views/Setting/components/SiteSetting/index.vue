@@ -6,6 +6,16 @@
 <template>
     <div class="site-setting">
         <Form :label-width="80">
+            <FormItem label="Logo">
+                <div class="logo">
+                    <img :src="setting.site.logo" alt="logo" v-if="setting.site.logo">
+                    <Uploader
+                        type="image"
+                        :name="config.UPLOAD_NAME.LOGO"
+                        :url="setting.site.logo"
+                        @on-success="uploadSuccess"></Uploader>
+                </div>
+            </FormItem>
             <FormItem label="欢迎语">
                 <Input type="textarea"
                     v-model.trim="setting.site.welcome"

@@ -6,7 +6,7 @@
 
 import Vue from '@/vue'
 import { namespace } from 'vuex-class'
-import { DEFAULT_AVATAR } from '@/config'
+import { DEFAULT_AVATAR, IS_PROD } from '@/config'
 import { Component } from '@/utils/decorators'
 import { TagList, EditInput, Uploader } from '@/components/common'
 import { UpdatePassword } from './components'

@@ -7,11 +7,15 @@
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
 import { namespace } from 'vuex-class'
+import { Uploader } from '@/components/common'
 
 const { Action } = namespace('setting')
 
 @Component({
     name: 'SiteSetting',
+    components: {
+        Uploader,
+    },
 })
 export default class SiteSetting extends Vue {
     @Action('update') public updateSetting
@@ -21,6 +25,14 @@ export default class SiteSetting extends Vue {
             site: {
                 musicId: this.setting.site.musicId,
                 welcome: this.setting.site.welcome,
+            },
+        })
+    }
+
+    private uploadSuccess (logo) {
+        this.updateSetting({
+            site: {
+                logo,
             },
         })
     }
