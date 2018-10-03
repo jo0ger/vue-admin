@@ -13,6 +13,13 @@ import { ArticleItem } from '@/views/Article/components'
 
 const nMod = namespace('notification')
 
+const getDefPageInfo = () => ({
+    total: 0,
+    current: 1,
+    pages: 1,
+    limit: 10,
+})
+
 @Component({
     name: 'Notification',
     components: {
@@ -42,12 +49,7 @@ export default class Notification extends Vue {
     } = NOTIFICATION_TYPE.reduce((sum, item) => {
         sum[item.value] = {
             list: [],
-            pageInfo: {
-                total: 0,
-                current: 0,
-                pages: 0,
-                limit: 0,
-            },
+            pageInfo: getDefPageInfo(),
         }
         return sum
     }, {})
@@ -79,6 +81,10 @@ export default class Notification extends Vue {
     private modeChange (mode) {
         this.mode = mode
         this.$nextTick(() => this.getList(1))
+        const query: any = {}
+        if (mode === 'viewed') query.viewed = true
+        else if (mode === 'unviewed') query.viewed = false
+        this.$router.replace({ query })
     }
 
     private typeChange (name) {
@@ -90,13 +96,28 @@ export default class Notification extends Vue {
     }
 
     private async viewItem (item, index, type) {
-        await this.viewN({
+        const success = await this.viewN({
             id: item._id,
             type,
         })
+        if (!success) return
         const l = this.listMap[type.value]
-        l.list.splice(index, 1)
-        l.pageInfo.total--
+        if (this.mode === 'unviewed') {
+            l.list.splice(index, 1)
+            l.pageInfo.total--
+        } else {
+            l.list[index].viewed = true
+        }
+    }
+
+    private async viewAll () {
+        const success = await this.viewAllN()
+        if (success) {
+            Object.keys(this.listMap).forEach(key => {
+                this.listMap[key].list = []
+                this.listMap[key].pageInfo = getDefPageInfo()
+            })
+        }
     }
 
     private deleteItem (item, index, type) {

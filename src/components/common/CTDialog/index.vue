@@ -14,13 +14,20 @@
             </FormItem>
             <FormItem label="扩展项" prop="extends">
                 <Row style="margin-bottom: 8px" type="flex" :gutter="8" v-for="(ext, index) in model.extends" :key="index">
-                    <Col span="9">
+                    <Col span="4">
                         <Input v-model="ext.key" placeholder="扩展项Key"></Input>
                     </Col>
                     <Col span="10">
                         <Input v-model="ext.value" placeholder="扩展项Value"></Input>
                     </Col>
-                    <Col span="3">
+                    <Col span="9">
+                        <Uploader
+                            v-if="ext.key === 'image'"
+                            style="margin-right: 8px;"
+                            type="image"
+                            :name="config.UPLOAD_NAME.CATEGORY"
+                            :url="ext.value"
+                            @on-success="url => uploadSuccess(index, url)"></Uploader>
                         <Button type="error" @click="deleteExt(ext, index)">删除</Button>
                     </Col>
                 </Row>

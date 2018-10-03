@@ -36,6 +36,7 @@
             <Col span="20">
                 <Card>
                     <Tabs v-model="query.type" @on-click="typeChange">
+                        <Button type="primary" slot="extra" v-if="mode === 'unviewed' && nTotal" @click="viewAll">全部已读</Button>
                         <TabPane
                             :label="mode !== 'unviewed' ? type.label : h => renderCount(h, type)"
                             :name="type.value"
@@ -61,9 +62,13 @@
                                                     <Avatar size="small" :src="item.actors.from.avatar"></Avatar>
                                                     <h4 class="name">{{ item.actors.from.name }}</h4>
                                                 </template>
-                                                <template v-else>
+                                                <template v-else-if="item.type !== 0">
                                                     <Avatar size="small">匿</Avatar>
                                                     <h4 class="name">陌生人</h4>
+                                                </template>
+                                                <template v-else>
+                                                    <Icon type="md-warning" color="red"></Icon>
+                                                    <h4>{{ item.classify | constantFilter('GENERAL_NOTIFICATION_CLASSIFY') }}</h4>
                                                 </template>
                                             </div>
                                             <div class="to" v-if="item.actors && item.actors.to">
@@ -85,11 +90,11 @@
                                                 <Time :time="item.createdAt"></Time>
                                             </div>
                                             <div class="meta-item target" v-if="item.target">
-                                                <span class="target-item article" v-if="item.target.article">
+                                                <span class="target-item article" v-if="item.target.article || item.target.comment && item.target.comment.article">
                                                     <Icon class="icon" type="md-book" />
-                                                    <Poptip width="800" placement="bottom-start" trigger="click">
-                                                        <ArticleItem slot="content" :article="item.target.article" :tip="true" :index="index"></ArticleItem>
-                                                        {{ item.target.article.title }}
+                                                    <Poptip width="500" placement="bottom-start" trigger="click">
+                                                        <ArticleItem slot="content" :article="item.target.article || item.target.comment.article" :tip="true" :index="index"></ArticleItem>
+                                                        {{ item.target.article && item.target.article.title || item.target.comment.article.title }}
                                                     </Poptip>
                                                 </span>
                                             </div>

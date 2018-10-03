@@ -51,6 +51,7 @@ export const DEFAULT_AVATAR = CDN + '/img/common/avatar.png'
 export const UPLOAD_NAME = {
     LOGO: `${IS_PROD ? 'common' : 'test'}/logo/`,
     AUTH: `${IS_PROD ? 'common' : 'test'}/avatar/`,
+    CATEGORY: `${IS_PROD ? 'common' : 'test'}/category/`,
     ARTICLE_THUMB () {
         return `${IS_PROD ? 'source' : 'test'}/${this.moment().format('YYYYMMDD')}/`
     },

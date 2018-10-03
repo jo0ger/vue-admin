@@ -60,3 +60,18 @@ export const NOTIFICATION_TYPE: ConstantItem = [
         icon: 'md-cog',
     },
 ]
+
+export const GENERAL_NOTIFICATION_CLASSIFY: ConstantItem = [
+    {
+        label: '邮件客户端校验失败',
+        value: 'mail_verify_fail',
+    },
+    {
+        label: '邮件发送失败',
+        value: 'mail_send_fail',
+    },
+    {
+        label: 'Akismet校验失败',
+        value: 'akismet_check_fail',
+    },
+]

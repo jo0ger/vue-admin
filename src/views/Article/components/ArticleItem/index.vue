@@ -11,7 +11,7 @@
         <div class="wrap">
             <div class="main">
                 <div class="detail">
-                    <div class="extra" v-if="article.thumb">
+                    <div class="extra" v-if="article.thumb && !tip">
                         <div class="thumb" v-if="article.thumb">
                             <img :src="article.thumb" alt="">
                         </div>

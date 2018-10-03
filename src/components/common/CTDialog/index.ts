@@ -7,9 +7,15 @@
 import Vue from '@/vue'
 import { namespace } from 'vuex-class'
 import { Component, Prop } from '@/utils/decorators'
+import Uploader from '../Uploader/index.vue'
 
 const cMod = namespace('category')
 const tMod = namespace('tag')
+
+enum type {
+    CATEGORY = 'category',
+    TAG = 'tag',
+}
 
 const getDefExt = () => ({
     key: '',
@@ -23,13 +29,16 @@ const getDefMod = () => ({
 
 @Component({
     name: 'CTDialog',
+    components: {
+        Uploader,
+    },
 })
 export default class CTDialog extends Vue {
     @Prop() private value!: boolean
 
     @Prop({
         validator (val) {
-            return ['category', 'tag'].includes(val)
+            return [type.CATEGORY, type.TAG].includes(val)
         },
     })
     private type!: string
@@ -73,8 +82,15 @@ export default class CTDialog extends Vue {
     }
 
     private get visible () {
-        if (this.value && this.id) {
-            this.getModel()
+        if (this.value) {
+            if (this.id) {
+                this.getModel()
+            } else if (this.type === type.CATEGORY) {
+                this.model.extends.push({
+                    key: 'image',
+                    value: '',
+                })
+            }
         }
         return this.value
     }
@@ -106,6 +122,10 @@ export default class CTDialog extends Vue {
 
     private clearModel () {
         this.model = getDefMod()
+    }
+
+    private uploadSuccess (index, url) {
+        this.model.extends[index].value = url
     }
 
     private submit () {
