@@ -32,7 +32,7 @@ export const VUEX_DEFAULT_CONFIG = {
 
 // vue-router默认配置
 export const ROUTER_DEFAULT_CONFIG = {
-    mode: 'history',
+    mode: 'hash',
     base: process.env.BASE_URL,
     linkActiveClass: 'active',
     linkExactActiveClass: 'exact-active',
