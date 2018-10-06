@@ -26,6 +26,7 @@
                                 <div class="avatar">
                                     <img :src="admin.avatar" alt="" v-if="admin.avatar">
                                     <Uploader
+                                        style="display: block;"
                                         :name="config.UPLOAD_NAME.AUTH"
                                         :url="admin.avatar"
                                         type="image"
@@ -40,6 +41,12 @@
                                 </p>
                             </div>
                             <div class="profile">
+                                <p class="github">
+                                    <Tooltip placement="top" content="Github">
+                                        <Icon size="16" class="icon" type="logo-github" />
+                                    </Tooltip>
+                                    <EditInput :value="setting.personal.github.login" @on-submit="(val, done) => personalUpdate('github', val, done)"></EditInput>
+                                </p>
                                 <p class="description">
                                     <Tooltip placement="top" content="个人简介">
                                         <Icon size="16" class="icon" type="md-person" />

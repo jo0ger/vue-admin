@@ -10,7 +10,7 @@
             :show-upload-list="false"
             :accept="accept"
             :before-upload="beforeUpload">
-            <Button type="primary" icon="md-cloud-upload" :loading="uploading">{{ url ? '更换' : '上传' }}</Button>
+            <Button type="primary" size="small" icon="md-cloud-upload" :loading="uploading">{{ url ? '更换' : '上传' }}</Button>
         </Upload>
     </div>
 </template>

@@ -30,11 +30,19 @@ export default class Auth extends Vue {
     private menu: 'info' | 'pass' = 'info'
 
     private async personalUpdate (path, val, done?: () => void) {
-        const success = await this.updateSetting({
+        const update: any = {
             personal: {
                 [path]: val,
             },
-        })
+        }
+        if (path === 'github') {
+            update.personal = {
+                github: {
+                    login: val,
+                },
+            }
+        }
+        const success = await this.updateSetting(update)
         if (success && done) {
             done()
         }
