@@ -14,7 +14,7 @@
             <Row :gutter="16">
                 <Col span="8">
                     <Card class="info-card" title="基本信息">
-                        <Form ref="baseInfoForm" :model="model" :label-width="60" :rules="rule">
+                        <Form ref="baseInfoForm" :model="model" :label-width="70" :rules="rule">
                             <FormItem label="标题" prop="title">
                                 <Input v-model.trim="model.title" placeholder="请填写文章标题"></Input>
                             </FormItem>
@@ -36,6 +36,9 @@
                             </FormItem>
                             <FormItem label="转载自" prop="from" required v-if="model.source === 1">
                                 <Input v-model.trim="model.from" placeholder="请填写转载地址"></Input>
+                            </FormItem>
+                            <FormItem label="创建时间" v-if="model.createdAt">
+                                <time>{{ model.createdAt | dateFormat('YYYY-MM-DD HH:mm:ss') }}</time>
                             </FormItem>
                         </Form>
                     </Card>

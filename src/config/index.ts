@@ -52,7 +52,7 @@ export const UPLOAD_NAME = {
     LOGO: `${IS_PROD ? 'common' : 'test'}/logo/`,
     AUTH: `${IS_PROD ? 'common' : 'test'}/avatar/`,
     CATEGORY: `${IS_PROD ? 'common' : 'test'}/category/`,
-    ARTICLE_THUMB () {
-        return `${IS_PROD ? 'source' : 'test'}/${this.moment().format('YYYYMMDD')}/`
+    ARTICLE_THUMB (date) {
+        return `${IS_PROD ? 'source' : 'test'}/${this.moment(date || undefined).format('YYYYMMDD')}/`
     },
 }
