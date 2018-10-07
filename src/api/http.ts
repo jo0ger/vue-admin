@@ -7,7 +7,7 @@ let msgVisible = false
 
 export default class Http {
     public static client: AxiosInstance
-    public static apiHost: string = IS_PROD ? 'https://api.jooger.me/v2/backend' : 'http://127.0.0.1:7001/v2/backend'
+    public static apiHost: string = IS_PROD ? 'https://api.jooger.me/backend' : 'http://127.0.0.1:7001/backend'
 
     constructor () {
         this.createAxios()
