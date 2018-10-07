@@ -36,6 +36,9 @@ export default class Uploader extends Vue {
     @Prop({ default: 'file' })
     private type!: string
 
+    @Prop({ type: String, default: 'default' })
+    private size!: string
+
     private file: any = null
     private uploading: boolean = false
 

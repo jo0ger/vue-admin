@@ -11,6 +11,7 @@
                     <img :src="setting.site.logo" alt="logo" v-if="setting.site.logo">
                     <Uploader
                         type="image"
+                        size="small"
                         :name="config.UPLOAD_NAME.LOGO"
                         :url="setting.site.logo"
                         @on-success="uploadSuccess"></Uploader>

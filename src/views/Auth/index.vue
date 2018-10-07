@@ -29,6 +29,7 @@
                                         style="display: block;"
                                         :name="config.UPLOAD_NAME.AUTH"
                                         :url="admin.avatar"
+                                        size="small"
                                         type="image"
                                         @on-success="uploadSuccess"
                                         @on-delete="deleteThumb"></Uploader>
@@ -100,92 +101,6 @@
                 </div>
             </div>
         </Card>
-        <!-- <Row :gutter="24">
-            <Col span="6">
-                <Card class="viewed-card">
-                    <div class="content">
-                        <Menu
-                            theme="light"
-                            :active-name="'info'"
-                            style="width: 100%;"
-                            @on-select="modeChange">
-                            <MenuItem name="info">
-                                <Icon size="16" type="md-list" />
-                                个人信息
-                            </MenuItem>
-                            <MenuItem name="pass">
-                                <Icon size="16" type="md-checkmark-circle-outline" />
-                                更新密码
-                            </MenuItem>
-                        </Menu>
-                    </div>
-                </Card>
-            </Col>
-            <Col span="18">
-                <Card>
-                    <div class="account">
-                        <div class="avatar">
-                            <img :src="admin.avatar" alt="">
-                            <Uploader
-                                name="test/avatar/"
-                                :url="admin.avatar"
-                                @on-success="uploadSuccess"
-                                @on-delete="deleteThumb"></Uploader>
-                        </div>
-                        <h1 class="name">
-                            <EditInput type="textarea" autosize :value="admin.name" @on-submit="(val, done) => authUpdate('name', val, done)"></EditInput>
-                        </h1>
-                        <p class="slogan">
-                            <EditInput type="textarea" autosize :value="setting.personal.slogan" @on-submit="(val, done) => personalUpdate('slogan', val, done)"></EditInput>
-                        </p>
-                    </div>
-                    <div class="profile">
-                        <p class="description">
-                            <Icon size="16" class="icon" type="md-person" />
-                            <EditInput type="textarea" autosize :value="setting.personal.description" @on-submit="(val, done) => personalUpdate('description', val, done)"></EditInput>
-                        </p>
-                        <p class="skill">
-                            <Icon size="16" class="icon" type="md-hammer" />
-                            <TagList :value="setting.personal.skill" action-text="添加技能"
-                                @on-change="(val, done) => personalUpdate('skill', val, done)"
-                                @on-delete="val => personalUpdate('skill', val)"></TagList>
-                        </p>
-                        <p class="hobby">
-                            <Icon size="16" class="icon" type="md-heart" />
-                            <TagList :value="setting.personal.hobby" action-text="添加爱好"
-                                @on-change="(val, done) => personalUpdate('hobby', val, done)"
-                                @on-delete="val => personalUpdate('hobby', val)"></TagList>
-                        </p>
-                        <p class="location">
-                            <Icon size="16" class="icon" type="md-compass" />
-                            <EditInput :value="setting.personal.location" @on-submit="(val, done) => personalUpdate('location', val, done)"></EditInput>
-                        </p>
-                        <p class="company">
-                            <Icon size="16" class="icon" type="md-trophy" />
-                            <EditInput :value="setting.personal.company" @on-submit="(val, done) => personalUpdate('company', val, done)"></EditInput>
-                        </p>
-                    </div>
-                    <Divider></Divider>
-                    <div class="tags">
-                        <h3 class="label">标签</h3>
-                        <div class="tag-list">
-                            <TagList :value="setting.personal.tag"
-                                @on-change="(val, done) => personalUpdate('tag', val, done)"
-                                @on-delete="val => personalUpdate('tag', val)"></TagList>
-                        </div>
-                    </div>
-                </Card>
-            </Col>
-            <Col span="12">
-                <Card>
-                    <Tabs value="name1">
-                        <TabPane label="更新密码" name="name2">
-                            <UpdatePassword></UpdatePassword>
-                        </TabPane>
-                    </Tabs>
-                </Card>
-            </Col>
-        </Row> -->
     </Container>
 </template>
 

@@ -71,6 +71,7 @@
                         <Uploader
                             slot="extra"
                             type="image"
+                            size="small"
                             :name="uploadName"
                             :url="model.thumb"
                             @on-success="uploadSuccess"

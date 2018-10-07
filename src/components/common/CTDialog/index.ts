@@ -6,7 +6,7 @@
 
 import Vue from '@/vue'
 import { namespace } from 'vuex-class'
-import { Component, Prop } from '@/utils/decorators'
+import { Component, Prop, Watch } from '@/utils/decorators'
 import Uploader from '../Uploader/index.vue'
 
 const cMod = namespace('category')
@@ -72,6 +72,7 @@ export default class CTDialog extends Vue {
         }
     }
 
+    private visible = false
     private model: any = getDefMod()
 
     private get title () {
@@ -81,8 +82,20 @@ export default class CTDialog extends Vue {
         }[this.type] || ''
     }
 
-    private get visible () {
-        if (this.value) {
+    @Watch('value')
+    private watchValue (val, oldVal) {
+        if (val !== oldVal) {
+            this.visible = val
+        }
+    }
+
+    @Watch('visible')
+    private watchVisible (val, oldVal) {
+        if (val === oldVal) return
+        this.$emit('input', val)
+        if (!val) {
+            setTimeout(() => this.clearModel(), 500)
+        } else {
             if (this.id) {
                 this.getModel()
             } else if (this.type === type.CATEGORY) {
@@ -91,14 +104,6 @@ export default class CTDialog extends Vue {
                     value: '',
                 })
             }
-        }
-        return this.value
-    }
-
-    private set visible (val) {
-        this.$emit('input', val)
-        if (!val) {
-            setTimeout(() => this.clearModel(), 500)
         }
     }
 
