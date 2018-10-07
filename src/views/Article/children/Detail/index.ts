@@ -135,8 +135,7 @@ export default class Detail extends Vue {
             return this.$Message.warning('请选择图片')
         }
         const filename = file.name.split('.').join(`_${new Date().getTime()}.`)
-        const client = await getAliOssClient(this.setting.keys.aliyun)
-        const res = await client.multipartUpload(
+        const res = await this.$alioss.multipartUpload(
             (Uploader as any).uploadTypeMap.image.dir + this.uploadName + filename,
             file,
         )

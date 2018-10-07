@@ -42,9 +42,9 @@ export const AUTH_TOKEN_KEY = 'node-server_token'
 
 export const AUTH_CACHE_KEY = 'jooger.me.info'
 
-export const SITE = 'https://jooger.me'
+export const SITE = '//jooger.me'
 
-export const CDN = 'https://static.jooger.me'
+export const CDN = '//static.jooger.me'
 
 export const DEFAULT_AVATAR = CDN + '/img/common/avatar.png'
 

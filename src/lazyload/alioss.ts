@@ -12,7 +12,7 @@ export default class AliOSS {
         const res = await this.client.put(name, file, opt)
         return {
             url: (res.url || res.res.requestUrls[0]).replace(
-                `http://${this.client.options.bucket}.${this.client.options.region}.aliyuncs.com`,
+                `//${this.client.options.bucket}.${this.client.options.region}.aliyuncs.com`,
                 CDN,
             ) || '',
         }
