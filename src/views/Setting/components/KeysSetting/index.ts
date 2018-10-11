@@ -38,6 +38,9 @@ export default class KeysSetting extends Vue {
             user: '',
             pass: '',
         },
+        baiduSeo: {
+            token: '',
+        },
     }
 
     private map = [
@@ -71,6 +74,12 @@ export default class KeysSetting extends Vue {
             type: 'github',
             icon: 'icon-github',
         },
+        {
+            name: '百度SEO',
+            desc: '百度seo的token',
+            type: 'baiduSeo',
+            icon: 'icon-baidu',
+        },
     ]
 
     private visible: boolean = false
@@ -82,7 +91,10 @@ export default class KeysSetting extends Vue {
 
     private open (type) {
         this.type = type
-        this.model[this.type] = this.setting.keys[this.type]
+        const data = this.setting.keys[this.type]
+        if (data) {
+            this.model[this.type] = this.setting.keys[this.type]
+        }
         this.visible = true
     }
 

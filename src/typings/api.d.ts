@@ -406,6 +406,9 @@ declare namespace WebApi {
                     clientID: string
                     clientSecret: string,
                 },
+                baiduSeo: {
+                    token: string
+                }
             }
             limit: {
                 articleCount: number

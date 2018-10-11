@@ -98,9 +98,6 @@ export default class Detail extends Vue {
             this.$route.params.id,
             this.processModel(this.model),
         )
-        if (res.success) {
-            this.$router.back()
-        }
         return res
     }
 

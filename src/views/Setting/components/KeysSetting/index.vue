@@ -68,6 +68,11 @@
                         <Input v-model.trim="model[type].clientSecret"></Input>
                     </FormItem>
                 </Form>
+                <Form v-if="type === 'baiduSeo'" :label-width="80">
+                    <FormItem label="token">
+                        <Input v-model.trim="model[type].token"></Input>
+                    </FormItem>
+                </Form>
             </div>
             <div slot="footer" style="text-align: center;">
                 <Button type="primary" @click="submit">提交</Button>
