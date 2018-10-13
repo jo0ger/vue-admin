@@ -143,11 +143,10 @@ export default class Detail extends Vue {
 
     private get rule () {
         const fromValidator = (rule, value, cb) => {
-            if (this.model.source !== 1 || value) {
-                cb()
-            } else if (!value) {
-                cb(new Error('请填写转载地址'))
+            if ([1, 3].find(item => item === this.model.source) && !value) {
+                return cb(new Error('请填写原文地址'))
             }
+            cb()
         }
         return {
             title: [

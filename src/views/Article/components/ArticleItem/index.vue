@@ -5,7 +5,7 @@
  -->
 <template>
     <Card class="article-item" :class="{ 'article-item-tip': tip }">
-        <div class="source" :class="[article.source ? 'reprint' : 'original']" v-if="article.source !== undefined">
+        <div class="source" :class="[getConstantItem('ARTICLE_SOURCE', article.source, 'code')]" v-if="article.source !== undefined">
             {{ article.source | constantFilter('ARTICLE_SOURCE') }}
         </div>
         <div class="wrap">

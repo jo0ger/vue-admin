@@ -8,8 +8,8 @@ import { Component } from '@/utils/decorators'
 import { cloneDeep, merge, processModel, findExtendsItem, constant, filters, moment } from '@/utils'
 import * as config from '@/config'
 import { namespace } from 'vuex-class'
-import AliOSS from '@/lazyload/alioss'
 import { getAliOssClient } from '@/lazyload'
+import { ConstantItem } from './utils/constant';
 
 const aMod = namespace('auth')
 const sMod = namespace('setting')
@@ -38,9 +38,20 @@ export default class Base extends Vue {
         super()
         // 如果需要在组件template中直接访问Base的方法，需要先在constructor中bind
         // this.exampleMethod = this.exampleMethod.bind(this)
+        this.getConstantItem = this.getConstantItem.bind(this)
     }
 
     protected async mountAliossClient () {
         Vue.prototype.$alioss = await getAliOssClient(this.setting.keys.aliyun)
+    }
+
+    protected getConstantItem (name: string, value: string | number, findKey: string = 'label') {
+        const con: ConstantItem = this.constant[name]
+        let find: string | number = ''
+        if (con) {
+            const hit = con.find(item => item.value === value)
+            find = hit && hit[findKey]
+        }
+        return find || ''
     }
 }

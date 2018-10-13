@@ -12,12 +12,12 @@
                 <FormItem label="分类项">
                     <Form :label-width="80" inline>
                         <FormItem label="分类">
-                            <Select v-model="filter.category" clearable style="width:200px" placeholder="请选择分类" @on-change="filterSearch">
+                            <Select v-model="filter.category" clearable style="min-width: 200px" placeholder="请选择分类" @on-change="filterSearch">
                                 <Option v-for="item in cList" :value="item._id" :key="item._id">{{ item.name }}</Option>
                             </Select>
                         </FormItem>
                         <FormItem label="标签">
-                            <Select v-model="filter.tag" clearable style="width:200px" placeholder="请选择标签" @on-change="filterSearch">
+                            <Select v-model="filter.tag" clearable style="min-width: 200px" placeholder="请选择标签" @on-change="filterSearch">
                                 <Option v-for="item in tList" :value="item._id" :key="item._id">{{ item.name }}</Option>
                             </Select>
                         </FormItem>
@@ -26,13 +26,13 @@
                 <FormItem label="筛选项">
                     <Form :label-width="80" inline>
                         <FormItem label="状态">
-                            <RadioGroup v-model="filter.state" type="button" style="width: 200px" @on-change="filterSearch">
+                            <RadioGroup v-model="filter.state" type="button" style="min-width: 200px" @on-change="filterSearch">
                                 <Radio :label="''">全部</Radio>
                                 <Radio v-for="item in constant.ARTICLE_STATE" :key="item.value" :label="item.value">{{ item.label }}</Radio>
                             </RadioGroup>
                         </FormItem>
                         <FormItem label="来源">
-                            <RadioGroup v-model="filter.source" type="button" style="width: 200px" @on-change="filterSearch">
+                            <RadioGroup v-model="filter.source" type="button" style="min-width: 200px" @on-change="filterSearch">
                                 <Radio :label="''">全部</Radio>
                                 <Radio v-for="item in constant.ARTICLE_SOURCE" :key="item.value" :label="item.value">{{ item.label }}</Radio>
                             </RadioGroup>
@@ -42,10 +42,10 @@
                 <FormItem label="时间项">
                     <Form :label-width="80" inline>
                         <FormItem label="起始时间">
-                            <DatePicker type="date" placeholder="请选择起始时间" style="width: 200px" @on-change="filterSearch" v-model="filter.startDate"></DatePicker>
+                            <DatePicker type="date" placeholder="请选择起始时间" style="min-width: 200px" @on-change="filterSearch" v-model="filter.startDate"></DatePicker>
                         </FormItem>
                         <FormItem label="终止时间">
-                            <DatePicker type="date" placeholder="请选择终止时间" style="width: 200px" @on-change="filterSearch" v-model="filter.endDate"></DatePicker>
+                            <DatePicker type="date" placeholder="请选择终止时间" style="min-width: 200px" @on-change="filterSearch" v-model="filter.endDate"></DatePicker>
                         </FormItem>
                     </Form>
                 </FormItem>

@@ -14,7 +14,7 @@
             <Row :gutter="16">
                 <Col span="8">
                     <Card class="info-card" title="基本信息">
-                        <Form ref="baseInfoForm" :model="model" :label-width="70" :rules="rule">
+                        <Form ref="baseInfoForm" :model="model" :label-width="80" :rules="rule">
                             <FormItem label="标题" prop="title">
                                 <Input v-model.trim="model.title" placeholder="请填写文章标题"></Input>
                             </FormItem>
@@ -34,11 +34,14 @@
                                     <Radio v-for="item in constant.ARTICLE_SOURCE" :key="item.value" :label="item.value">{{ item.label }}</Radio>
                                 </RadioGroup>
                             </FormItem>
-                            <FormItem label="转载自" prop="from" required v-if="model.source === 1">
-                                <Input v-model.trim="model.from" placeholder="请填写转载地址"></Input>
+                            <FormItem label="原文地址" prop="from" required v-if="model.source === 1 || model.source === 3">
+                                <Input v-model.trim="model.from" placeholder="请填写原文地址（适用于转载和翻译）"></Input>
                             </FormItem>
                             <FormItem label="创建时间" v-if="model.createdAt">
                                 <time>{{ model.createdAt | dateFormat('YYYY-MM-DD HH:mm:ss') }}</time>
+                            </FormItem>
+                            <FormItem label="更新时间" v-if="model.createdAt">
+                                <time>{{ model.updatedAt | dateFormat('YYYY-MM-DD HH:mm:ss') }}</time>
                             </FormItem>
                         </Form>
                     </Card>
