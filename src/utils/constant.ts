@@ -27,22 +27,22 @@ export const ARTICLE_SOURCE: ConstantItem = [
     {
         label: '原创',
         value: 0,
-        code: 'original'
+        code: 'original',
     },
     {
         label: '转载',
         value: 1,
-        code: 'reprint'
+        code: 'reprint',
     },
     {
         label: '混撰',
         value: 2,
-        code: 'hybrid'
+        code: 'hybrid',
     },
     {
         label: '翻译',
         value: 3,
-        code: 'translate'
+        code: 'translate',
     },
 ]
 
