@@ -10,6 +10,15 @@ import { Component } from '@/utils/decorators'
 
 const sMod = namespace('setting')
 
+const getDefModel = () => ({
+    id: '',
+    name: '',
+    site: '',
+    avatar: '',
+    slogan: '',
+    github: '',
+})
+
 @Component({
     name: 'LinkList',
 })
@@ -25,11 +34,7 @@ export default class LinkList extends Vue {
 
     private linkDialogVisible: boolean = false
 
-    private model = {
-        name: '',
-        site: '',
-        github: '',
-    }
+    private model = getDefModel()
 
     private addLink () {
         this.linkDialogVisible = true
@@ -39,14 +44,25 @@ export default class LinkList extends Vue {
         if (!this.model.name && !this.model.github) {
             return this.$Message.warning('名称和Github必填其一')
         }
+        const links = this.setting.site.links.slice()
+        if (this.model.id) {
+            // 更新
+            const hitIndex = links.findIndex(link => link.id === this.model.id)
+            links.splice(hitIndex, 1, Object.assign(this.model))
+        } else {
+            links.push(Object.assign(this.model))
+        }
         const success = await this.updateSetting({
-            site: {
-                links: this.setting.site.links.concat(this.model),
-            },
+            site: { links },
         })
         if (success) {
             this.close()
         }
+    }
+
+    private async editLink (link) {
+        this.linkDialogVisible = true
+        Object.assign(this.model, link)
     }
 
     private async deleteLink (link, index) {
@@ -59,10 +75,6 @@ export default class LinkList extends Vue {
 
     private close () {
         this.linkDialogVisible = false
-        this.model = {
-            name: '',
-            site: '',
-            github: '',
-        }
+        this.model = getDefModel()
     }
 }

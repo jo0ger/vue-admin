@@ -5,19 +5,24 @@
  -->
 <template>
     <div class="link-list">
-        <Button icon="md-add" type="dashed" long class="add-link-btn" @click="addLink">添加友链</Button>
+        <Button icon="md-add" type="dashed" long class="add-link-btn" @click="addLink">{{ model.id ? '更新' : '添加'}}友链</Button>
         <Row :gutter="16">
             <Col v-bind="linkColResponsiveProps" v-for="(link, index) in setting.site.links" :key="index">
                 <div class="link-item">
-                    <Poptip
-                        class="delete-btn"
-                        confirm
-                        title="确定删除该友军吗？"
-                        @on-ok="deleteLink(link, index)">
-                        <span>
-                            <Icon type="md-close-circle" size="24" />
+                    <div class="action">
+                        <span class="action-item edit-btn" @click="editLink(link)">
+                            <Icon type="md-create" size="24" />
                         </span>
-                    </Poptip>
+                        <Poptip
+                            class="action-item delete-btn"
+                            confirm
+                            title="确定删除该友军吗？"
+                            @on-ok="deleteLink(link, index)">
+                            <span>
+                                <Icon type="md-close-circle" size="24" />
+                            </span>
+                        </Poptip>
+                    </div>
                     <div class="wrap">
                         <img :src="link.avatar" class="avatar" alt="">
                         <div class="content">
@@ -43,6 +48,12 @@
                 <FormItem label="名称">
                     <Input v-model.trim="model.name" placeholder="请填写名称"></Input>
                 </FormItem>
+                <FormItem label="头像">
+                    <Input v-model.trim="model.avatar" placeholder="请填写头像"></Input>
+                </FormItem>
+                <FormItem label="简介">
+                    <Input v-model.trim="model.slogan" placeholder="请填写简介"></Input>
+                </FormItem>
                 <FormItem label="网站">
                     <Input v-model.trim="model.site" placeholder="请填写网站"></Input>
                 </FormItem>
@@ -51,7 +62,7 @@
                 </FormItem>
             </Form>
             <div class="action" style="text-align: center;" slot="footer">
-                <Button type="primary" @click="submit">添加</Button>
+                <Button type="primary" @click="submit">{{ model.id ? '更新' : '添加'}}</Button>
                 <Button @click="close">取消</Button>
             </div>
         </Modal>

@@ -22,14 +22,15 @@
         cursor pointer
         text-shadow 1px 5px 5px rgba($black-color, .2)
 
-        .delete-btn {
-            display inline-block
+        .action {
+            flexLayout(, flex-end)
             position absolute
             top 5px
             right @top
+            color $white-color
 
-            span {
-                color $white-color
+            &-item {
+                margin-left $padding-xs
             }
         }
 
@@ -78,5 +79,5 @@
                 padding-left 0
             }
         }
-    }    
+    }
 }

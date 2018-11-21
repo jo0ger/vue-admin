@@ -366,11 +366,12 @@ declare namespace WebApi {
             site: {
                 welcome: string
                 links: Array<{
+                    id: string
                     name: string
                     github: string
                     avatar?: string
                     slogan?: string
-                    site: string,
+                    site: string
                 }>
                 musicId: string,
             }
