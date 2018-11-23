@@ -5203,9 +5203,9 @@ iview-editor@^1.1.1:
     marked "^0.3.19"
     vue "^2.5.16"
 
-iview@^2.11.0:
-  version "2.14.3"
-  resolved "http://registry.npm.taobao.org/iview/download/iview-2.14.3.tgz#0f32a450f956cce2ac60a4df5a6eba30816a0708"
+iview@3.1.4:
+  version "3.1.4"
+  resolved "http://registry.npm.taobao.org/iview/download/iview-3.1.4.tgz#982bde89302d73c01d32146ef10597bed59d2893"
   dependencies:
     async-validator "^1.8.2"
     deepmerge "^2.1.0"
@@ -5216,9 +5216,9 @@ iview@^2.11.0:
     tinycolor2 "^1.4.1"
     v-click-outside-x "^3.0.0"
 
-iview@^3.0.1:
-  version "3.1.1"
-  resolved "http://registry.npm.taobao.org/iview/download/iview-3.1.1.tgz#dfac7ca5eafa0ed67d92f083e021de425eec61af"
+iview@^2.11.0:
+  version "2.14.3"
+  resolved "http://registry.npm.taobao.org/iview/download/iview-2.14.3.tgz#0f32a450f956cce2ac60a4df5a6eba30816a0708"
   dependencies:
     async-validator "^1.8.2"
     deepmerge "^2.1.0"
