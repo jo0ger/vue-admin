@@ -44,3 +44,47 @@ yarn run lint
 ```
 yarn run test:unit
 ```
+
+### Create Component
+```
+yarn cli new
+```
+
+## Screenshots
+
+### 仪表盘
+
+![](https://raw.githubusercontent.com/jo0ger/vue-admin/master/screenshots/dashboard.png)
+
+### 文章列表
+
+![](https://raw.githubusercontent.com/jo0ger/vue-admin/master/screenshots/article-list.jpg)
+
+### 文章详情
+
+![](https://raw.githubusercontent.com/jo0ger/vue-admin/master/screenshots/article-detail.jpg)
+
+### 分类列表
+
+![](https://raw.githubusercontent.com/jo0ger/vue-admin/master/screenshots/category-list.png)
+
+### 友链设置
+
+![](https://raw.githubusercontent.com/jo0ger/vue-admin/master/screenshots/setting-links.jpg)
+
+### 第三方API keys设置
+
+![](https://raw.githubusercontent.com/jo0ger/vue-admin/master/screenshots/setting-keys.png)
+
+### 分页数据设置
+
+![](https://raw.githubusercontent.com/jo0ger/vue-admin/master/screenshots/setting-limit.png)
+
+### 个人信息设置
+
+![](https://raw.githubusercontent.com/jo0ger/vue-admin/master/screenshots/personal-info.png)
+
+### 站内通知
+
+![](https://raw.githubusercontent.com/jo0ger/vue-admin/master/screenshots/notification.png)
+
