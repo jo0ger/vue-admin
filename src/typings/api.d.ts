@@ -371,7 +371,7 @@ declare namespace WebApi {
                     github: string
                     avatar?: string
                     slogan?: string
-                    site: string
+                    site: string,
                 }>
                 musicId: string,
             }
@@ -494,6 +494,38 @@ declare namespace WebApi {
                     count: number,
                 }>,
             }>
+        }
+    }
+
+    namespace MomentModule {
+        type Moment = ModuleShare & {
+            content: string
+            location: any,
+        }
+
+        namespace list {
+            export type Req =  IPageableRequest & {
+                keyword?: string,
+            }
+            export type Res = IPageableResponse<Moment>
+        }
+
+        namespace item {
+            export type Res = IResponse<Moment>
+        }
+
+        namespace create {
+            export type Req = Moment
+            export type Res = IResponse<Moment>
+        }
+
+        namespace update {
+            export type Req = Moment
+            export type Res = IResponse<Moment>
+        }
+
+        namespace deleteItem {
+            export type Res = IResponse<boolean>
         }
     }
 }

@@ -26,6 +26,16 @@ export default [
         },
     },
     {
+        path: '/moment',
+        name: 'Moment',
+        component: () => import('@/views/Moment/index.vue'),
+        meta: {
+            title: '说说管理',
+            icon: 'md-timer',
+            menu: true,
+        },
+    },
+    {
         path: '/articles',
         name: 'Article',
         component: () => import('@/views/Article/index.vue'),

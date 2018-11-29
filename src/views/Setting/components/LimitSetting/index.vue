@@ -31,6 +31,11 @@
                     <span slot="append">次</span>
                 </Input>
             </FormItem>
+            <FormItem label="说说数量">
+                <Input v-model.trim="setting.limit.momentCount" style="max-width: 200px;" placeholder="说说数量">
+                    <span slot="append">条</span>
+                </Input>
+            </FormItem>
             <FormItem>
                 <Button type="primary" @click="submit">提交</Button>
             </FormItem>
