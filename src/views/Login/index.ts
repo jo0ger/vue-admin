@@ -43,9 +43,9 @@ export default class Login extends Vue {
                 if (success) {
                     const query = this.$route.query
                     this.$router.push({
-                        name: query.redirect_uri_name || 'Dashboard',
-                        params: JSON.parse(query.redirect_params || '{}'),
-                        query: JSON.parse(query.redirect_query || '{}'),
+                        name: (query.redirect_uri_name as string) || 'Dashboard',
+                        params: JSON.parse((query.redirect_params as string) || '{}'),
+                        query: JSON.parse((query.redirect_query as string) || '{}'),
                     })
                 }
             }

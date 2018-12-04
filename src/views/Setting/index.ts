@@ -21,7 +21,7 @@ export default class Setting extends Vue {
     private menu = 'site'
 
     private created () {
-        const tab = this.$route.query.tab
+        const tab = this.$route.query.tab as string
         if (tab) {
             this.menu = tab
         }
