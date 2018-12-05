@@ -36,7 +36,8 @@
                             </p>
                             <p class="github">
                                 <Icon class="icon" type="logo-github" />
-                                <a :href="'https://github.com/' + link.github" target="_blank">{{ link.github }}</a>
+                                <a :href="'https://github.com/' + link.github" target="_blank" v-if="link.github">{{ link.github }}</a>
+                                <a v-else>暂无</a>
                             </p>
                         </div>
                     </div>
