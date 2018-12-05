@@ -158,7 +158,7 @@ export default class Moment extends Vue {
                 render: (h, params) => {
                     return h('Time', {
                         props: {
-                            time: params.row.createdAt,
+                            time: params.row.updatedAt,
                             type: 'datetime',
                         },
                     })
