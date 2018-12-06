@@ -100,13 +100,15 @@ export const actions: Actions<State, RootState> = {
         }
         return success
     },
-    async getInfo ({ commit, state }) {
+    async getInfo ({ commit, state, dispatch }) {
         if (state.loading) return
         try {
             const { success, data } = await api.auth.info()
             if (success) {
                 storage.set(AUTH_CACHE_KEY, data)
                 commit(FETCH_INFO_SUCCESS, data)
+                dispatch('setting/getData', null, { root: true })
+                dispatch('notification/getUnviewedCount', null, { root: true })
             } else {
                 commit(FETCH_INFO_FAILURE)
             }

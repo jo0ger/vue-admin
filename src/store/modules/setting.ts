@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import api from '@/api'
 import {
     FETCH_DATA_REQUEST,
@@ -9,6 +10,7 @@ import {
 } from '../mutation-types'
 import { StateTree, Getters, RootState, Mutations, Actions } from '../interface'
 import { Message } from 'iview'
+import { getAliOssClient } from '@/lazyload'
 
 interface State extends StateTree {
     loading: boolean
@@ -47,6 +49,7 @@ export const actions: Actions<State, RootState> = {
         const { success, data } = await api.setting.getData()
         if (success) {
             commit(FETCH_DATA_SUCCESS, data)
+            mountAliyunOss(data)
         } else {
             commit(FETCH_DATA_FAILURE)
         }
@@ -69,10 +72,19 @@ export const actions: Actions<State, RootState> = {
         if (success) {
             commit(UPDATE_ITEM_SUCCESS, data)
             Message.success(message)
+            if (payload.keys && payload.keys.aliyun) {
+                mountAliyunOss(data)
+            }
         } else {
             commit(UPDATE_ITEM_FAILURE)
             Message.error(message)
         }
         return success
     },
+}
+
+function mountAliyunOss (setting) {
+    getAliOssClient(setting.keys.aliyun).then(client => {
+        Vue.prototype.$alioss = client
+    })
 }

@@ -34,16 +34,8 @@ export default class Default extends Vue {
     @nMod.Action('getUnviewedCount')
     private getNUnviewedCount
 
-    @sMod.Action('getData')
-    private getSData
-
     get routeMenus () {
         return this.genMenu(routes)
-    }
-
-    private created () {
-        this.getSData().then(() => this.mountAliossClient())
-        this.getNUnviewedCount()
     }
 
     private genMenu (r: RouteConfig[]) {

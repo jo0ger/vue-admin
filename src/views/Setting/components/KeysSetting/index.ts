@@ -115,9 +115,5 @@ export default class KeysSetting extends Vue {
         if (success) {
             this.close()
         }
-        if (this.type === 'aliyun') {
-            // 重新生成alioss的client
-            this.mountAliossClient()
-        }
     }
 }
