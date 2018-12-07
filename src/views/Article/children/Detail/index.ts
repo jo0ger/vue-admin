@@ -7,9 +7,7 @@
 import Vue from '@/vue'
 import { Component } from '@/utils/decorators'
 import { namespace } from 'vuex-class'
-import { MDEditor, Uploader, CTDialog, TagList } from '@/components/common'
-import { IS_PROD } from '@/config'
-import { getAliOssClient } from '@/lazyload'
+import { Uploader, CTDialog, TagList, Editor } from '@/components/common'
 
 const cMod = namespace('category')
 const tMod = namespace('tag')
@@ -17,10 +15,10 @@ const tMod = namespace('tag')
 @Component({
     name: 'Detail',
     components: {
-        MDEditor,
         Uploader,
         CTDialog,
         TagList,
+        Editor,
     },
 })
 export default class Detail extends Vue {
@@ -120,25 +118,6 @@ export default class Detail extends Vue {
 
     private deleteThumb () {
         this.model.thumb = ''
-    }
-
-    private beforeUpload (file) {
-        this.upload(file)
-        return false
-    }
-
-    private async upload (file) {
-        if (!file) {
-            return this.$Message.warning('请选择图片')
-        }
-        const filename = file.name.split('.').join(`_${new Date().getTime()}.`)
-        const res = await this.$alioss.multipartUpload(
-            (Uploader as any).uploadTypeMap.image.dir + this.uploadName + filename,
-            file,
-        )
-        const url = res.url as string
-        (this.$refs.editor as any).handleUploadSuccess(url)
-        return false
     }
 
     private get rule () {

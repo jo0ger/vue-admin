@@ -124,3 +124,10 @@ export const findExtendsItem = (ext, key) => {
     const hit = ext.find(item => item.key === key)
     return hit && hit.value || ''
 }
+
+export const getDefPageInfo = () => ({
+    total: 0,
+    current: 1,
+    pages: 1,
+    limit: 10,
+})

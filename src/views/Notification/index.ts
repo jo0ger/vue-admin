@@ -6,19 +6,13 @@
 
 import Vue from '@/vue'
 import { namespace } from 'vuex-class'
+import { getDefPageInfo } from '@/utils'
 import { Component } from '@/utils/decorators'
-import { Container } from '@/components/common'
 import { NOTIFICATION_TYPE } from '@/utils/constant'
+import { Container } from '@/components/common'
 import { ArticleItem } from '@/views/Article/components'
 
 const nMod = namespace('notification')
-
-const getDefPageInfo = () => ({
-    total: 0,
-    current: 1,
-    pages: 1,
-    limit: 10,
-})
 
 @Component({
     name: 'Notification',
@@ -87,7 +81,7 @@ export default class Notification extends Vue {
         this.$router.replace({ query })
     }
 
-    private typeChange (name) {
+    private typeChange () {
         this.$nextTick(() => this.getList(1))
     }
 

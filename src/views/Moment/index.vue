@@ -11,7 +11,7 @@
             共找到 <b style="color: #FF8D13">{{ pageInfo.total }}</b> 条说说
         </Alert>
         <Button icon="md-add" type="dashed" long class="add-moment-btn" @click="add">新建说说</Button>
-        <Table :columns="columns" :data="list"></Table>
+        <Table :columns="columns" :data="list" :loading="loading"></Table>
         <div class="pager">
             <Page
                 :total="pageInfo.total"

@@ -55,4 +55,5 @@ export const UPLOAD_NAME = {
     ARTICLE_THUMB (date) {
         return `${IS_PROD ? 'source' : 'test'}/${this.moment(date || undefined).format('YYYYMMDD')}/`
     },
+    COMMENT: `${IS_PROD ? 'common' : 'test'}/comment/`,
 }

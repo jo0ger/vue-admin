@@ -299,12 +299,12 @@ declare namespace WebApi {
 
     namespace CommentModule {
         type Comment = ModuleShare & {
+            content: string
             renderedContent: string
             state: number
             spam: boolean
-            author: UserModule.User
+            author: UserModule.User | string
             ups: number
-            sticky: boolean
             type: number
             article?: ArticleModule.Article
             meta: {

@@ -90,16 +90,13 @@
                 </Col>
                 <Col span="16">
                     <Card class="info-card">
-                        <!-- <MDEditor v-model="model.content"></MDEditor> -->
-                        <i-editor v-model="model.content"
-                            ref="editor"
-                            affix
-                            paste
+                        <Editor
+                            v-model="model.content"
+                            :update-name="uploadName"
                             :autosize="{ minRows: 50 }"
                             placeholder="请输入文章内容"
-                            write-name="文章内容"
-                            :config="{ action: '' }"
-                            :before-upload="beforeUpload"></i-editor>
+                            write-name="文章内容">
+                        </Editor>
                     </Card>
                 </Col>
             </Row>

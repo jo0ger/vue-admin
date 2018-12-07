@@ -41,12 +41,14 @@ export default class Base extends Vue {
         this.getConstantItem = this.getConstantItem.bind(this)
     }
 
-    protected getConstantItem (name: string, value: string | number, findKey: string = 'label') {
+    protected getConstantItem (name: string, value: string | number, findKey?: string) {
         const con: ConstantItem = this.constant[name]
-        let find: string | number = ''
+        let find: any = ''
         if (con) {
-            const hit = con.find(item => item.value === value)
-            find = hit && hit[findKey]
+            find = con.find(item => item.value === value)
+            if (findKey) {
+                find = find && find[findKey]
+            }
         }
         return find || ''
     }
