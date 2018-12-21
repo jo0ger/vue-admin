@@ -20,13 +20,17 @@
                     {{ type.lbel }}
                     <div class="pager">
                         <Page
+                            :current="current.pageInfo.current"
                             :total="current.pageInfo.total"
+                            show-total
                             @on-change="pageChange"></Page>
                     </div>
                     <Table :columns="columns" :data="current.list" :loading="current.loading"></Table>
                     <div class="pager">
                         <Page
+                            :current="current.pageInfo.current"
                             :total="current.pageInfo.total"
+                            show-total
                             @on-change="pageChange"></Page>
                     </div>
                 </TabPane>

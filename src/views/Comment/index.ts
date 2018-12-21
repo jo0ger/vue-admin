@@ -57,9 +57,9 @@ export default class Comment extends Vue {
     }
 
     private async getList (page: number = 1) {
+        const cur = this.curTab
         const { loading, query } = this.data[this.curTab]
         if (loading) return
-        const cur = this.curTab
         this.data[cur].loading = true
         const res = await this.api.comment.list({
             ...query,
@@ -118,15 +118,15 @@ export default class Comment extends Vue {
             content: this.replyContent,
             author: this.admin._id,
             type: this.replyTarget.type,
+            forward: this.replyTarget._id,
         }
         if (this.replyTarget.article) {
             payload.article = this.replyTarget.article._id
         }
         if (this.replyTarget.parent) {
             payload.parent = this.replyTarget.parent._id
-        }
-        if (this.replyTarget.forward) {
-            payload.forward = this.replyTarget.forward._id
+        } else {
+            payload.parent = this.replyTarget._id
         }
         return payload as WebApi.CommentModule.Comment
     }
@@ -179,7 +179,7 @@ export default class Comment extends Vue {
                     const itemMargin = '8px 0'
                     return h('div', {
                         style: {
-                            padding: '16px',
+                            padding: '16px 0',
                         },
                     }, [
                         h('p', {
@@ -210,6 +210,13 @@ export default class Comment extends Vue {
                             },
                         }, params.row.author.site),
                     ])
+                },
+            },
+            {
+                title: '类型',
+                width: 120,
+                render: (h, params) => {
+                    return h('span', null, params.row.forward ? '回复' : '评论')
                 },
             },
             {
