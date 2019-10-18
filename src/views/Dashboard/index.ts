@@ -66,7 +66,7 @@ export default class Dashboard extends Vue {
             control: {
                 dimension: 'day',
                 date: [],
-                range: 'week',
+                range: 'threeMonth',
             },
             list: {
                 sortBy: 'meta.pvs',
@@ -91,7 +91,7 @@ export default class Dashboard extends Vue {
             control: {
                 dimension: 'day',
                 date: [],
-                range: 'week',
+                range: 'threeMonth',
             },
             list: {
                 sortBy: 'meta.ups',
@@ -116,7 +116,7 @@ export default class Dashboard extends Vue {
             control: {
                 dimension: 'day',
                 date: [],
-                range: 'week',
+                range: 'threeMonth',
             },
             list: {
                 sortBy: 'meta.comments',
@@ -141,7 +141,7 @@ export default class Dashboard extends Vue {
             control: {
                 dimension: 'day',
                 date: [],
-                range: 'week',
+                range: 'threeMonth',
             },
         },
         user: {
@@ -161,7 +161,7 @@ export default class Dashboard extends Vue {
             control: {
                 dimension: 'day',
                 date: [],
-                range: 'week',
+                range: 'threeMonth',
             },
         },
     }
@@ -212,12 +212,10 @@ export default class Dashboard extends Vue {
 
     private async getRangeTrendList (target: string, startDate, endDate, sortBy, order) {
         const res = await this.api.article.list({
-            startDate,
-            endDate,
             order,
             sortBy,
             page: 1,
-            limit: 7,
+            limit: 9,
         })
         if (res.success) {
             return res.data.list
@@ -350,6 +348,18 @@ export default class Dashboard extends Vue {
                 md: 12,
                 lg: 12,
             },
+            trend: {
+                xs: 24,
+                sm: 24,
+                md: 18,
+                lg: 18,
+            },
+            rank: {
+                xs: 24,
+                sm: 24,
+                md: 6,
+                lg: 6,
+            }
         }[key]
     }
 

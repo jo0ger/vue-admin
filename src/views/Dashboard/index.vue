@@ -22,41 +22,50 @@
                 </Card>
             </Col>
         </Row>
-        <Card class="stat-card" :title="control.title + '趋势统计'" v-for="(control, key) in controls" :key="key">
-            <div slot="extra">
-                <RadioGroup v-model="control.control.range" type="button" class="dimension" @on-change="dateRangeChange(control)">
-                    <Radio label="week">最近1周</Radio>
-                    <Radio label="month">最近1月</Radio>
-                    <Radio label="threeMonth">最近3月</Radio>
-                    <Radio label="other">自定义</Radio>
-                </RadioGroup>
-                <DatePicker
-                    confirm
-                    type="daterange"
-                    :disabled="control.control.range !== 'other'"
-                    v-model="control.control.date"
-                    :value="control.control.date"
-                    :options="datePickerOption"
-                    placement="bottom-end"
-                    placeholder="选择日期"
-                    style="width: 200px"
-                    @on-ok="selectDate(control)">
-                </DatePicker>
-            </div>
-            <div class="trend">
-                <div :id="key + '-trend-chart'" class="trend-chart"></div>
-                <div class="rank-list" :class="key + '-rank-list'" v-if="!['message', 'user'].includes(key)">
-                    <h3 class="rank-title">{{ control.title }}排名</h3>
-                    <ul class="article-list">
-                        <li class="article" v-for="(article, index) in control.list.data" :key="article._id">
-                            <span class="rank-number">{{ index + 1 }}</span>
-                            <span class="title">{{ article.title }}</span>
-                            <span class="count">{{ article.meta[key + 's'] }}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </Card>
+        <Row :gutter="16" v-for="(control, key) in controls" :key="key">
+            <Col v-bind="['message', 'user'].includes(key) ? { lg: 24 } : getCountColResponsiveProps('trend')">
+                <Card class="stat-card" :title="control.title + '趋势统计'">
+                    <div slot="extra">
+                        <RadioGroup v-model="control.control.range" type="button" class="dimension" @on-change="dateRangeChange(control)">
+                            <Radio label="week">最近1周</Radio>
+                            <Radio label="month">最近1月</Radio>
+                            <Radio label="threeMonth">最近3月</Radio>
+                            <Radio label="other">自定义</Radio>
+                        </RadioGroup>
+                        <DatePicker
+                            confirm
+                            type="daterange"
+                            :disabled="control.control.range !== 'other'"
+                            v-model="control.control.date"
+                            :value="control.control.date"
+                            :options="datePickerOption"
+                            placement="bottom-end"
+                            placeholder="选择日期"
+                            style="width: 200px"
+                            @on-ok="selectDate(control)">
+                        </DatePicker>
+                    </div>
+                    <div class="trend">
+                        <div :id="key + '-trend-chart'" class="trend-chart"></div>
+                    </div>
+                </Card>
+            </Col>
+            <Col v-bind="getCountColResponsiveProps('rank')" v-if="!['message', 'user'].includes(key)">
+                <Card class="stat-card" :title="control.title + '排名'">
+                    <div class="rank">
+                        <div class="rank-list" :class="key + '-rank-list'" v-if="!['message', 'user'].includes(key)">
+                            <ul class="article-list">
+                                <li class="article" v-for="(article, index) in control.list.data" :key="article._id">
+                                    <span class="rank-number">{{ index + 1 }}</span>
+                                    <router-link class="title" :to="{ name: 'ArticleDetail', params: { id: article._id }}">{{ article.title }}</router-link>
+                                    <span class="count">{{ article.meta[key + 's'] }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </Card>
+            </Col>
+        </Row>
     </Container>
 </template>
 

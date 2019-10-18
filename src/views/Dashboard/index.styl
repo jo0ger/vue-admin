@@ -40,6 +40,9 @@
             .trend-chart {
                 flex 1 0
             }
+        }
+
+        .rank {
 
             .rank-list {
                 flex 0 0 350px
@@ -48,7 +51,11 @@
             .article-list {
                 .article {
                     display flex
-                    margin-top $padding-lg
+                    justify-content space-between
+                    margin-top $padding-md
+
+                    &:nth-child(1) {
+                        margin-top 0}
 
                     .rank-number {
                         flex 0 0 20px
@@ -64,16 +71,14 @@
                     }
 
                     .title {
-                        flex 1 1
-                        max-width 250px
+                        flex 1 0
                         textOverflow()
                     }
 
                     .count {
                         flex 0 0 30px
-                        margin-left $padding-lg
                     }
-                    
+
                     &:nth-child(1) {
                         .rank-number {
                             color $white-color
