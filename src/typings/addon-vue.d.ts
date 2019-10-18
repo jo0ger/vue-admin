@@ -14,7 +14,7 @@ declare module 'vue/types/vue' {
     interface Vue {
         $Modal: ModalInstance
         $Message: Message
-        $meta: any
+        $meta: () => MetaInfo
         $alioss: AliOSS
     }
     interface VueConstructor<V extends Vue> {}

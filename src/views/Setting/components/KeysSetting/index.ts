@@ -16,7 +16,7 @@ const { Action } = namespace('setting')
 export default class KeysSetting extends Vue {
     @Action('update') public updateSetting
 
-    private type: '' | 'aliyun' | 'alinode' | 'aliApiGateway' | 'mail' = ''
+    private type: '' | 'aliyun' | 'alinode' | 'aliApiGateway' | 'mail' | 'baiduSeo' | 'github' = ''
 
     private model: WebApi.SettingModule.Setting['keys'] = {
         aliyun: {
@@ -100,7 +100,7 @@ export default class KeysSetting extends Vue {
 
     private close () {
         if (!this.type) return
-        this.model[this.type] = this.setting.keys[this.type]
+        this.model[this.type as any] = this.setting.keys[this.type]
         this.type = ''
         this.visible = false
     }
